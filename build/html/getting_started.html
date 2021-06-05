@@ -1,0 +1,158 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Getting Started &#8212; GSEIM 0.0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Creating a new project" href="new_project.html" />
+    <link rel="prev" title="GSEIM Installation" href="installation.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="getting-started">
+<span id="id1"></span><h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
+<p>It is assumed that you have successfully
+installed GSEIM on a linux computer. In this section, you will see
+how to run an existing project (which is already available in the GSEIM
+distribution).</p>
+<p>We consider free acceleration of an induction motor
+(project file <code class="docutils literal notranslate"><span class="pre">m_indmc.grc</span></code>) and demonstrate how to load this project,
+run the simulation, and view the results.</p>
+<ul>
+<li><p class="first">File menu <span class="math notranslate nohighlight">\(\rightarrow\)</span> Open
+<span class="math notranslate nohighlight">\(\rightarrow\)</span> Select the <strong>project file</strong>
+<code class="docutils literal notranslate"><span class="pre">~/gseim_gui/proj_grc/m_indmc.grc</span></code>
+as shown below.</p>
+<a class="reference internal image-reference" href="_images/open_project.png"><img alt="Alternative text" src="_images/open_project.png" style="width: 500px;" /></a>
+<p>The project schematic diagram will appear as shown below.</p>
+<a class="reference internal image-reference" href="_images/demo_project_1.png"><img alt="Alternative text" src="_images/demo_project_1.png" style="width: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</li>
+<li><p class="first">Click on <code class="docutils literal notranslate"><span class="pre">Generate</span> <span class="pre">flow</span> <span class="pre">graph</span></code>. This would create the <strong>circuit file</strong>
+<code class="docutils literal notranslate"><span class="pre">~/gseim_gui/gseim/output/m_indmc.in</span></code> which is used by the GSEIM solver
+for solving the set of ODEs associated with the project schematic.
+Notice that a separate window opens to show the progress of this step.
+If the flow graph generation is successful, <strong>Program Completed</strong> will
+appear at the bottom of that window.</p>
+</li>
+<li><p class="first">Click on <code class="docutils literal notranslate"><span class="pre">Execute</span> <span class="pre">flow</span> <span class="pre">graph</span></code>. This invokes the solver which runs the
+simulation and creates the data files as specified for this project.
+Again, a separate window opens to show the progress made by the solver.
+The data files are created in the directory
+<code class="docutils literal notranslate"><span class="pre">~/gseim_gui/gseim/output</span></code>.</p>
+</li>
+<li><p class="first">Click on <code class="docutils literal notranslate"><span class="pre">View</span> <span class="pre">results</span></code>. The plotting GUI would show up as a separate
+application, as shown below.</p>
+<a class="reference internal image-reference" href="_images/plotting_gui.png"><img alt="Alternative text" src="_images/plotting_gui.png" style="width: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</li>
+<li><p class="first">Click on <code class="docutils literal notranslate"><span class="pre">Browse</span> <span class="pre">files</span></code>, and select the circuit file
+<code class="docutils literal notranslate"><span class="pre">~/gseim_gui/gseim/output/m_indmc.in</span></code>. The data file created by GSEIM
+for this particular project will appear as shown below. Names of the
+variables stored in the data file are listed. Select <code class="docutils literal notranslate"><span class="pre">time</span></code> as
+x-axis and <code class="docutils literal notranslate"><span class="pre">wrm</span></code> (the angular speed of the motor) as the y-axis to
+obtain the plot shown below.</p>
+<a class="reference internal image-reference" href="_images/plotting_gui_1.png"><img alt="Alternative text" src="_images/plotting_gui_1.png" style="width: 600px;" /></a>
+</li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">GSEIM</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">GSEIM Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="new_project.html">Creating a new project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="organisation.html">GSEIM Organisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xbe.html">Element templates (<code class="docutils literal notranslate"><span class="pre">xbe</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html"><code class="docutils literal notranslate"><span class="pre">f</span></code>, <code class="docutils literal notranslate"><span class="pre">g</span></code>, <code class="docutils literal notranslate"><span class="pre">h</span></code> functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solve.html">Solve Blocks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="subckt.html">Subcircuits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xbedocs.html">xbe Documents</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="installation.html" title="previous chapter">GSEIM Installation</a></li>
+      <li>Next: <a href="new_project.html" title="next chapter">Creating a new project</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Mahesh Patil.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/getting_started.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

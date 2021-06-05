@@ -1,0 +1,249 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Solve Blocks &#8212; GSEIM 0.0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Subcircuits" href="subckt.html" />
+    <link rel="prev" title="f, g, h functions" href="functions.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="solve-blocks">
+<h1>Solve Blocks<a class="headerlink" href="#solve-blocks" title="Permalink to this headline">¶</a></h1>
+<p>After a circuit schematic is prepared, we need to
+convey to the simulator what kind of simulation needs
+to be performed, which method to use, which output
+parameters should be saved, etc. This task is performed
+by a solve block. Solve blocks are of two types:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">startup</span></code> solve block for <a class="reference internal" href="functions.html#startup"><span class="std std-ref">start-up simulation</span></a></li>
+<li><code class="docutils literal notranslate"><span class="pre">trns</span></code> solve block for transient simulation</li>
+</ul>
+<p>Multiple solve blocks per project are allowed. Here are
+a few situations where multiple solve block would be useful:</p>
+<ul class="simple">
+<li>We want to perform a start-up simulation and use the
+solution as a starting point for transient simulation.</li>
+<li>We have performed transient simulation from
+<span class="math notranslate nohighlight">\(t = 0\)</span> to
+<span class="math notranslate nohighlight">\(t = t_1\)</span>.
+We want to continue from
+<span class="math notranslate nohighlight">\(t_1\)</span>
+and perform transient simulation up to
+<span class="math notranslate nohighlight">\(t_2\)</span>,
+without having to repeat the
+<span class="math notranslate nohighlight">\(0 &lt; t &lt; t_1\)</span>
+part.</li>
+</ul>
+<p>In most cases, we are interested in a single transient simulation,
+and in that case, only one solve block is required.</p>
+<p>A new solve block can be added by clicking on
+<code class="docutils literal notranslate"><span class="pre">Edit</span></code>
+<span class="math notranslate nohighlight">\(\rightarrow\)</span>
+<code class="docutils literal notranslate"><span class="pre">SolveBlocks</span></code>
+<span class="math notranslate nohighlight">\(\rightarrow\)</span>
+<code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">Solve</span> <span class="pre">Block</span></code>.</p>
+<p>A dialog box for a new solve block appears as shown below.</p>
+<a class="reference internal image-reference" href="_images/new_project_9.png"><img alt="Alternative text" src="_images/new_project_9.png" style="width: 250px;" /></a>
+<p>The solve block needs to be assigned a suitable name, e.g, <code class="docutils literal notranslate"><span class="pre">S1</span></code>.
+The <code class="docutils literal notranslate"><span class="pre">index</span></code> field determines the order in which solve blocks are
+executed. For example, if there are two solve blocks with names
+<code class="docutils literal notranslate"><span class="pre">S1</span></code>, <code class="docutils literal notranslate"><span class="pre">S2</span></code> and indices 0, 1, respectively, the solve block
+<code class="docutils literal notranslate"><span class="pre">S1(0)</span></code> will be executed first, followed by <code class="docutils literal notranslate"><span class="pre">S2(1)</span></code>.</p>
+<p>When a solve block is added, it gets a set of default parameter values
+from the file <code class="docutils literal notranslate"><span class="pre">~/gseim_gui/gseim/exec/gseim_slvparms.in</span></code>.
+These values can be edited by clicking on
+<code class="docutils literal notranslate"><span class="pre">Edit</span></code>
+<span class="math notranslate nohighlight">\(\rightarrow\)</span>
+<code class="docutils literal notranslate"><span class="pre">SolveBlocks</span></code>
+<span class="math notranslate nohighlight">\(\rightarrow\)</span>
+<code class="docutils literal notranslate"><span class="pre">Edit</span> <span class="pre">Solve</span> <span class="pre">Block</span></code>.</p>
+<p>A dialog box with parameters appears as shown below.</p>
+<a class="reference internal image-reference" href="_images/new_project_10.png"><img alt="Alternative text" src="_images/new_project_10.png" style="width: 400px;" /></a>
+<p>We will now describe the solve block parameters.
+The following points may be noted.</p>
+<ul class="simple">
+<li>Keeping future developments in mind, some of the parameters
+have been given names starting with <code class="docutils literal notranslate"><span class="pre">x_</span></code> (or ending with <code class="docutils literal notranslate"><span class="pre">_x</span></code>),
+which means that they are related to <code class="docutils literal notranslate"><span class="pre">xbe</span></code>’s as opposed to <code class="docutils literal notranslate"><span class="pre">ebe</span></code>’s
+(electrical basic elements) to be introduced in the near future.</li>
+<li>Parameters with <code class="docutils literal notranslate"><span class="pre">_nr_</span></code> in their names are related to the Newton-Raphson
+method.</li>
+</ul>
+<div class="section" id="solve-block-statements">
+<h2>Solve Block Statements<a class="headerlink" href="#solve-block-statements" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">solve_type</span></code>: <em>trns</em> for transient simulation, <em>startup</em> for
+start-up simulation</li>
+<li><code class="docutils literal notranslate"><span class="pre">initial_sol</span></code> is related to the initial solution, i.e., the starting
+point for transient simulation. There are three options.<ul>
+<li><em>initialize</em> for initializing variables before transient simulation</li>
+<li><em>previous</em> for continuing with the solution obtained in the previous
+solve block as the initial solution</li>
+<li><em>read_from_file</em> for reading the initial solution from a file</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">initial_sol_file</span></code>: name of the solution file (This field is relevant
+if <code class="docutils literal notranslate"><span class="pre">initial_sol</span></code> is <em>read_from_file</em></li>
+<li><code class="docutils literal notranslate"><span class="pre">output_solution_file</span></code>: name of the solution file (needs to be supplied
+only if the user wants to save the solution file)</li>
+<li><code class="docutils literal notranslate"><span class="pre">algorithm_x_trns</span></code>: transient simulation algorithm</li>
+<li><code class="docutils literal notranslate"><span class="pre">algorithm_x_startup</span></code>: start-up simulation algorithm</li>
+<li><code class="docutils literal notranslate"><span class="pre">itmax_trns</span></code>: maximum number of time points allowed in transient simulation
+This is a <em>safety feature</em>. If the user mistakenly creates conditions which
+lead to a huge number of time points, the output files could fill up the
+disk</li>
+<li><code class="docutils literal notranslate"><span class="pre">t_start</span></code>: starting time for transient simulation</li>
+<li><code class="docutils literal notranslate"><span class="pre">t_end</span></code>: ending time for transient simulation</li>
+<li><code class="docutils literal notranslate"><span class="pre">tstep0_x</span></code>: time step. For constant time-step methods, this parameter specifies
+the uniform time interval. For auto time-step methods, it specifies the initial
+time step
+(see
+<a class="reference external" href="https://www.ee.iitb.ac.in/~sequel/sequel_manual_1.pdf">SEQUEL User’s manual-Part 1</a>)</li>
+<li><code class="docutils literal notranslate"><span class="pre">delt_min_x</span></code>: smallest time step allowed during transient simulation</li>
+<li><code class="docutils literal notranslate"><span class="pre">delt_max_x</span></code>: largest time step allowed during transient simulation</li>
+<li><code class="docutils literal notranslate"><span class="pre">t_startup</span></code>: time at which start-up simulation is to be performed (ignored
+for transient simulation)</li>
+<li><code class="docutils literal notranslate"><span class="pre">factor_step_increase</span></code>: factor by which time step should be increased
+in successive iterations in auto time-step methods.</li>
+<li><code class="docutils literal notranslate"><span class="pre">factor_step_decrease</span></code>: factor by which time step should be decreased
+in successive iterations in auto time-step methods.</li>
+<li><code class="docutils literal notranslate"><span class="pre">rkf45_tolr</span></code>: tolerance for the RKF45 method</li>
+<li><code class="docutils literal notranslate"><span class="pre">rkf45_fctr_min</span></code>: lower limit on multiplier <span class="math notranslate nohighlight">\(k\)</span> of RKF45 algorithm
+for time step change, where
+<span class="math notranslate nohighlight">\(\Delta t_{\mathrm{new}} = k \times \Delta t_{\mathrm{new}}\)</span>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">rkf45_fctr_max</span></code>: upper limit on multiplier <span class="math notranslate nohighlight">\(k\)</span> of RKF45 algorithm</li>
+<li><code class="docutils literal notranslate"><span class="pre">bs23_tolr</span></code>: tolerance for the BS23 method</li>
+<li><code class="docutils literal notranslate"><span class="pre">bs23_fctr_min</span></code>: lower limit on multiplier <span class="math notranslate nohighlight">\(k\)</span> of BS23 algorithm
+for time step change</li>
+<li><code class="docutils literal notranslate"><span class="pre">bs23_fctr_max</span></code>: upper limit on multiplier <span class="math notranslate nohighlight">\(k\)</span> of BS23 algorithm</li>
+<li><code class="docutils literal notranslate"><span class="pre">trbdf2_tolr</span></code>: tolerance for the TR-BDF2 method</li>
+<li><code class="docutils literal notranslate"><span class="pre">itmax_trbdf2</span></code>: maximum number of successive reductions in the time step at
+a given time point when TR-BDF2 algorithm is selected.</li>
+<li><code class="docutils literal notranslate"><span class="pre">itmax_stepred</span></code>: maximum number of successive reductions in the time step at
+a given time point when an auto time-step algorithm (other than TR-BDF2) is selected.</li>
+<li><code class="docutils literal notranslate"><span class="pre">write_time_x</span></code>: GSEIM writes the iteration number to the console during
+transient simulation to indicate the progress of the solver. If the time should
+also be written, this parameter should be set to <em>yes</em>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">write_iter_n_x</span></code>: Interval (in terms of iterations, not time) after which
+GSEIM should write the iteration number to the console.</li>
+<li><code class="docutils literal notranslate"><span class="pre">write_matrix_x</span></code>: meant for debugging; ignore.</li>
+<li><code class="docutils literal notranslate"><span class="pre">x_nr_itermax</span></code>: maximum number of Newton-Raphson (NR) iterations</li>
+<li><code class="docutils literal notranslate"><span class="pre">x_nr_dmp</span></code>: <em>yes</em> if damping should be used in NR iterations
+(see
+<a class="reference external" href="https://www.ee.iitb.ac.in/~sequel/sequel_manual_1.pdf">SEQUEL User’s manual-Part 1</a>)</li>
+<li><code class="docutils literal notranslate"><span class="pre">x_nr_dmp_itermax</span></code>: number of NR iterations for which damping should be applied</li>
+<li><code class="docutils literal notranslate"><span class="pre">x_nr_dmp_k</span></code>: damping factor for NR iterations</li>
+<li><code class="docutils literal notranslate"><span class="pre">x_nr_itermax0</span></code>, <code class="docutils literal notranslate"><span class="pre">x_nr_dmp0</span></code>, <code class="docutils literal notranslate"><span class="pre">x_nr_dmp_itermax0</span></code>, <code class="docutils literal notranslate"><span class="pre">x_nr_dmp_k0</span></code>: like
+the above NR parameters except that these apply to the first time point.</li>
+<li><code class="docutils literal notranslate"><span class="pre">x_nr_check_rhs2</span></code>: <em>yes</em> if the 2-norm should be used to check for convergence
+(see
+<a class="reference external" href="https://www.ee.iitb.ac.in/~sequel/sequel_manual_1.pdf">SEQUEL User’s manual-Part 1</a>)</li>
+<li><code class="docutils literal notranslate"><span class="pre">x_nr_write_rhs2</span></code>: <em>yes</em> for writing the 2-norm to the console (used for debugging)</li>
+<li><code class="docutils literal notranslate"><span class="pre">x_nr_eps_rhs</span></code>: tolerance value for the 2-norm</li>
+<li><code class="docutils literal notranslate"><span class="pre">delt_small</span></code>: parameter used in comparing time points. It can be
+set to two to three orders of magnitude smaller than <code class="docutils literal notranslate"><span class="pre">delt_min</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">x_fixed_tstep</span></code>: for future development; ignore.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">GSEIM</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">GSEIM Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="new_project.html">Creating a new project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="organisation.html">GSEIM Organisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xbe.html">Element templates (<code class="docutils literal notranslate"><span class="pre">xbe</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html"><code class="docutils literal notranslate"><span class="pre">f</span></code>, <code class="docutils literal notranslate"><span class="pre">g</span></code>, <code class="docutils literal notranslate"><span class="pre">h</span></code> functions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Solve Blocks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#solve-block-statements">Solve Block Statements</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="subckt.html">Subcircuits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xbedocs.html">xbe Documents</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="functions.html" title="previous chapter"><code class="docutils literal notranslate"><span class="pre">f</span></code>, <code class="docutils literal notranslate"><span class="pre">g</span></code>, <code class="docutils literal notranslate"><span class="pre">h</span></code> functions</a></li>
+      <li>Next: <a href="subckt.html" title="next chapter">Subcircuits</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Mahesh Patil.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/solve.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

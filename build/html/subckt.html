@@ -1,0 +1,536 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Subcircuits &#8212; GSEIM 0.0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="xbe Documents" href="xbedocs.html" />
+    <link rel="prev" title="Solve Blocks" href="solve.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="subcircuits">
+<span id="subckt"></span><h1>Subcircuits<a class="headerlink" href="#subcircuits" title="Permalink to this headline">¶</a></h1>
+<p>To represent a complicated system with a schematic
+diagram, subcircuits (hierarchical blocks) are very
+useful. In this section, we will first explain how
+a simple subcircuit can be designed using the schematic
+capture GUI. We will then look at a more complex subcircuit
+which represents an induction motor model.</p>
+<div class="section" id="linear-transformation-subcircuit">
+<span id="subckt-linear2"></span><h2>Linear transformation subcircuit<a class="headerlink" href="#linear-transformation-subcircuit" title="Permalink to this headline">¶</a></h2>
+<p>Let us see how to make up a subcircuit to implement
+the linear transformation given by,</p>
+<div class="math notranslate nohighlight" id="equation-eq-linear">
+<span class="eqno">(1)<a class="headerlink" href="#equation-eq-linear" title="Permalink to this equation">¶</a></span>\[\begin{split}\left[
+\begin{array}{c}
+y_1 \\
+y_2
+\end{array}
+\right]
+=
+\left[
+\begin{array}{cc}
+a_{11} &amp; a_{12}
+\\
+a_{21} &amp; a_{22}
+\end{array}
+\right]
+\thinspace
+\left[
+\begin{array}{c}
+x_1 \\
+x_2
+\end{array}
+\right]
+\,,\end{split}\]</div>
+<p>where
+<span class="math notranslate nohighlight">\(x_1\)</span>,
+<span class="math notranslate nohighlight">\(x_2\)</span>
+are the input nodes (variables), and
+<span class="math notranslate nohighlight">\(y_1\)</span>,
+<span class="math notranslate nohighlight">\(y_2\)</span>
+are the output nodes. Eq. <a class="reference internal" href="#equation-eq-linear">(1)</a> can be implemented
+as follows.</p>
+<a class="reference internal image-reference" href="_images/linear_2.png"><img alt="Alternative text" src="_images/linear_2.png" style="width: 300px;" /></a>
+<p>To convert this block diagram to a GSEIM subcircuit, you can use
+the step-by-step procedure given below.</p>
+<ul>
+<li><p class="first">Start a new project. A canvas with an <code class="docutils literal notranslate"><span class="pre">Options</span></code> block will
+appear. Double-click on the options block, and set <code class="docutils literal notranslate"><span class="pre">Id</span></code>
+and <code class="docutils literal notranslate"><span class="pre">Title</span></code>. Note that Id should only contain letters, digits,
+and the underscore character. In the <code class="docutils literal notranslate"><span class="pre">Generate</span> <span class="pre">option</span></code> field,
+choose <code class="docutils literal notranslate"><span class="pre">Hier</span> <span class="pre">Block</span></code> to indicate that this schematic diagram is
+for a hierarchical block (subcircuit) and not a stand-alone
+system. It may be a good idea to start the <code class="docutils literal notranslate"><span class="pre">Id</span></code> with <code class="docutils literal notranslate"><span class="pre">s_</span></code>
+(<code class="docutils literal notranslate"><span class="pre">s</span></code> for subcircuit) as a convention; however, it is not
+really required.</p>
+<a class="reference internal image-reference" href="_images/sub_linear2_1.png"><img alt="Alternative text" src="_images/sub_linear2_1.png" style="width: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</li>
+<li><p class="first">The next step is to bring in the required elements (blocks)
+from the library. We need four <code class="docutils literal notranslate"><span class="pre">multscl</span></code> (multiply by scalar)
+elements and
+two <code class="docutils literal notranslate"><span class="pre">sum_2</span></code> elements. To bring <code class="docutils literal notranslate"><span class="pre">multscl</span></code>
+into the canvas, select it from the library, and drag it into
+the canvas.</p>
+<a class="reference internal image-reference" href="_images/sub_linear2_2.png"><img alt="Alternative text" src="_images/sub_linear2_2.png" style="width: 270px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</li>
+<li><p class="first">Place the components, keeping in mind the connections you will
+need to make.</p>
+<a class="reference internal image-reference" href="_images/sub_linear2_3.png"><img alt="Alternative text" src="_images/sub_linear2_3.png" style="width: 270px;" /></a>
+</li>
+<li><p class="first">Next, we need to provide <strong>pads</strong> for our subcircuit. We need two
+source pads (for
+<span class="math notranslate nohighlight">\(x_1\)</span> and
+<span class="math notranslate nohighlight">\(x_2\)</span>) and two
+sink pads (for
+<span class="math notranslate nohighlight">\(y_1\)</span> and
+<span class="math notranslate nohighlight">\(y_2\)</span>). The source pads will show up as input pads when we invoke
+this subcircuit from a higher level; similarly, the sink pads will show
+up as output pads.</p>
+<a class="reference internal image-reference" href="_images/sub_linear2_4.png"><img alt="Alternative text" src="_images/sub_linear2_4.png" style="width: 270px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</li>
+<li><p class="first">Double-click on each of the source and sink pads and name
+those as
+<code class="docutils literal notranslate"><span class="pre">x1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">x2</span></code>,
+<code class="docutils literal notranslate"><span class="pre">y1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">y2</span></code>.
+Assign <code class="docutils literal notranslate"><span class="pre">x1</span></code> to the source pad which you brought in first,
+and <code class="docutils literal notranslate"><span class="pre">x2</span></code> to the one you brought in later. Similarly, name
+the sink pad you brought in first as <code class="docutils literal notranslate"><span class="pre">y1</span></code> and the other
+sink pad as <code class="docutils literal notranslate"><span class="pre">y2</span></code>. When this procedure is followed, the
+subcircuit, when invoked, will have the order <code class="docutils literal notranslate"><span class="pre">x1</span></code>, <code class="docutils literal notranslate"><span class="pre">x2</span></code>
+for the input nodes (ports), and <code class="docutils literal notranslate"><span class="pre">y1</span></code>, <code class="docutils literal notranslate"><span class="pre">y2</span></code> for the output nodes.</p>
+<a class="reference internal image-reference" href="_images/sub_linear2_5.png"><img alt="Alternative text" src="_images/sub_linear2_5.png" style="width: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</li>
+<li><p class="first">Your schematic should now look like this:</p>
+<a class="reference internal image-reference" href="_images/sub_linear2_6.png"><img alt="Alternative text" src="_images/sub_linear2_6.png" style="width: 450px;" /></a>
+</li>
+<li><p class="first">Connect the elements as required. To make a connection between two
+ports, click on one of the ports and then the other.</p>
+<a class="reference internal image-reference" href="_images/sub_linear2_7.png"><img alt="Alternative text" src="_images/sub_linear2_7.png" style="width: 450px;" /></a>
+</li>
+<li><p class="first">Our next step is to assign the multiplier parameter (<code class="docutils literal notranslate"><span class="pre">k</span></code>)
+of each <code class="docutils literal notranslate"><span class="pre">multscl</span></code> element the values shown below.</p>
+<a class="reference internal image-reference" href="_images/sub_linear2_8.png"><img alt="Alternative text" src="_images/sub_linear2_8.png" style="width: 470px;" /></a>
+</li>
+<li><p class="first">Note that we will need to make
+<code class="docutils literal notranslate"><span class="pre">a11</span></code>,
+<code class="docutils literal notranslate"><span class="pre">a12</span></code>,
+<code class="docutils literal notranslate"><span class="pre">a21</span></code>,
+<code class="docutils literal notranslate"><span class="pre">a22</span></code>,
+assignable when this subcircuit is invoked. This is achieved
+with the help of <strong>global parameters</strong>.
+We first need to add four global parameters and name them
+<code class="docutils literal notranslate"><span class="pre">a11</span></code>,
+<code class="docutils literal notranslate"><span class="pre">a12</span></code>,
+<code class="docutils literal notranslate"><span class="pre">a21</span></code>,
+<code class="docutils literal notranslate"><span class="pre">a22</span></code>,
+one-by-one.
+Click on <code class="docutils literal notranslate"><span class="pre">Edit</span></code>
+<span class="math notranslate nohighlight">\(\rightarrow\)</span>
+<code class="docutils literal notranslate"><span class="pre">GParms</span></code>
+<span class="math notranslate nohighlight">\(\rightarrow\)</span>
+<code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">gparm</span></code>, and change the name as shown below.</p>
+<a class="reference internal image-reference" href="_images/sub_linear2_10.png"><img alt="Alternative text" src="_images/sub_linear2_10.png" style="width: 230px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</li>
+<li><p class="first">We now map the global parameters to the <code class="docutils literal notranslate"><span class="pre">k</span></code> parameters of the
+<code class="docutils literal notranslate"><span class="pre">multscl</span></code> elements. Double-click on the top <code class="docutils literal notranslate"><span class="pre">multscl</span></code> element
+in the schematic and change <code class="docutils literal notranslate"><span class="pre">k</span></code> to <code class="docutils literal notranslate"><span class="pre">a11</span></code>. Similarly, change
+<code class="docutils literal notranslate"><span class="pre">k</span></code> for the other three <code class="docutils literal notranslate"><span class="pre">multscl</span></code> elements.</p>
+<a class="reference internal image-reference" href="_images/sub_linear2_11.png"><img alt="Alternative text" src="_images/sub_linear2_11.png" style="width: 420px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</li>
+<li><p class="first">Save the subcircuit schematic. It is a good practice to use a file
+name which reflects the name (<code class="docutils literal notranslate"><span class="pre">Id</span></code>) of the subcircuit. In our
+example, it would be <code class="docutils literal notranslate"><span class="pre">s_linear_2.grc</span></code>.</p>
+<a class="reference internal image-reference" href="_images/sub_linear2_9.png"><img alt="Alternative text" src="_images/sub_linear2_9.png" style="width: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</li>
+<li><p class="first">Click on <code class="docutils literal notranslate"><span class="pre">Generate</span> <span class="pre">flow</span> <span class="pre">graph</span></code>. This creates a file
+<code class="docutils literal notranslate"><span class="pre">~/gseim_gui/subckt/s_linear_2.hblock.yml</span></code>.
+You will find that the <code class="docutils literal notranslate"><span class="pre">.grc</span></code> file in the previous step appears
+in the <code class="docutils literal notranslate"><span class="pre">grc_source</span></code> field of the <code class="docutils literal notranslate"><span class="pre">.yml</span></code> file.</p>
+<p>End your GSEIM session and start it again. You will find the newly
+added subcircuit listed under <code class="docutils literal notranslate"><span class="pre">GRC</span> <span class="pre">Hier</span> <span class="pre">Blocks</span></code> as shown below:
+Note that the label which appears in this list corresponds to the
+<code class="docutils literal notranslate"><span class="pre">Title</span></code> value (not the <code class="docutils literal notranslate"><span class="pre">Id</span></code> value) of your subcircuit.</p>
+<a class="reference internal image-reference" href="_images/sub_linear2_12.png"><img alt="Alternative text" src="_images/sub_linear2_12.png" style="width: 270px;" /></a>
+</li>
+<li><p class="first">Drag and drop the subcircuit into the canvas.</p>
+<a class="reference internal image-reference" href="_images/sub_linear2_13.png"><img alt="Alternative text" src="_images/sub_linear2_13.png" style="width: 150px;" /></a>
+</li>
+<li><p class="first">Double-clicking on the subcircuit opens the following dialog box,
+enabling the user to edit the parameter values as required.</p>
+<a class="reference internal image-reference" href="_images/sub_linear2_14.png"><img alt="Alternative text" src="_images/sub_linear2_14.png" style="width: 450px;" /></a>
+</li>
+</ul>
+</div>
+<div class="section" id="induction-motor-subcircuit">
+<span id="subckt-indmc"></span><h2>Induction motor subcircuit<a class="headerlink" href="#induction-motor-subcircuit" title="Permalink to this headline">¶</a></h2>
+<p>We now consider the induction motor model described in
+<a class="reference internal" href="xbe.html#xbe"><span class="std std-ref">xbe templates</span></a>. The model equations are reproduced
+below.</p>
+<div class="math notranslate nohighlight" id="equation-eq-indmcx-1">
+<span class="eqno">(2)<a class="headerlink" href="#equation-eq-indmcx-1" title="Permalink to this equation">¶</a></span>\[\displaystyle\frac{d{\psi}_{ds}}{dt} = v_{ds}-r_si_{ds},\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-indmcx-2">
+<span class="eqno">(3)<a class="headerlink" href="#equation-eq-indmcx-2" title="Permalink to this equation">¶</a></span>\[\displaystyle\frac{d{\psi}_{qs}}{dt} = v_{qs}-r_si_{qs},\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-indmcx-3">
+<span class="eqno">(4)<a class="headerlink" href="#equation-eq-indmcx-3" title="Permalink to this equation">¶</a></span>\[\displaystyle\frac{d{\psi}_{dr}}{dt} = -\,\frac{P}{2}\,\omega_ {rm}\psi _{qr}-r_ri_{dr},\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-indmcx-4">
+<span class="eqno">(5)<a class="headerlink" href="#equation-eq-indmcx-4" title="Permalink to this equation">¶</a></span>\[\displaystyle\frac{d{\psi}_{qr}}{dt} =  \frac{P}{2}\,\omega_ {rm}\psi _{dr}-r_ri_{qr},\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-indmcx-5">
+<span class="eqno">(6)<a class="headerlink" href="#equation-eq-indmcx-5" title="Permalink to this equation">¶</a></span>\[\displaystyle\frac{d{\omega}_{rm}}{dt} = \frac{1}{J}\,(T_{em}-T_L),\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight" id="equation-eq-indmcx1-1">
+<span class="eqno">(7)<a class="headerlink" href="#equation-eq-indmcx1-1" title="Permalink to this equation">¶</a></span>\[i_{ds} = \frac{L_r}{L_m L_e}\,\psi _{ds} - \frac{1}{L_e}\,\psi _{dr},\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-indmcx1-2">
+<span class="eqno">(8)<a class="headerlink" href="#equation-eq-indmcx1-2" title="Permalink to this equation">¶</a></span>\[i_{qs} = \frac{L_r}{L_m L_e}\,\psi _{qs} - \frac{1}{L_e}\,\psi _{qr},\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-indmcx1-3">
+<span class="eqno">(9)<a class="headerlink" href="#equation-eq-indmcx1-3" title="Permalink to this equation">¶</a></span>\[i_{dr} = \frac{1}{L_m}\,\psi _{ds} - \left(\frac{L_{ls}}{L_m}+1\right)~i _{ds},\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-indmcx1-4">
+<span class="eqno">(10)<a class="headerlink" href="#equation-eq-indmcx1-4" title="Permalink to this equation">¶</a></span>\[i_{qr} = \frac{1}{L_m}\,\psi _{qs} - \left(\frac{L_{ls}}{L_m}+1\right)~i _{qs},\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-indmcx1-5">
+<span class="eqno">(11)<a class="headerlink" href="#equation-eq-indmcx1-5" title="Permalink to this equation">¶</a></span>\[T_{em} = \frac{3}{4}\, P L_m\,(i_{qs}i_{dr} - i_{ds}i_{qr}),\]</div>
+<p>with</p>
+<div class="math notranslate nohighlight" id="equation-eq-indmcx2-1">
+<span class="eqno">(12)<a class="headerlink" href="#equation-eq-indmcx2-1" title="Permalink to this equation">¶</a></span>\[L_e = \displaystyle\frac{L_sL_r}{L_m}-L_m,\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-indmcx2-2">
+<span class="eqno">(13)<a class="headerlink" href="#equation-eq-indmcx2-2" title="Permalink to this equation">¶</a></span>\[L_s = L_{ls}+L_m,\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-indmcx2-3">
+<span class="eqno">(14)<a class="headerlink" href="#equation-eq-indmcx2-3" title="Permalink to this equation">¶</a></span>\[L_r = L_{lr}+L_m.\]</div>
+<p>We first rewrite
+Eqs. <a class="reference internal" href="#equation-eq-indmcx-1">(2)</a> to <a class="reference internal" href="#equation-eq-indmcx-5">(6)</a> such that each of them can be
+implemented using basic blocks such as adder, multiplier, integrator, etc.</p>
+<p>As an example, Eq. <a class="reference internal" href="#equation-eq-indmcx-3">(4)</a> can be rewritten as,</p>
+<div class="math notranslate nohighlight" id="equation-eq-indmcx3-3">
+<span class="eqno">(15)<a class="headerlink" href="#equation-eq-indmcx3-3" title="Permalink to this equation">¶</a></span>\[\psi _{dr} = \int \left(-\,\frac{P}{2}\,\omega _{rm}\psi _{qr}-r_r i_{dr}\right)\,dt,\]</div>
+<p>which can be implemented using the <code class="docutils literal notranslate"><span class="pre">mult_2</span></code> element (to multiply <span class="math notranslate nohighlight">\(\omega _{rm}\)</span> and
+<span class="math notranslate nohighlight">\(\psi _{qr}\)</span>), and the <code class="docutils literal notranslate"><span class="pre">sum\_2</span></code> and <code class="docutils literal notranslate"><span class="pre">integrator</span></code> elements described in
+<a class="reference internal" href="xbe.html#xbe"><span class="std std-ref">xbe templates</span></a>.
+Treating
+Eqs. <a class="reference internal" href="#equation-eq-indmcx-1">(2)</a> to <a class="reference internal" href="#equation-eq-indmcx-5">(6)</a>
+in this manner, we obtain the subciruit shown below
+(the <code class="docutils literal notranslate"><span class="pre">.grc</span></code> file is
+<code class="docutils literal notranslate"><span class="pre">~/gseim_gui/subckt_grc/s_indmc.grc</span></code>).</p>
+<a class="reference internal image-reference" href="_images/sub_indmc.png"><img alt="Alternative text" src="_images/sub_indmc.png" style="width: 700px;" /></a>
+<p>The following additional points about the implementation may be
+noted:</p>
+<ul>
+<li><p class="first"><strong>Virtual</strong> (dummy) sources and sinks (shown in light yellow colour) are used
+in order to make wiring less cumbersome. For example, note the virtual
+sink marked <code class="docutils literal notranslate"><span class="pre">&gt;idr</span></code> and the virtual source marked
+<code class="docutils literal notranslate"><span class="pre">idr&gt;</span></code>, the two corresponding to the same node.</p>
+</li>
+<li><p class="first">Input and output pads (shown in light green colour) are used to indicate
+the input and output ports the subcircuit symbol will have when it is
+invoked (from a higher level). For the induction machine subcircuit,
+<code class="docutils literal notranslate"><span class="pre">vds</span></code>, <code class="docutils literal notranslate"><span class="pre">vqs</span></code>, <code class="docutils literal notranslate"><span class="pre">tl</span></code> are the input ports, and
+<code class="docutils literal notranslate"><span class="pre">wrm</span></code> is the output port.</p>
+</li>
+<li><p class="first">The subcircuit has the following parameters:
+<code class="docutils literal notranslate"><span class="pre">j</span></code>,
+<code class="docutils literal notranslate"><span class="pre">llr</span></code>,
+<code class="docutils literal notranslate"><span class="pre">lls</span></code>,
+<code class="docutils literal notranslate"><span class="pre">lm</span></code>,
+<code class="docutils literal notranslate"><span class="pre">poles</span></code>,
+<code class="docutils literal notranslate"><span class="pre">rr</span></code>,
+<code class="docutils literal notranslate"><span class="pre">rs</span></code>,
+which correspond to
+<span class="math notranslate nohighlight">\(J\)</span>,
+<span class="math notranslate nohighlight">\(L_{lr}\)</span>,
+<span class="math notranslate nohighlight">\(L_{ls}\)</span>,
+<span class="math notranslate nohighlight">\(L_m\)</span>,
+<span class="math notranslate nohighlight">\(P\)</span>,
+<span class="math notranslate nohighlight">\(r_r\)</span>,
+<span class="math notranslate nohighlight">\(r_s\)</span>,
+respectively, in
+Eqs. <a class="reference internal" href="#equation-eq-indmcx-1">(2)</a> to <a class="reference internal" href="#equation-eq-indmcx-5">(6)</a>.
+In implementing the equations, we need to compute quantities which
+depend on these parameters.
+For example, consider
+Eq. <a class="reference internal" href="#equation-eq-indmcx1-1">(7)</a>
+for <a href="#id1"><span class="problematic" id="id2">:mat:`i_{ds}`</span></a>, implemented using
+the <code class="docutils literal notranslate"><span class="pre">sum\_2</span></code> element marked as <code class="docutils literal notranslate"><span class="pre">s6</span></code> in the figure. This element gives</p>
+<div class="math notranslate nohighlight">
+\[i_{ds} = k_1\psi _{ds} + k_2\psi _{dr},\]</div>
+<p>which requires
+<span class="math notranslate nohighlight">\(k_1 = \displaystyle\frac{L_r}{L_mL_e}\)</span>,
+<span class="math notranslate nohighlight">\(k_2 = -\,\displaystyle\frac{1}{L_e}\)</span>
+to be assigned.
+For all such assignments, the user is expected to supply a python file
+specific to the concerned subcircuit, and it needs to be in the
+same directory as the <code class="docutils literal notranslate"><span class="pre">.yml</span></code> file for that subcircuit.
+For <code class="docutils literal notranslate"><span class="pre">s_indmc</span></code>, the python file is
+<code class="docutils literal notranslate"><span class="pre">~/gseim_gui/subckt/s_indmc_parm.py</span></code>, and is reproduced below.</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">s_indmc_parm</span><span class="p">(</span><span class="n">dict1</span><span class="p">):</span>
+
+    <span class="n">j</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">dict1</span><span class="p">[</span><span class="s1">&#39;j&#39;</span><span class="p">])</span>
+    <span class="n">llr</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">dict1</span><span class="p">[</span><span class="s1">&#39;llr&#39;</span><span class="p">])</span>
+    <span class="n">lls</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">dict1</span><span class="p">[</span><span class="s1">&#39;lls&#39;</span><span class="p">])</span>
+    <span class="n">lm</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">dict1</span><span class="p">[</span><span class="s1">&#39;lm&#39;</span><span class="p">])</span>
+    <span class="n">rr</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">dict1</span><span class="p">[</span><span class="s1">&#39;rr&#39;</span><span class="p">])</span>
+    <span class="n">rs</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">dict1</span><span class="p">[</span><span class="s1">&#39;rs&#39;</span><span class="p">])</span>
+    <span class="n">poles</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">dict1</span><span class="p">[</span><span class="s1">&#39;poles&#39;</span><span class="p">])</span>
+
+    <span class="n">ls</span> <span class="o">=</span> <span class="n">lls</span> <span class="o">+</span> <span class="n">lm</span>
+    <span class="n">lr</span> <span class="o">=</span> <span class="n">llr</span> <span class="o">+</span> <span class="n">lm</span>
+    <span class="n">le</span> <span class="o">=</span> <span class="p">(</span><span class="n">ls</span><span class="o">*</span><span class="n">lr</span><span class="o">/</span><span class="n">lm</span><span class="p">)</span> <span class="o">-</span> <span class="n">lm</span>
+    <span class="n">l1</span> <span class="o">=</span> <span class="n">lr</span><span class="o">/</span><span class="p">(</span><span class="n">lm</span><span class="o">*</span><span class="n">le</span><span class="p">)</span>
+    <span class="n">l2</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="p">(</span><span class="n">lls</span><span class="o">/</span><span class="n">lm</span><span class="p">)</span>
+    <span class="n">l3</span> <span class="o">=</span> <span class="n">lls</span><span class="o">/</span><span class="n">lm</span>
+    <span class="n">x1</span> <span class="o">=</span> <span class="mf">0.75</span><span class="o">*</span><span class="n">poles</span><span class="o">*</span><span class="n">lm</span>
+    <span class="n">x2</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">poles</span>
+
+    <span class="n">i1_k</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="n">j</span>
+
+    <span class="n">s1_k1</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="n">s1_k2</span> <span class="o">=</span> <span class="o">-</span><span class="n">rs</span>
+
+    <span class="n">s2_k1</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="n">s2_k2</span> <span class="o">=</span> <span class="o">-</span><span class="n">rs</span>
+
+    <span class="n">s3_k1</span> <span class="o">=</span> <span class="o">-</span><span class="n">rr</span>
+    <span class="n">s3_k2</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span>
+
+    <span class="n">s4_k1</span> <span class="o">=</span> <span class="o">-</span><span class="n">rr</span>
+    <span class="n">s4_k2</span> <span class="o">=</span>  <span class="mf">1.0</span>
+
+    <span class="n">s6_k1</span> <span class="o">=</span> <span class="n">l1</span>
+    <span class="n">s6_k2</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span><span class="o">/</span><span class="n">le</span>
+
+    <span class="n">s7_k1</span> <span class="o">=</span> <span class="n">l1</span>
+    <span class="n">s7_k2</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span><span class="o">/</span><span class="n">le</span>
+
+    <span class="n">s8_k1</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="n">lm</span>
+    <span class="n">s8_k2</span> <span class="o">=</span> <span class="o">-</span><span class="n">l2</span>
+
+    <span class="n">s9_k1</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="n">lm</span>
+    <span class="n">s9_k2</span> <span class="o">=</span> <span class="o">-</span><span class="n">l2</span>
+
+    <span class="n">m1_k</span> <span class="o">=</span> <span class="n">x1</span>
+
+    <span class="n">dict1</span><span class="p">[</span><span class="s1">&#39;i1_k&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%14.7e</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i1_k</span><span class="p">)</span>
+    <span class="n">dict1</span><span class="p">[</span><span class="s1">&#39;s1_k1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%14.7e</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">s1_k1</span><span class="p">)</span>
+    <span class="n">dict1</span><span class="p">[</span><span class="s1">&#39;s1_k2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%14.7e</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">s1_k2</span><span class="p">)</span>
+    <span class="n">dict1</span><span class="p">[</span><span class="s1">&#39;s2_k1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%14.7e</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">s2_k1</span><span class="p">)</span>
+    <span class="n">dict1</span><span class="p">[</span><span class="s1">&#39;s2_k2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%14.7e</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">s2_k2</span><span class="p">)</span>
+    <span class="n">dict1</span><span class="p">[</span><span class="s1">&#39;s3_k1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%14.7e</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">s3_k1</span><span class="p">)</span>
+    <span class="n">dict1</span><span class="p">[</span><span class="s1">&#39;s3_k2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%14.7e</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">s3_k2</span><span class="p">)</span>
+    <span class="n">dict1</span><span class="p">[</span><span class="s1">&#39;s4_k1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%14.7e</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">s4_k1</span><span class="p">)</span>
+    <span class="n">dict1</span><span class="p">[</span><span class="s1">&#39;s4_k2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%14.7e</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">s4_k2</span><span class="p">)</span>
+    <span class="n">dict1</span><span class="p">[</span><span class="s1">&#39;s6_k1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%14.7e</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">s6_k1</span><span class="p">)</span>
+    <span class="n">dict1</span><span class="p">[</span><span class="s1">&#39;s6_k2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%14.7e</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">s6_k2</span><span class="p">)</span>
+    <span class="n">dict1</span><span class="p">[</span><span class="s1">&#39;s7_k1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%14.7e</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">s7_k1</span><span class="p">)</span>
+    <span class="n">dict1</span><span class="p">[</span><span class="s1">&#39;s7_k2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%14.7e</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">s7_k2</span><span class="p">)</span>
+    <span class="n">dict1</span><span class="p">[</span><span class="s1">&#39;s8_k1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%14.7e</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">s8_k1</span><span class="p">)</span>
+    <span class="n">dict1</span><span class="p">[</span><span class="s1">&#39;s8_k2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%14.7e</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">s8_k2</span><span class="p">)</span>
+    <span class="n">dict1</span><span class="p">[</span><span class="s1">&#39;s9_k1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%14.7e</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">s9_k1</span><span class="p">)</span>
+    <span class="n">dict1</span><span class="p">[</span><span class="s1">&#39;s9_k2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%14.7e</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">s9_k2</span><span class="p">)</span>
+    <span class="n">dict1</span><span class="p">[</span><span class="s1">&#39;m1_k&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%14.7e</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">m1_k</span><span class="p">)</span>
+    <span class="n">dict1</span><span class="p">[</span><span class="s1">&#39;x2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%14.7e</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">x2</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p>The <code class="docutils literal notranslate"><span class="pre">k1</span></code> and <code class="docutils literal notranslate"><span class="pre">k2</span></code> values for the <code class="docutils literal notranslate"><span class="pre">sum_2</span></code> element marked as
+<code class="docutils literal notranslate"><span class="pre">s6</span></code> in the schematic are computed in the above python function
+as <code class="docutils literal notranslate"><span class="pre">s6_k1</span></code> and <code class="docutils literal notranslate"><span class="pre">s6_k2</span></code>, respectively. At the end of the function,
+all of these computed values are stored in the parameter dictionary
+for this subcircuit.
+With this mechanism, the user has significant flexibility in implementing
+element equations.</p>
+</li>
+<li><p class="first">The user can define <code class="docutils literal notranslate"><span class="pre">output</span> <span class="pre">parameters</span></code> for a subcircuit and use those at
+higher levels. The output parameters
+can be mapped to nodes within the subcircuit or to the output parameters
+of the blocks involved in the subcircuit. These features provide a mechanism
+for viewing various quantities of interest at different levels when the
+system is simulated.</p>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">GSEIM</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">GSEIM Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="new_project.html">Creating a new project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="organisation.html">GSEIM Organisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xbe.html">Element templates (<code class="docutils literal notranslate"><span class="pre">xbe</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html"><code class="docutils literal notranslate"><span class="pre">f</span></code>, <code class="docutils literal notranslate"><span class="pre">g</span></code>, <code class="docutils literal notranslate"><span class="pre">h</span></code> functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solve.html">Solve Blocks</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Subcircuits</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#linear-transformation-subcircuit">Linear transformation subcircuit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#induction-motor-subcircuit">Induction motor subcircuit</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="xbedocs.html">xbe Documents</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="solve.html" title="previous chapter">Solve Blocks</a></li>
+      <li>Next: <a href="xbedocs.html" title="next chapter">xbe Documents</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Mahesh Patil.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/subckt.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

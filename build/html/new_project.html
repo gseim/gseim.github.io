@@ -1,0 +1,285 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Creating a new project &#8212; GSEIM 0.0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="GSEIM Organisation" href="organisation.html" />
+    <link rel="prev" title="Getting Started" href="getting_started.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="creating-a-new-project">
+<h1>Creating a new project<a class="headerlink" href="#creating-a-new-project" title="Permalink to this headline">¶</a></h1>
+<p>It is assumed that you have successfully
+installed GSEIM on a linux computer. In this section,
+you will see how to make up a new GSEIM project,
+simulate it, and view the simulation results.</p>
+<p>Consider the ODE given by</p>
+<div class="math notranslate nohighlight">
+\[\frac{dy}{dt} = 4 \cos \omega t + 3 \sin \omega t\]</div>
+<p>This ODE can be implemented with a GSEIM schematic
+by rewriting it as</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}x_1 = 4 \cos \omega t\\x_2 = 3 \sin \omega t\\y = \int (x_1 + x_2)\,dt\end{aligned}\end{align} \]</div>
+<p>In the following, a step-by-step procedure is given to make
+up the schematic diagram and obtain the simulation results
+for the above equations. Note that this is a rather simple
+ODE for which the analytic solution can be easily found and
+compared with the numerical solution given by GSEIM.</p>
+<ul>
+<li><p class="first">Start a new project. A canvas with an <code class="docutils literal notranslate"><span class="pre">Options</span></code> block will
+appear. Double-click on the options block, and set <code class="docutils literal notranslate"><span class="pre">Id</span></code>
+and <code class="docutils literal notranslate"><span class="pre">Title</span></code>. Note that Id should only contain letters, digits,
+and the underscore character. In the <code class="docutils literal notranslate"><span class="pre">Generate</span> <span class="pre">option</span></code> field,
+choose <code class="docutils literal notranslate"><span class="pre">Circuit</span></code> to indicate that this schematic diagram is
+for a complete stand-alone circuit (system) and not a hierarchical block.</p>
+<a class="reference internal image-reference" href="_images/new_project_1.png"><img alt="Alternative text" src="_images/new_project_1.png" style="width: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</li>
+<li><p class="first">The next step is to bring in the required elements (blocks)
+from the library. We need two <code class="docutils literal notranslate"><span class="pre">src_ac</span></code> (sinusoidal source)
+elements for
+<span class="math notranslate nohighlight">\(x_1\)</span> and
+<span class="math notranslate nohighlight">\(x_2\)</span>,
+a <code class="docutils literal notranslate"><span class="pre">sum_2</span></code> element and an <code class="docutils literal notranslate"><span class="pre">integrator</span></code>. To bring <code class="docutils literal notranslate"><span class="pre">src_ac</span></code>
+into the canvas, select it from the library, and drag it into
+the canvas.</p>
+<a class="reference internal image-reference" href="_images/new_project_2.png"><img alt="Alternative text" src="_images/new_project_2.png" style="width: 250px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</li>
+<li><p class="first">Place the components, keeping in mind the connections you will
+need to make.</p>
+<a class="reference internal image-reference" href="_images/new_project_3.png"><img alt="Alternative text" src="_images/new_project_3.png" style="width: 350px;" /></a>
+</li>
+<li><p class="first">Next, we need to set the properties (parameters) for each of the
+elements. In this example, the parameters for <code class="docutils literal notranslate"><span class="pre">sum_2</span></code> and
+<code class="docutils literal notranslate"><span class="pre">integrator</span></code> are not required to be changed (from their
+default values). For the <code class="docutils literal notranslate"><span class="pre">src_ac</span></code> elements, we need to set
+the amplitude, frequency, and phase. Double-click on the element
+of interest, and edit its parameter values.
+For <span class="math notranslate nohighlight">\(x_1 = 4 \cos \omega t\)</span>, the parameters
+<code class="docutils literal notranslate"><span class="pre">a</span></code>, <code class="docutils literal notranslate"><span class="pre">f_hz</span></code>, <code class="docutils literal notranslate"><span class="pre">phi_deg</span></code>
+should be set to 4, 10, and 90, respectively.
+For <span class="math notranslate nohighlight">\(x_2 = 3 \sin \omega t\)</span>, they
+should be set to 3, 10, and 0, respectively, as shown below.</p>
+<a class="reference internal image-reference" href="_images/new_project_4.png"><img alt="Alternative text" src="_images/new_project_4.png" style="width: 600px;" /></a>
+<p>(Note that it is also possible to add comments about a block
+by double-clicking on it and then selecting the <code class="docutils literal notranslate"><span class="pre">Advacned</span></code> tab.)</p>
+</li>
+<li><p class="first">Connect the elements as required. To make a connection between two
+ports, click on one of the ports and then the other.</p>
+<a class="reference internal image-reference" href="_images/new_project_5.png"><img alt="Alternative text" src="_images/new_project_5.png" style="width: 350px;" /></a>
+</li>
+<li><p class="first">We now want to indicate to the simulator which variables it should
+save (and make available for plotting). These are of two types:</p>
+<ul>
+<li><p class="first">Node value: This is the value of the variable represented by a
+node (wire). To select a node value as an output variable,
+left-click on the node (wire), and it will appear in a different
+colour as shown below.</p>
+<a class="reference internal image-reference" href="_images/new_project_6.png"><img alt="Alternative text" src="_images/new_project_6.png" style="width: 350px;" /></a>
+<p>Now, right click on that wire and select <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">to</span> <span class="pre">outvars</span></code>. A box
+which describes the node (as a connection between node x of element xx
+and node y of element yy) appears. Give a suitable name to this output
+variable as shown below.</p>
+<a class="reference internal image-reference" href="_images/new_project_7.png"><img alt="Alternative text" src="_images/new_project_7.png" style="width: 500px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</li>
+<li><p class="first">Output parameter of an element: For each element, a few output
+parameters are declared in the library. To select an output parameter
+of a specific element, right-click on that element and select
+<code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">to</span> <span class="pre">outvars</span></code>. The output parameters available for that element
+will appear. For example, if you click on the <code class="docutils literal notranslate"><span class="pre">integrator</span></code>, the
+following dialog box will be displayed.
+Select <code class="docutils literal notranslate"><span class="pre">y</span></code> and give a suitable name to the corresponding output
+variable.</p>
+<a class="reference internal image-reference" href="_images/new_project_8.png"><img alt="Alternative text" src="_images/new_project_8.png" style="width: 400px;" /></a>
+</li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</li>
+<li><p class="first">The next step is to set simulation parameters such as time step,
+choice of numerical method, etc. This is done by preparing one or
+more <code class="docutils literal notranslate"><span class="pre">solve</span> <span class="pre">blocks</span></code>. In most cases, including the present example,
+we only need one solve block.</p>
+<p>To begin with, we need to add a new solve block. Click on
+<code class="docutils literal notranslate"><span class="pre">Edit</span></code>
+<span class="math notranslate nohighlight">\(\rightarrow\)</span>
+<code class="docutils literal notranslate"><span class="pre">SolveBlocks</span></code>
+<span class="math notranslate nohighlight">\(\rightarrow\)</span>
+<code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">Solve</span> <span class="pre">Block</span></code>.
+A dialog box for a new solve block appears as shown below.
+Choose a suitable name for this solve block. The <code class="docutils literal notranslate"><span class="pre">index</span></code> of
+this block can keep its default value.</p>
+<a class="reference internal image-reference" href="_images/new_project_9.png"><img alt="Alternative text" src="_images/new_project_9.png" style="width: 250px;" /></a>
+<p>We have now added a solve block called <code class="docutils literal notranslate"><span class="pre">S1(0)</span></code>.</p>
+</li>
+<li><p class="first">Next, we edit the properties of the solve block <code class="docutils literal notranslate"><span class="pre">S1(0)</span></code>. Click on
+<code class="docutils literal notranslate"><span class="pre">Edit</span></code>
+<span class="math notranslate nohighlight">\(\rightarrow\)</span>
+<code class="docutils literal notranslate"><span class="pre">SolveBlocks</span></code>
+<span class="math notranslate nohighlight">\(\rightarrow\)</span>
+<code class="docutils literal notranslate"><span class="pre">Edit</span> <span class="pre">Solve</span> <span class="pre">Block</span></code>.
+A dialog box with several parameters appears. For the present example,
+we only need to set the following.</p>
+<ul class="simple">
+<li>numerical method: We can choose Runge-Kutta order 4 (RK4), for example.</li>
+<li><code class="docutils literal notranslate"><span class="pre">t_start</span></code> and <code class="docutils literal notranslate"><span class="pre">t_end</span></code>, the starting and ending times for the simulation</li>
+<li>the time step <code class="docutils literal notranslate"><span class="pre">tstep0_x</span></code></li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="_images/new_project_10.png"><img alt="Alternative text" src="_images/new_project_10.png" style="width: 400px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</li>
+<li><p class="first">We now need to prepare an <code class="docutils literal notranslate"><span class="pre">output</span> <span class="pre">block</span></code> to inform the simulator
+about what data files should be created and which variables should
+be stored in each of them. For this purpose, we first need to add
+an output block.  Click on
+<code class="docutils literal notranslate"><span class="pre">Edit</span></code>
+<span class="math notranslate nohighlight">\(\rightarrow\)</span>
+<code class="docutils literal notranslate"><span class="pre">OutputBlocks</span></code>
+<span class="math notranslate nohighlight">\(\rightarrow\)</span>
+<code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">Output</span> <span class="pre">Block</span></code>.
+The following dialog box appears.</p>
+<a class="reference internal image-reference" href="_images/new_project_11.png"><img alt="Alternative text" src="_images/new_project_11.png" style="width: 200px;" /></a>
+<p>Each output block is associated with a parent solve block.
+In this case, there is only one solve block, so there is no need to
+exercise any choice.</p>
+</li>
+<li><p class="first">Edit the output block added in the previous step by clicking on
+<code class="docutils literal notranslate"><span class="pre">Edit</span></code>
+<span class="math notranslate nohighlight">\(\rightarrow\)</span>
+<code class="docutils literal notranslate"><span class="pre">OutputBlocks</span></code>
+<span class="math notranslate nohighlight">\(\rightarrow\)</span>
+<code class="docutils literal notranslate"><span class="pre">Edit</span> <span class="pre">Output</span> <span class="pre">Block</span></code>.
+The following dialog box appears.</p>
+<a class="reference internal image-reference" href="_images/new_project_12.png"><img alt="Alternative text" src="_images/new_project_12.png" style="width: 450px;" /></a>
+<p>Note that the output variables listed in this box are those declared
+earlier. Select the output variables of interest, and assign a name to
+the output file (which will be created by this output block).</p>
+</li>
+<li><p class="first">You are now ready to simulate the system. Save the project
+file in the directory of your choice, naming it
+<code class="docutils literal notranslate"><span class="pre">test_1.grc</span></code> (where <code class="docutils literal notranslate"><span class="pre">test_`</span></code> comes from the <code class="docutils literal notranslate"><span class="pre">Id</span></code> in the
+<code class="docutils literal notranslate"><span class="pre">Options</span></code> block). Click on
+<code class="docutils literal notranslate"><span class="pre">Generate</span> <span class="pre">flow</span> <span class="pre">graph</span></code>, then
+<code class="docutils literal notranslate"><span class="pre">Execute</span> <span class="pre">flow</span> <span class="pre">graph</span></code>.
+At this stage, the data file specified in your output block would
+be created in the directory
+<code class="docutils literal notranslate"><span class="pre">~/gseim_gui/gseim/output/</span></code>. Click on <code class="docutils literal notranslate"><span class="pre">View</span> <span class="pre">results</span></code>. The plotting
+GUI will appear in a separate window. Click on <code class="docutils literal notranslate"><span class="pre">Browse</span> <span class="pre">files</span></code> and select
+<code class="docutils literal notranslate"><span class="pre">~/gseim_gui/gseim/output/test_1.in</span></code>. After that, select the x and y variables
+as shown in the following figure to view <span class="math notranslate nohighlight">\(y(t)\)</span>.</p>
+<a class="reference internal image-reference" href="_images/new_project_13.png"><img alt="Alternative text" src="_images/new_project_13.png" style="width: 650px;" /></a>
+</li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">GSEIM</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">GSEIM Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Creating a new project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="organisation.html">GSEIM Organisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xbe.html">Element templates (<code class="docutils literal notranslate"><span class="pre">xbe</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html"><code class="docutils literal notranslate"><span class="pre">f</span></code>, <code class="docutils literal notranslate"><span class="pre">g</span></code>, <code class="docutils literal notranslate"><span class="pre">h</span></code> functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solve.html">Solve Blocks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="subckt.html">Subcircuits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xbedocs.html">xbe Documents</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="getting_started.html" title="previous chapter">Getting Started</a></li>
+      <li>Next: <a href="organisation.html" title="next chapter">GSEIM Organisation</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Mahesh Patil.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/new_project.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

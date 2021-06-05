@@ -1,0 +1,171 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Introduction &#8212; GSEIM 0.0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="GSEIM Installation" href="installation.html" />
+    <link rel="prev" title="Welcome to GSEIM’s documentation!" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>GSEIM (General-purpose Simulator with Explicit and Implicit
+Methods) is meant for solving a set of ordinary differential
+equations (ODEs) arising from a system (circuit) schematic
+diagram provided by the user. Its basic functionality may
+be compared with the
+<a class="reference external" href="https://in.mathworks.com/products/simulink.html">Matlab-Simulink</a>
+and
+<a class="reference external" href="http://www.scicos.org/">Scicos</a>
+packages;
+however, at this stage, GSEIM needs substantial enhancement
+particularly in terms of library elements made available to
+the user.</p>
+<p>The salient features of the GSEIM package can be described as follows.</p>
+<ul>
+<li><p class="first">The solver, which handles the most intensive computation, viz.,
+numerical solution of the ODEs, is written in C++ because of
+its high performance.</p>
+</li>
+<li><p class="first">For all other purposes, viz., schematic capture, parsing, parameter
+computation, and plotting, python is used because of the flexibility
+and ease of programming it offers.</p>
+</li>
+<li><p class="first">Output parameters, which determine what data gets stored in the output
+files during simulation, are specified without having to add extra
+elements, such as the <em>scope</em> in Simulink and
+Scicos, to the schematic diagram. This helps in avoiding clutter.</p>
+</li>
+<li><p class="first">Subcircuits (hierarchical blocks) can be used for simplifying the
+schematic.</p>
+</li>
+<li><p class="first">Explicit as well as implicit numerical methods are incorporated in the
+solver. Currently, the following methods are made available:</p>
+<ul class="simple">
+<li>explicit (fixed time step): improved Euler, Heun, Runge-Kutta (4th order)</li>
+<li>explicit (auto time step):
+RKF45, Bogacki and Shampine (2,3)</li>
+<li>implicit (fixed time step):
+backward Euler, trapezoidal</li>
+<li>implicit (auto time step):
+backward Euler-auto, trapezoidal-auto, TR-BDF2</li>
+</ul>
+<p>The backward Euler-auto and trapezoidal-auto methods are used
+only for nonlinear problems. In these methods, the time step is
+adjusted depending on the number of Newton-Raphson iterations
+required at a given time point.</p>
+</li>
+<li><p class="first">GSEIM provides a GUI for plotting the variables specified by the
+user. The plotting GUI allows the user
+to select the output file of interest, the x-axis variable
+(typically time), and y-axis variable(s) to be included
+in the plot. It also gives the user control over plot attributes
+such as line colour, line width, and symbol type, with appropriate
+values specified by default. Using this information, the plotting
+GUI displays the plot requested by the user.
+It also produces python code associated
+with the plot. If required, the user can edit this code in order to make the plot
+more suitable for a report or a presentation. This way,
+the user can benefit from a wide range of plotting capabilities
+offered by python.</p>
+</li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">GSEIM</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">GSEIM Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="new_project.html">Creating a new project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="organisation.html">GSEIM Organisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xbe.html">Element templates (<code class="docutils literal notranslate"><span class="pre">xbe</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html"><code class="docutils literal notranslate"><span class="pre">f</span></code>, <code class="docutils literal notranslate"><span class="pre">g</span></code>, <code class="docutils literal notranslate"><span class="pre">h</span></code> functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solve.html">Solve Blocks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="subckt.html">Subcircuits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xbedocs.html">xbe Documents</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to GSEIM’s documentation!</a></li>
+      <li>Next: <a href="installation.html" title="next chapter">GSEIM Installation</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Mahesh Patil.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/intro.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

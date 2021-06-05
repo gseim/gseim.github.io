@@ -1,0 +1,284 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>f, g, h functions &#8212; GSEIM 0.0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Solve Blocks" href="solve.html" />
+    <link rel="prev" title="Element templates (xbe)" href="xbe.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="f-g-h-functions">
+<span id="functions"></span><h1><code class="docutils literal notranslate"><span class="pre">f</span></code>, <code class="docutils literal notranslate"><span class="pre">g</span></code>, <code class="docutils literal notranslate"><span class="pre">h</span></code> functions<a class="headerlink" href="#f-g-h-functions" title="Permalink to this headline">¶</a></h1>
+<p>An attractive feature offered by GSEIM is the facility for
+the user to make up a new element (<code class="docutils literal notranslate"><span class="pre">xbe</span></code>). In order to
+use this facility effectively, it is important to understand
+the working of explicit and implicit methods for solving ODEs
+(see
+<a class="reference external" href="https://www.ee.iitb.ac.in/~sequel/sequel_manual_1.pdf">SEQUEL User’s manual-Part 1</a>,
+Chapters 4 and 6, for a short review).</p>
+<div class="section" id="transient-simulation">
+<span id="trns"></span><h2>Transient simulation<a class="headerlink" href="#transient-simulation" title="Permalink to this headline">¶</a></h2>
+<p>Here, we will take two
+representative methods, Forward Euler (FE) and Backward Euler (BE),
+and explain what information about the ODEs needs to be provided
+by the <code class="docutils literal notranslate"><span class="pre">xbe</span></code> template in each case. The FE method has its limitations
+in terms of accuracy and stability and is therefore rarely used.
+However, for the purpose of this discussion, it is adequate.
+For simplicity, we consider a single ODE of the form,</p>
+<div class="math notranslate nohighlight" id="equation-eq-ode-1">
+<span class="eqno">(1)<a class="headerlink" href="#equation-eq-ode-1" title="Permalink to this equation">¶</a></span>\[\displaystyle\frac{dx_k}{dt} = u(x_1,\,x_2,\cdots,\,t).\]</div>
+<p>The discretised forms of Eq. <a class="reference internal" href="#equation-eq-ode-1">(1)</a> obtained with the
+FE and BE methods are given by</p>
+<div class="math notranslate nohighlight" id="equation-eq-fe-1">
+<span class="eqno">(2)<a class="headerlink" href="#equation-eq-fe-1" title="Permalink to this equation">¶</a></span>\[FE:~x_k^{n+1} = x_k^n + h\,u(x_1^n,\,x_2^n,\cdots,\,t_n),\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-be-1">
+<span class="eqno">(3)<a class="headerlink" href="#equation-eq-be-1" title="Permalink to this equation">¶</a></span>\[BE:~x_k^{n+1} = x_k^n + h\,u(x_1^{n+1},\,x_2^{n+1},\cdots,\,t_{n+1}),\]</div>
+<p>where <span class="math notranslate nohighlight">\(x_i^n\)</span> is the numerical solution at time <span class="math notranslate nohighlight">\(t_n\)</span>.
+There is a striking difference between these two forms: The right-hand side
+involves
+<em>known</em> quantities
+<span class="math notranslate nohighlight">\((x_1^n,\,x_2^n,\cdots)\)</span>
+in the FE formula, and
+<em>unknown</em> quantities
+<span class="math notranslate nohighlight">\((x_1^{n+1},\,x_2^{n+1},\cdots)\)</span>
+in the BE formula.
+This implies that, to obtain <span class="math notranslate nohighlight">\(x_k^{n+1}\)</span>, we only need to
+<em>evaluate</em> the right-hand side of <a class="reference internal" href="#equation-eq-fe-1">(2)</a> for the FE method,
+but <em>solve</em> <a class="reference internal" href="#equation-eq-be-1">(3)</a> for the BE method.</p>
+<p>Assuming that <span class="math notranslate nohighlight">\(u(x_1,\,x_2,\cdots)\)</span> is in general a nonlinear
+function, the
+<a class="reference external" href="https://www.ee.iitb.ac.in/~sequel/sequel_manual_1.pdf">Newton-Raphson method</a>
+is used in GSEIM to solve <a class="reference internal" href="#equation-eq-be-1">(3)</a>, requiring the function value <span class="math notranslate nohighlight">\(u\)</span>
+as well as the derivative (Jacobian) values
+<span class="math notranslate nohighlight">\(\displaystyle\frac{\partial u}{\partial x_1}, \displaystyle\frac{\partial u}{\partial x_2}, \cdots\)</span>.
+This brings us to the following requirement from an <code class="docutils literal notranslate"><span class="pre">xbe</span></code> template of
+<code class="docutils literal notranslate"><span class="pre">integrate</span></code> type.</p>
+<p><strong>Transient simulation with explicit methods:</strong> Supply
+<span class="math notranslate nohighlight">\(u(x_1,\,x_2,\cdots,\,t)\)</span>. The function <span class="math notranslate nohighlight">\(u\)</span> in <a class="reference internal" href="#equation-eq-ode-1">(1)</a>
+is denoted by <code class="docutils literal notranslate"><span class="pre">f</span></code> in GSEIM terminology.</p>
+<p><strong>Transient simulation with implicit methods:</strong> Supply
+<span class="math notranslate nohighlight">\(u(x_1,\,x_2,\cdots,\,t)\)</span> as well as
+<span class="math notranslate nohighlight">\(\displaystyle\frac{\partial u}{\partial x_1}, \displaystyle\frac{\partial u}{\partial x_2}, \cdots\)</span>.
+These are denoted by <code class="docutils literal notranslate"><span class="pre">g</span></code>, <code class="docutils literal notranslate"><span class="pre">dgdx</span></code> in GSEIM terminology.</p>
+<p>Note that, since there are multiple ODEs in general in an <code class="docutils literal notranslate"><span class="pre">integrate</span></code> type
+<code class="docutils literal notranslate"><span class="pre">xbe</span></code> template, <code class="docutils literal notranslate"><span class="pre">f</span></code>, <code class="docutils literal notranslate"><span class="pre">g</span></code> are one-dimensional vectors, and <code class="docutils literal notranslate"><span class="pre">dgdx</span></code> is a
+two-dimensional vector.</p>
+<p>In <code class="docutils literal notranslate"><span class="pre">xbe</span></code>’s of type <code class="docutils literal notranslate"><span class="pre">evaluate</span></code>, the equations are of the form,</p>
+<div class="math notranslate nohighlight" id="equation-eq-eval-1">
+<span class="eqno">(4)<a class="headerlink" href="#equation-eq-eval-1" title="Permalink to this equation">¶</a></span>\[y = u(x_1,\,x_2,\cdots,\,t),\]</div>
+<p>where
+<span class="math notranslate nohighlight">\(x_1\)</span>,
+<span class="math notranslate nohighlight">\(x_2\)</span>,
+<span class="math notranslate nohighlight">\(\cdots\)</span>
+are the input variables, and
+<span class="math notranslate nohighlight">\(y\)</span>
+is the output variable.
+If an explicit method is being used, GSEIM expects
+the <code class="docutils literal notranslate"><span class="pre">xbe</span></code> template to return
+<span class="math notranslate nohighlight">\(y\)</span>.
+If an implicit method is being used, GSEIM expects
+information about a function
+<span class="math notranslate nohighlight">\(v\)</span>, defined as</p>
+<div class="math notranslate nohighlight" id="equation-eq-eval-2">
+<span class="eqno">(5)<a class="headerlink" href="#equation-eq-eval-2" title="Permalink to this equation">¶</a></span>\[v \equiv y - u(x_1,\,x_2,\cdots,\,t).\]</div>
+<p>In this case, the <code class="docutils literal notranslate"><span class="pre">xbe</span></code> template is expected to return
+<span class="math notranslate nohighlight">\(v\)</span> and its derivatives with respect to the variables
+involved in that equation. The variables to be assigned in
+the <code class="docutils literal notranslate"><span class="pre">xbe</span></code> template are the vectors <code class="docutils literal notranslate"><span class="pre">g</span></code> and <code class="docutils literal notranslate"><span class="pre">dgdx</span></code>.</p>
+</div>
+<div class="section" id="start-up-simulation">
+<span id="startup"></span><h2>Start-up simulation<a class="headerlink" href="#start-up-simulation" title="Permalink to this headline">¶</a></h2>
+<p>In some situations, it is required to assign specific values
+to the state variables in the system (such as <span class="math notranslate nohighlight">\(x_k\)</span> in
+<a class="reference internal" href="#equation-eq-ode-1">(1)</a>), and solve for the remaining variables. We will
+refer to this type of simulation as <em>start-up</em> simulation.</p>
+<p><a class="reference internal" href="#equation-eq-ode-1">(1)</a> in the start-up scenario is written as</p>
+<div class="math notranslate nohighlight" id="equation-eq-strt-1">
+<span class="eqno">(6)<a class="headerlink" href="#equation-eq-strt-1" title="Permalink to this equation">¶</a></span>\[x_k = x_k^{st},\]</div>
+<p>where <span class="math notranslate nohighlight">\(x_k = x_k^{st}\)</span> is the start-up value. If an explicit
+method is being used, the <code class="docutils literal notranslate"><span class="pre">xbe</span></code> template simply needs to make the
+above assignment. If an implicit method is being used, <a class="reference internal" href="#equation-eq-strt-1">(6)</a>
+needs to be rewritten as</p>
+<div class="math notranslate nohighlight" id="equation-eq-strt-2">
+<span class="eqno">(7)<a class="headerlink" href="#equation-eq-strt-2" title="Permalink to this equation">¶</a></span>\[w \equiv x_k - x_k^{st} = 0,\]</div>
+<p>and <span class="math notranslate nohighlight">\(w\)</span> needs to be returned by the <code class="docutils literal notranslate"><span class="pre">xbe</span></code> template (in the form
+of vector <code class="docutils literal notranslate"><span class="pre">h</span></code>).</p>
+<p>For <code class="docutils literal notranslate"><span class="pre">evaluate</span></code> type elements, the start-up situation can be handled in
+the same manner as the transient situation.</p>
+</div>
+<div class="section" id="algebraic-loops">
+<h2>Algebraic loops<a class="headerlink" href="#algebraic-loops" title="Permalink to this headline">¶</a></h2>
+<p>The <em>flow-graph</em> approach, with each element having input and output ports,
+runs into problems if there are <em>algebraic loops</em> in the system. For example,
+consider the following system.</p>
+<a class="reference internal image-reference" href="_images/alg_loop_1.png"><img alt="Alternative text" src="_images/alg_loop_1.png" style="width: 320px;" /></a>
+<p>In this system, there are no time derivatives. It is therefore sufficient to
+consider any time <span class="math notranslate nohighlight">\(t_n\)</span> and see if we can obtain
+<span class="math notranslate nohighlight">\(x_2^n\)</span>,
+<span class="math notranslate nohighlight">\(x_3^n\)</span>,
+<span class="math notranslate nohighlight">\(x_4^n\)</span>
+in terms of the input
+<span class="math notranslate nohighlight">\(x_1^n\)</span>.
+The following equations must be satisfied:</p>
+<div class="math notranslate nohighlight" id="equation-eq-alg-1">
+<span class="eqno">(8)<a class="headerlink" href="#equation-eq-alg-1" title="Permalink to this equation">¶</a></span>\[x_2^n = x_1^n - x_4^n,\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-alg-2">
+<span class="eqno">(9)<a class="headerlink" href="#equation-eq-alg-2" title="Permalink to this equation">¶</a></span>\[x_4^n = k_2 x_3^n,\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-alg-3">
+<span class="eqno">(10)<a class="headerlink" href="#equation-eq-alg-3" title="Permalink to this equation">¶</a></span>\[x_3^n = k_1 x_2^n.\]</div>
+<p>In an explicit method, we treat <span class="math notranslate nohighlight">\(x_1^n\)</span> as the
+source, and then compute variables one by one, following
+the arrows in the figure, by evaluating Eqs.
+<a class="reference internal" href="#equation-eq-alg-1">(8)</a> to
+<a class="reference internal" href="#equation-eq-alg-3">(10)</a>
+in succession. This approach leads to a problem: The three
+equations are supposed to be valid <em>simultaneously</em>. However, since
+<a class="reference internal" href="#equation-eq-alg-3">(10)</a> is evaluated <em>after</em>
+<a class="reference internal" href="#equation-eq-alg-2">(9)</a>, the value of
+<span class="math notranslate nohighlight">\(x_3^n\)</span> is not consistently computed.
+This type of conflict occurs when there is an <em>algebraic loop</em>
+in the system, i.e., there is a loop in which the variables are
+related through purely {it algebraic} equations, not involving
+time derivatives.</p>
+<p>If an implicit method is used for the above system, Eqs.
+<a class="reference internal" href="#equation-eq-alg-1">(8)</a> to
+<a class="reference internal" href="#equation-eq-alg-3">(10)</a>
+are solved simultaneously (as an algebraic system of equations),
+and there is no conflict.</p>
+<p>Now consider applying an explicit method to a system which has
+both <code class="docutils literal notranslate"><span class="pre">integrate</span></code> type elements (involving time derivatives)
+and <code class="docutils literal notranslate"><span class="pre">evaluate</span></code> type elements. If there is an algebraic loop
+in the system, a consistent solution can be obtained in two steps:</p>
+<ol class="arabic simple">
+<li>Update the outputs of <code class="docutils literal notranslate"><span class="pre">integrate</span></code> type elements.</li>
+<li>Solve the algebraic system of equations involving the remaining
+variables using a suitable method (GSEIM uses the
+<a class="reference external" href="https://www.ee.iitb.ac.in/~sequel/sequel_manual_1.pdf">Newton-Raphson method</a>.</li>
+</ol>
+<p>The second step is implemented in GSEIM by holding the updated output
+values of <code class="docutils literal notranslate"><span class="pre">integrate</span></code> type elements (denoted by <span class="math notranslate nohighlight">\(x^u\)</span>)
+constant, and solving the resulting algebraic set of equations.
+In other words, for <code class="docutils literal notranslate"><span class="pre">integrate</span></code> time elements, we need to replace
+the original equation</p>
+<div class="math notranslate nohighlight">
+\[\displaystyle\frac{dx_k}{dt} = u(x_1,\,x_2,\cdots,\,t).\]</div>
+<p>with</p>
+<div class="math notranslate nohighlight">
+\[x_k - x_k^u = 0,\]</div>
+<p>and the <code class="docutils literal notranslate"><span class="pre">xbe</span></code> template in this situation should return
+<span class="math notranslate nohighlight">\(h \equiv x_k - x_k^u\)</span>.</p>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>The above discussion is summarised  in the following figures.</p>
+<a class="reference internal image-reference" href="_images/xbe_trns.png"><img alt="Alternative text" src="_images/xbe_trns.png" style="width: 620px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="_images/xbe_startup.png"><img alt="Alternative text" src="_images/xbe_startup.png" style="width: 480px;" /></a>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">GSEIM</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">GSEIM Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="new_project.html">Creating a new project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="organisation.html">GSEIM Organisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xbe.html">Element templates (<code class="docutils literal notranslate"><span class="pre">xbe</span></code>)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">f</span></code>, <code class="docutils literal notranslate"><span class="pre">g</span></code>, <code class="docutils literal notranslate"><span class="pre">h</span></code> functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#transient-simulation">Transient simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#start-up-simulation">Start-up simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#algebraic-loops">Algebraic loops</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="solve.html">Solve Blocks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="subckt.html">Subcircuits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xbedocs.html">xbe Documents</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="xbe.html" title="previous chapter">Element templates (<code class="docutils literal notranslate"><span class="pre">xbe</span></code>)</a></li>
+      <li>Next: <a href="solve.html" title="next chapter">Solve Blocks</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Mahesh Patil.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/functions.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
