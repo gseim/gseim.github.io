@@ -1,0 +1,466 @@
+options:
+  parameters:
+    author: mbp
+    category: '[GRC Hier Blocks]'
+    comment: ''
+    copyright: ''
+    delta_show_grid: '2'
+    description: ''
+    drawing_scheme: name
+    engine_output: GUI_window
+    generate_options: circuit
+    id: connectors_2
+    mirror: none
+    placement: (0,0)
+    port_block_x: '4'
+    port_block_y: '4'
+    port_sep_x: '4'
+    port_sep_y: '4'
+    rotate_strict: 'no'
+    run: 'True'
+    sizing_mode: fixed
+    title: Not titled yet
+    wiring_style: rectilinear
+  states:
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+blocks:
+- name: connector_e_2$0
+  id: connector_e_2
+  parameters:
+    comment: ''
+    drawing_scheme: none
+    mirror: none
+    name: none
+    port_block_x: '1'
+    port_block_y: '1'
+    port_sep_x: '0'
+    port_sep_y: '0'
+    rotate_strict: 'no'
+  states:
+    coordinate: [267, 84]
+    rotation: 0
+    state: true
+- name: connector_e_2A$0
+  id: connector_e_2A
+  parameters:
+    comment: ''
+    drawing_scheme: symbol
+    mirror: none
+    name: none
+    port_block_x: '1'
+    port_block_y: '1'
+    port_offset_b: '0'
+    port_offset_l: '0'
+    port_offset_r: '0'
+    port_offset_t: '0'
+    port_sep_x: '0'
+    port_sep_y: '0'
+    rotate_strict: 'yes'
+  states:
+    coordinate: [387, 84]
+    rotation: 0
+    state: true
+- name: connector_e_3$0
+  id: connector_e_3
+  parameters:
+    comment: ''
+    drawing_scheme: none
+    mirror: none
+    name: none
+    port_block_x: '1'
+    port_block_y: '1'
+    port_sep_x: '0'
+    port_sep_y: '0'
+    rotate_strict: 'no'
+  states:
+    coordinate: [507, 84]
+    rotation: 0
+    state: true
+- name: connector_e_4$0
+  id: connector_e_4
+  parameters:
+    comment: ''
+    drawing_scheme: none
+    mirror: none
+    name: none
+    port_block_x: '1'
+    port_block_y: '1'
+    port_sep_x: '0'
+    port_sep_y: '0'
+    rotate_strict: 'no'
+  states:
+    coordinate: [627, 84]
+    rotation: 0
+    state: true
+- name: connector_f_2A$0
+  id: connector_f_2A
+  parameters:
+    comment: ''
+    drawing_scheme: symbol
+    mirror: none
+    name: none
+    output1: top
+    port_block_x: '1'
+    port_block_y: '1'
+    port_offset_b: '0'
+    port_offset_l: '0'
+    port_offset_r: '0'
+    port_offset_t: '0'
+    port_sep_x: '0'
+    port_sep_y: '0'
+    rotate_strict: 'yes'
+  states:
+    coordinate: [267, 144]
+    rotation: 0
+    state: true
+- name: connector_f_2B$0
+  id: connector_f_2B
+  parameters:
+    comment: ''
+    drawing_scheme: symbol
+    mirror: none
+    name: none
+    output1: bottom
+    port_block_x: '1'
+    port_block_y: '1'
+    port_offset_b: '0'
+    port_offset_l: '0'
+    port_offset_r: '0'
+    port_offset_t: '0'
+    port_sep_x: '0'
+    port_sep_y: '0'
+    rotate_strict: 'yes'
+  states:
+    coordinate: [387, 144]
+    rotation: 0
+    state: true
+- name: connector_f_2a$0
+  id: connector_f_2a
+  parameters:
+    comment: ''
+    drawing_scheme: none
+    mirror: none
+    name: none
+    output1: top
+    port_block_x: '1'
+    port_block_y: '1'
+    port_sep_x: '0'
+    port_sep_y: '0'
+    rotate_strict: 'no'
+  states:
+    coordinate: [507, 144]
+    rotation: 0
+    state: true
+- name: connector_f_2b$0
+  id: connector_f_2b
+  parameters:
+    comment: ''
+    drawing_scheme: none
+    mirror: none
+    name: none
+    output1: bottom
+    port_block_x: '1'
+    port_block_y: '1'
+    port_sep_x: '0'
+    port_sep_y: '0'
+    rotate_strict: 'no'
+  states:
+    coordinate: [627, 144]
+    rotation: 0
+    state: true
+- name: connector_f_3a$0
+  id: connector_f_3a
+  parameters:
+    comment: ''
+    drawing_scheme: none
+    mirror: none
+    name: none
+    output1: top
+    output2: right
+    port_block_x: '1'
+    port_block_y: '1'
+    port_sep_x: '0'
+    port_sep_y: '0'
+    rotate_strict: 'no'
+  states:
+    coordinate: [267, 204]
+    rotation: 0
+    state: true
+- name: connector_f_3b$0
+  id: connector_f_3b
+  parameters:
+    comment: ''
+    drawing_scheme: none
+    mirror: none
+    name: none
+    output1: bottom
+    output2: right
+    port_block_x: '1'
+    port_block_y: '1'
+    port_sep_x: '0'
+    port_sep_y: '0'
+    rotate_strict: 'no'
+  states:
+    coordinate: [387, 204]
+    rotation: 0
+    state: true
+- name: connector_f_3c$0
+  id: connector_f_3c
+  parameters:
+    comment: ''
+    drawing_scheme: none
+    mirror: none
+    name: none
+    output1: top
+    output2: bottom
+    port_block_x: '1'
+    port_block_y: '1'
+    port_sep_x: '0'
+    port_sep_y: '0'
+    rotate_strict: 'no'
+  states:
+    coordinate: [507, 204]
+    rotation: 0
+    state: true
+- name: connector_f_4$0
+  id: connector_f_4
+  parameters:
+    comment: ''
+    drawing_scheme: none
+    mirror: none
+    name: none
+    output1: top
+    output2: right
+    output3: bottom
+    port_block_x: '1'
+    port_block_y: '1'
+    port_sep_x: '0'
+    port_sep_y: '0'
+    rotate_strict: 'no'
+  states:
+    coordinate: [627, 204]
+    rotation: 0
+    state: true
+- name: show_text$0
+  id: show_text
+  parameters:
+    comment: ''
+    drawing_scheme: text
+    font_size: '9'
+    mirror: none
+    name: none
+    port_block_x: '4'
+    port_block_y: '4'
+    port_sep_x: '4'
+    port_sep_y: '4'
+    rotate_strict: 'no'
+    text: connector_e_2
+  states:
+    coordinate: [231, 102]
+    rotation: 0
+    state: true
+- name: show_text$1
+  id: show_text
+  parameters:
+    comment: ''
+    drawing_scheme: text
+    font_size: '9'
+    mirror: none
+    name: none
+    port_block_x: '4'
+    port_block_y: '4'
+    port_sep_x: '4'
+    port_sep_y: '4'
+    rotate_strict: 'no'
+    text: connector_2A
+  states:
+    coordinate: [354, 102]
+    rotation: 0
+    state: true
+- name: show_text$10
+  id: show_text
+  parameters:
+    comment: ''
+    drawing_scheme: text
+    font_size: '9'
+    mirror: none
+    name: none
+    port_block_x: '4'
+    port_block_y: '4'
+    port_sep_x: '4'
+    port_sep_y: '4'
+    rotate_strict: 'no'
+    text: connector_f_3b
+  states:
+    coordinate: [348, 222]
+    rotation: 0
+    state: true
+- name: show_text$11
+  id: show_text
+  parameters:
+    comment: ''
+    drawing_scheme: text
+    font_size: '9'
+    mirror: none
+    name: none
+    port_block_x: '4'
+    port_block_y: '4'
+    port_sep_x: '4'
+    port_sep_y: '4'
+    rotate_strict: 'no'
+    text: connector_f_4
+  states:
+    coordinate: [588, 222]
+    rotation: 0
+    state: true
+- name: show_text$2
+  id: show_text
+  parameters:
+    comment: ''
+    drawing_scheme: text
+    font_size: '9'
+    mirror: none
+    name: none
+    port_block_x: '4'
+    port_block_y: '4'
+    port_sep_x: '4'
+    port_sep_y: '4'
+    rotate_strict: 'no'
+    text: connector_e_3
+  states:
+    coordinate: [471, 102]
+    rotation: 0
+    state: true
+- name: show_text$3
+  id: show_text
+  parameters:
+    comment: ''
+    drawing_scheme: text
+    font_size: '9'
+    mirror: none
+    name: none
+    port_block_x: '4'
+    port_block_y: '4'
+    port_sep_x: '4'
+    port_sep_y: '4'
+    rotate_strict: 'no'
+    text: connector_e_4
+  states:
+    coordinate: [588, 102]
+    rotation: 0
+    state: true
+- name: show_text$4
+  id: show_text
+  parameters:
+    comment: ''
+    drawing_scheme: text
+    font_size: '9'
+    mirror: none
+    name: none
+    port_block_x: '4'
+    port_block_y: '4'
+    port_sep_x: '4'
+    port_sep_y: '4'
+    rotate_strict: 'no'
+    text: connector_f_2A
+  states:
+    coordinate: [228, 162]
+    rotation: 0
+    state: true
+- name: show_text$5
+  id: show_text
+  parameters:
+    comment: ''
+    drawing_scheme: text
+    font_size: '9'
+    mirror: none
+    name: none
+    port_block_x: '4'
+    port_block_y: '4'
+    port_sep_x: '4'
+    port_sep_y: '4'
+    rotate_strict: 'no'
+    text: connector_f_2B
+  states:
+    coordinate: [348, 162]
+    rotation: 0
+    state: true
+- name: show_text$6
+  id: show_text
+  parameters:
+    comment: ''
+    drawing_scheme: text
+    font_size: '9'
+    mirror: none
+    name: none
+    port_block_x: '4'
+    port_block_y: '4'
+    port_sep_x: '4'
+    port_sep_y: '4'
+    rotate_strict: 'no'
+    text: connector_f_2a
+  states:
+    coordinate: [468, 162]
+    rotation: 0
+    state: true
+- name: show_text$7
+  id: show_text
+  parameters:
+    comment: ''
+    drawing_scheme: text
+    font_size: '9'
+    mirror: none
+    name: none
+    port_block_x: '4'
+    port_block_y: '4'
+    port_sep_x: '4'
+    port_sep_y: '4'
+    rotate_strict: 'no'
+    text: connector_f_2b
+  states:
+    coordinate: [588, 162]
+    rotation: 0
+    state: true
+- name: show_text$8
+  id: show_text
+  parameters:
+    comment: ''
+    drawing_scheme: text
+    font_size: '9'
+    mirror: none
+    name: none
+    port_block_x: '4'
+    port_block_y: '4'
+    port_sep_x: '4'
+    port_sep_y: '4'
+    rotate_strict: 'no'
+    text: connector_f_3c
+  states:
+    coordinate: [468, 222]
+    rotation: 0
+    state: true
+- name: show_text$9
+  id: show_text
+  parameters:
+    comment: ''
+    drawing_scheme: text
+    font_size: '9'
+    mirror: none
+    name: none
+    port_block_x: '4'
+    port_block_y: '4'
+    port_sep_x: '4'
+    port_sep_y: '4'
+    rotate_strict: 'no'
+    text: connector_f_3a
+  states:
+    coordinate: [228, 222]
+    rotation: 0
+    state: true
+connections: []
+gparms: {}
+outvars: {}
+solve_blocks: []
+output_blocks: []

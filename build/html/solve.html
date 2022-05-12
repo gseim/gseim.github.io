@@ -18,7 +18,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Subcircuits" href="subckt.html" />
-    <link rel="prev" title="f, g, h functions" href="functions.html" />
+    <link rel="prev" title="Element templates" href="templates.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -38,9 +38,22 @@
 convey to the simulator what kind of simulation needs
 to be performed, which method to use, which output
 parameters should be saved, etc. This task is performed
-by a solve block. Solve blocks are of two types:</p>
+by a solve block.</p>
+<p>Many of the solve block statements are related to the
+numerical methods employed by GSEIM.
+Some basic familiarity with the following topics
+would therefore help in understanding the solve
+block statements.</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">startup</span></code> solve block for <a class="reference internal" href="functions.html#startup"><span class="std std-ref">start-up simulation</span></a></li>
+<li><a class="reference internal" href="mna.html#mna"><span class="std std-ref">modified nodal analysis</span></a></li>
+<li><a class="reference internal" href="nr.html#nr"><span class="std std-ref">Newton-Raphson method</span></a></li>
+<li><a class="reference internal" href="numerical.html#numerical"><span class="std std-ref">methods for solving ODEs</span></a></li>
+<li><a class="reference internal" href="ssw.html#ssw"><span class="std std-ref">steady-state waveform computation</span></a></li>
+<li><a class="reference internal" href="startup.html#startup"><span class="std std-ref">start-up simulation</span></a></li>
+</ul>
+<p>Solve blocks are of two types:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">startup</span></code> solve block for start-up simulation</li>
 <li><code class="docutils literal notranslate"><span class="pre">trns</span></code> solve block for transient simulation</li>
 </ul>
 <p>Multiple solve blocks per project are allowed. Here are
@@ -60,45 +73,70 @@ without having to repeat the
 part.</li>
 </ul>
 <p>In most cases, we are interested in a single transient simulation,
-and in that case, only one solve block is required.</p>
+and therefore only one solve block is required.</p>
 <p>A new solve block can be added by clicking on
-<code class="docutils literal notranslate"><span class="pre">Edit</span></code>
-<span class="math notranslate nohighlight">\(\rightarrow\)</span>
 <code class="docutils literal notranslate"><span class="pre">SolveBlocks</span></code>
 <span class="math notranslate nohighlight">\(\rightarrow\)</span>
 <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">Solve</span> <span class="pre">Block</span></code>.</p>
 <p>A dialog box for a new solve block appears as shown below.</p>
-<a class="reference internal image-reference" href="_images/new_project_9.png"><img alt="Alternative text" src="_images/new_project_9.png" style="width: 250px;" /></a>
+<a class="reference internal image-reference" href="_images/new_project_9.png"><img alt="add solve block" src="_images/new_project_9.png" style="width: 220px;" /></a>
 <p>The solve block needs to be assigned a suitable name, e.g, <code class="docutils literal notranslate"><span class="pre">S1</span></code>.
 The <code class="docutils literal notranslate"><span class="pre">index</span></code> field determines the order in which solve blocks are
 executed. For example, if there are two solve blocks with names
 <code class="docutils literal notranslate"><span class="pre">S1</span></code>, <code class="docutils literal notranslate"><span class="pre">S2</span></code> and indices 0, 1, respectively, the solve block
-<code class="docutils literal notranslate"><span class="pre">S1(0)</span></code> will be executed first, followed by <code class="docutils literal notranslate"><span class="pre">S2(1)</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">S1</span></code> will be executed first, followed by <code class="docutils literal notranslate"><span class="pre">S2</span></code>.</p>
 <p>When a solve block is added, it gets a set of default parameter values
-from the file <code class="docutils literal notranslate"><span class="pre">~/gseim_gui/gseim/exec/gseim_slvparms.in</span></code>.
+from the file <code class="docutils literal notranslate"><span class="pre">~/gseim_grc/gseim/exec/gseim_slvparms.in</span></code>.
 These values can be edited by clicking on
-<code class="docutils literal notranslate"><span class="pre">Edit</span></code>
-<span class="math notranslate nohighlight">\(\rightarrow\)</span>
 <code class="docutils literal notranslate"><span class="pre">SolveBlocks</span></code>
 <span class="math notranslate nohighlight">\(\rightarrow\)</span>
 <code class="docutils literal notranslate"><span class="pre">Edit</span> <span class="pre">Solve</span> <span class="pre">Block</span></code>.</p>
 <p>A dialog box with parameters appears as shown below.</p>
-<a class="reference internal image-reference" href="_images/new_project_10.png"><img alt="Alternative text" src="_images/new_project_10.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="_images/new_project_10.png"><img alt="edit solve block" src="_images/new_project_10.png" style="width: 400px;" /></a>
 <p>We will now describe the solve block parameters.
-The following points may be noted.</p>
+In the interest of brevity, we will use the following definitions.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="35%" />
+<col width="65%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">circuit</span></code></td>
+<td>circuit has only xbe’s</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">e</span> <span class="pre">circuit</span></code></td>
+<td>circuit has only ebe’s</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">ex</span> <span class="pre">circuit</span></code></td>
+<td>circuit has ebe’s and xbe’s</td>
+</tr>
+</tbody>
+</table>
+<p>The following points may be noted.</p>
 <ul class="simple">
-<li>Keeping future developments in mind, some of the parameters
-have been given names starting with <code class="docutils literal notranslate"><span class="pre">x_</span></code> (or ending with <code class="docutils literal notranslate"><span class="pre">_x</span></code>),
-which means that they are related to <code class="docutils literal notranslate"><span class="pre">xbe</span></code>’s as opposed to <code class="docutils literal notranslate"><span class="pre">ebe</span></code>’s
-(electrical basic elements) to be introduced in the near future.</li>
+<li>Parameters names starting with <code class="docutils literal notranslate"><span class="pre">x_</span></code> (or ending with <code class="docutils literal notranslate"><span class="pre">_x</span></code>)
+generally apply to <code class="docutils literal notranslate"><span class="pre">x</span></code> circuits.</li>
+<li>Parameters names starting with <code class="docutils literal notranslate"><span class="pre">e_</span></code> (or ending with <code class="docutils literal notranslate"><span class="pre">_e</span></code>)
+generally apply to <code class="docutils literal notranslate"><span class="pre">e</span></code> circuits.</li>
+<li>Parameters names starting with <code class="docutils literal notranslate"><span class="pre">ex_</span></code> (or ending with <code class="docutils literal notranslate"><span class="pre">_ex</span></code>)
+generally apply to <code class="docutils literal notranslate"><span class="pre">ex</span></code> circuits.</li>
 <li>Parameters with <code class="docutils literal notranslate"><span class="pre">_nr_</span></code> in their names are related to the Newton-Raphson
 method.</li>
 </ul>
 <div class="section" id="solve-block-statements">
 <h2>Solve Block Statements<a class="headerlink" href="#solve-block-statements" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">solve_type</span></code>: <em>trns</em> for transient simulation, <em>startup</em> for
-start-up simulation</li>
+<li><code class="docutils literal notranslate"><span class="pre">solve_type</span></code>:<ul>
+<li><em>trns</em> for transient simulation</li>
+<li><em>startup</em> for start-up simulation</li>
+<li><em>ssw</em> for steady-state waveform simulation</li>
+</ul>
+</li>
 <li><code class="docutils literal notranslate"><span class="pre">initial_sol</span></code> is related to the initial solution, i.e., the starting
 point for transient simulation. There are three options.<ul>
 <li><em>initialize</em> for initializing variables before transient simulation</li>
@@ -107,67 +145,174 @@ solve block as the initial solution</li>
 <li><em>read_from_file</em> for reading the initial solution from a file</li>
 </ul>
 </li>
-<li><code class="docutils literal notranslate"><span class="pre">initial_sol_file</span></code>: name of the solution file (This field is relevant
-if <code class="docutils literal notranslate"><span class="pre">initial_sol</span></code> is <em>read_from_file</em></li>
-<li><code class="docutils literal notranslate"><span class="pre">output_solution_file</span></code>: name of the solution file (needs to be supplied
-only if the user wants to save the solution file)</li>
-<li><code class="docutils literal notranslate"><span class="pre">algorithm_x_trns</span></code>: transient simulation algorithm</li>
-<li><code class="docutils literal notranslate"><span class="pre">algorithm_x_startup</span></code>: start-up simulation algorithm</li>
-<li><code class="docutils literal notranslate"><span class="pre">itmax_trns</span></code>: maximum number of time points allowed in transient simulation
-This is a <em>safety feature</em>. If the user mistakenly creates conditions which
-lead to a huge number of time points, the output files could fill up the
-disk</li>
+<li><code class="docutils literal notranslate"><span class="pre">init</span> <span class="pre">sol</span> <span class="pre">file</span></code>: This field is relevant
+if <code class="docutils literal notranslate"><span class="pre">initial_sol</span></code> is <em>read_from_file</em>. It is assumed that the solution
+file already exists, and the user can click on the
+<code class="docutils literal notranslate"><span class="pre">init</span> <span class="pre">sol</span> <span class="pre">file</span></code> button and select it from the file menu.</li>
+<li><code class="docutils literal notranslate"><span class="pre">output_solution_file</span></code>: name of the solution file; it needs to be
+supplied if the user wants to save the solution file (at the end of
+the simulation). The complete file path may be specified; if only the
+file name is specified, the file would get created in
+<code class="docutils literal notranslate"><span class="pre">~/gseim_grc/gseim/output/</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">algorithm_x_trns</span></code>: transient simulation algorithm; it applies
+to <code class="docutils literal notranslate"><span class="pre">x</span></code> circuits.</li>
+<li><code class="docutils literal notranslate"><span class="pre">algorithm_x_startup</span></code>: start-up simulation algorithm; it applies
+to <code class="docutils literal notranslate"><span class="pre">x</span></code> circuits.</li>
+<li><code class="docutils literal notranslate"><span class="pre">algorithm_e</span></code>: transient simulation algorithm; it applies to
+<code class="docutils literal notranslate"><span class="pre">e</span></code> circuits.</li>
+<li><code class="docutils literal notranslate"><span class="pre">algorithm_ex</span></code>: transient simulation algorithm; it applies
+to <code class="docutils literal notranslate"><span class="pre">ex</span></code> circuits.</li>
+<li><code class="docutils literal notranslate"><span class="pre">itmax_trns</span></code>: maximum number of time points allowed in transient simulation.
+This is a <em>safety feature</em> to prevent the user from mistakenly
+generating large output files that could fill up the disk.</li>
 <li><code class="docutils literal notranslate"><span class="pre">t_start</span></code>: starting time for transient simulation</li>
 <li><code class="docutils literal notranslate"><span class="pre">t_end</span></code>: ending time for transient simulation</li>
-<li><code class="docutils literal notranslate"><span class="pre">tstep0_x</span></code>: time step. For constant time-step methods, this parameter specifies
-the uniform time interval. For auto time-step methods, it specifies the initial
-time step
-(see
-<a class="reference external" href="https://www.ee.iitb.ac.in/~sequel/sequel_manual_1.pdf">SEQUEL User’s manual-Part 1</a>)</li>
-<li><code class="docutils literal notranslate"><span class="pre">delt_min_x</span></code>: smallest time step allowed during transient simulation</li>
-<li><code class="docutils literal notranslate"><span class="pre">delt_max_x</span></code>: largest time step allowed during transient simulation</li>
 <li><code class="docutils literal notranslate"><span class="pre">t_startup</span></code>: time at which start-up simulation is to be performed (ignored
 for transient simulation)</li>
-<li><code class="docutils literal notranslate"><span class="pre">factor_step_increase</span></code>: factor by which time step should be increased
-in successive iterations in auto time-step methods.</li>
-<li><code class="docutils literal notranslate"><span class="pre">factor_step_decrease</span></code>: factor by which time step should be decreased
-in successive iterations in auto time-step methods.</li>
+<li><code class="docutils literal notranslate"><span class="pre">block_index</span></code>: index of the solve block being edited. If there are multiple
+solve blocks, the one with the lowest <code class="docutils literal notranslate"><span class="pre">block_index</span></code> is executed first, and so on.
+(Not relevant if there is only one solve block)</li>
+<li><code class="docutils literal notranslate"><span class="pre">time_step_x</span></code>: Parameters in this group apply to <code class="docutils literal notranslate"><span class="pre">x</span></code> circuits.<ul>
+<li><code class="docutils literal notranslate"><span class="pre">tstep0_x</span></code>: time step. For constant time-step methods, this parameter specifies
+the uniform time step. For auto time-step methods, it specifies the initial
+time step.</li>
+<li><code class="docutils literal notranslate"><span class="pre">delt_min_x</span></code>: smallest time step allowed during transient simulation</li>
+<li><code class="docutils literal notranslate"><span class="pre">delt_max_x</span></code>: largest time step allowed during transient simulation</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">time_step_e</span></code>: Parameters in this group apply to <code class="docutils literal notranslate"><span class="pre">e</span></code> circuits.<ul>
+<li><code class="docutils literal notranslate"><span class="pre">tstep0_e</span></code>: time step. For constant time-step methods, this parameter specifies
+the uniform time step. For auto time-step methods, it specifies the initial
+time step.</li>
+<li><code class="docutils literal notranslate"><span class="pre">delt_min_e</span></code>: smallest time step allowed during transient simulation</li>
+<li><code class="docutils literal notranslate"><span class="pre">delt_max_e</span></code>: largest time step allowed during transient simulation</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">time_step_ex</span></code>: Parameters in this group apply to <code class="docutils literal notranslate"><span class="pre">ex</span></code> circuits.<ul>
+<li><code class="docutils literal notranslate"><span class="pre">tstep0_ex</span></code>: time step. For constant time-step methods, this parameter specifies
+the uniform time step. For auto time-step methods, it specifies the initial
+time step.</li>
+<li><code class="docutils literal notranslate"><span class="pre">delt_min_ex</span></code>: smallest time step allowed during transient simulation</li>
+<li><code class="docutils literal notranslate"><span class="pre">delt_max_ex</span></code>: largest time step allowed during transient simulation</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">auto_step</span></code>: Parameters in this group apply when the
+<code class="docutils literal notranslate"><span class="pre">backward_euler_auto</span></code> or
+<code class="docutils literal notranslate"><span class="pre">trz_auto</span></code> method is selected.<ul>
+<li><code class="docutils literal notranslate"><span class="pre">factor_step_increase</span></code>: factor by which time step is increased
+in successive iterations.</li>
+<li><code class="docutils literal notranslate"><span class="pre">factor_step_decrease</span></code>: factor by which time step is decreased
+in successive iterations.</li>
+<li><code class="docutils literal notranslate"><span class="pre">itmax_stepred</span></code>: maximum number of successive reductions in the time step at
+a given time point.</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">rkf45</span></code>: Parameters in this group apply when the <code class="docutils literal notranslate"><span class="pre">RKF45</span></code> method is
+selected.<ul>
 <li><code class="docutils literal notranslate"><span class="pre">rkf45_tolr</span></code>: tolerance for the RKF45 method</li>
-<li><code class="docutils literal notranslate"><span class="pre">rkf45_fctr_min</span></code>: lower limit on multiplier <span class="math notranslate nohighlight">\(k\)</span> of RKF45 algorithm
-for time step change, where
+<li><code class="docutils literal notranslate"><span class="pre">rkf45_fctr_min</span></code>: lower limit on multiplier <span class="math notranslate nohighlight">\(k\)</span> of RKF45 algorithm where
 <span class="math notranslate nohighlight">\(\Delta t_{\mathrm{new}} = k \times \Delta t_{\mathrm{new}}\)</span>.</li>
 <li><code class="docutils literal notranslate"><span class="pre">rkf45_fctr_max</span></code>: upper limit on multiplier <span class="math notranslate nohighlight">\(k\)</span> of RKF45 algorithm</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">bs23</span></code>: Parameters in this group apply when the <code class="docutils literal notranslate"><span class="pre">BS23</span></code> method is
+selected.<ul>
 <li><code class="docutils literal notranslate"><span class="pre">bs23_tolr</span></code>: tolerance for the BS23 method</li>
-<li><code class="docutils literal notranslate"><span class="pre">bs23_fctr_min</span></code>: lower limit on multiplier <span class="math notranslate nohighlight">\(k\)</span> of BS23 algorithm
-for time step change</li>
+<li><code class="docutils literal notranslate"><span class="pre">bs23_fctr_min</span></code>: lower limit on multiplier <span class="math notranslate nohighlight">\(k\)</span> of BS23 algorithm</li>
 <li><code class="docutils literal notranslate"><span class="pre">bs23_fctr_max</span></code>: upper limit on multiplier <span class="math notranslate nohighlight">\(k\)</span> of BS23 algorithm</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">TRBDF2</span></code>: Parameters in this group apply when the <code class="docutils literal notranslate"><span class="pre">TRBDF2</span></code> method is
+selected.<ul>
 <li><code class="docutils literal notranslate"><span class="pre">trbdf2_tolr</span></code>: tolerance for the TR-BDF2 method</li>
 <li><code class="docutils literal notranslate"><span class="pre">itmax_trbdf2</span></code>: maximum number of successive reductions in the time step at
 a given time point when TR-BDF2 algorithm is selected.</li>
-<li><code class="docutils literal notranslate"><span class="pre">itmax_stepred</span></code>: maximum number of successive reductions in the time step at
-a given time point when an auto time-step algorithm (other than TR-BDF2) is selected.</li>
-<li><code class="docutils literal notranslate"><span class="pre">write_time_x</span></code>: GSEIM writes the iteration number to the console during
-transient simulation to indicate the progress of the solver. If the time should
-also be written, this parameter should be set to <em>yes</em>.</li>
-<li><code class="docutils literal notranslate"><span class="pre">write_iter_n_x</span></code>: Interval (in terms of iterations, not time) after which
-GSEIM should write the iteration number to the console.</li>
-<li><code class="docutils literal notranslate"><span class="pre">write_matrix_x</span></code>: meant for debugging; ignore.</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">write_to_console</span></code>: Parameters in this group are related to printing
+iteration number in transient simulation (i.e., time point number)
+and time to the console.<ul>
+<li><code class="docutils literal notranslate"><span class="pre">write_iter_n_x</span></code>: Interval in terms of number of iterations after which
+GSEIM should write the iteration number (time point number) to the console.
+Applies to <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">ex</span></code> circuits.</li>
+<li><code class="docutils literal notranslate"><span class="pre">write_time_x</span></code>: This parameter should be set to <em>yes</em> if the time
+should also be printed to the console (along with the time point number).
+Applies to <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">ex</span></code> circuits.</li>
+<li><code class="docutils literal notranslate"><span class="pre">write_iter_n_e</span></code>: Interval in terms of number of iterations after which
+GSEIM should write the iteration number (time point number) to the console.
+Applies to <code class="docutils literal notranslate"><span class="pre">e</span></code> and <code class="docutils literal notranslate"><span class="pre">ex</span></code> circuits.</li>
+<li><code class="docutils literal notranslate"><span class="pre">write_time_e</span></code>: This parameter should be set to <em>yes</em> if the time
+should also be printed to the console (along with the time point number).
+Applies to <code class="docutils literal notranslate"><span class="pre">e</span></code> and <code class="docutils literal notranslate"><span class="pre">ex</span></code> circuits.</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">x_nr</span></code>: Parameters in this group are related to NR convergence for <code class="docutils literal notranslate"><span class="pre">x</span></code> circuits.<ul>
 <li><code class="docutils literal notranslate"><span class="pre">x_nr_itermax</span></code>: maximum number of Newton-Raphson (NR) iterations</li>
-<li><code class="docutils literal notranslate"><span class="pre">x_nr_dmp</span></code>: <em>yes</em> if damping should be used in NR iterations
-(see
-<a class="reference external" href="https://www.ee.iitb.ac.in/~sequel/sequel_manual_1.pdf">SEQUEL User’s manual-Part 1</a>)</li>
+<li><code class="docutils literal notranslate"><span class="pre">x_nr_dmp</span></code>: <em>yes</em> if damping should be used in NR iterations</li>
 <li><code class="docutils literal notranslate"><span class="pre">x_nr_dmp_itermax</span></code>: number of NR iterations for which damping should be applied</li>
 <li><code class="docutils literal notranslate"><span class="pre">x_nr_dmp_k</span></code>: damping factor for NR iterations</li>
 <li><code class="docutils literal notranslate"><span class="pre">x_nr_itermax0</span></code>, <code class="docutils literal notranslate"><span class="pre">x_nr_dmp0</span></code>, <code class="docutils literal notranslate"><span class="pre">x_nr_dmp_itermax0</span></code>, <code class="docutils literal notranslate"><span class="pre">x_nr_dmp_k0</span></code>: like
 the above NR parameters except that these apply to the first time point.</li>
-<li><code class="docutils literal notranslate"><span class="pre">x_nr_check_rhs2</span></code>: <em>yes</em> if the 2-norm should be used to check for convergence
-(see
-<a class="reference external" href="https://www.ee.iitb.ac.in/~sequel/sequel_manual_1.pdf">SEQUEL User’s manual-Part 1</a>)</li>
+<li><code class="docutils literal notranslate"><span class="pre">x_nr_check_delx_all</span></code>: <em>yes</em> if the <span class="math notranslate nohighlight">\(\Delta x\)</span> norm should be used
+for convergence (see <a class="reference internal" href="nr.html#delx-norm"><span class="std std-ref">delx norm</span></a>)</li>
+<li><code class="docutils literal notranslate"><span class="pre">x_nr_eps_delx_all</span></code>: tolerance value for the <span class="math notranslate nohighlight">\(\Delta x\)</span> norm</li>
 <li><code class="docutils literal notranslate"><span class="pre">x_nr_write_rhs2</span></code>: <em>yes</em> for writing the 2-norm to the console (used for debugging)</li>
-<li><code class="docutils literal notranslate"><span class="pre">x_nr_eps_rhs</span></code>: tolerance value for the 2-norm</li>
-<li><code class="docutils literal notranslate"><span class="pre">delt_small</span></code>: parameter used in comparing time points. It can be
-set to two to three orders of magnitude smaller than <code class="docutils literal notranslate"><span class="pre">delt_min</span></code>.</li>
-<li><code class="docutils literal notranslate"><span class="pre">x_fixed_tstep</span></code>: for future development; ignore.</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">e_nr</span></code>: Parameters in this group are related to NR convergence for <code class="docutils literal notranslate"><span class="pre">e</span></code>
+and <code class="docutils literal notranslate"><span class="pre">ex</span></code> circuits.<ul>
+<li><code class="docutils literal notranslate"><span class="pre">e_nr_itermax</span></code>: maximum number of Newton-Raphson (NR) iterations</li>
+<li><code class="docutils literal notranslate"><span class="pre">e_nr_dmp</span></code>: <em>yes</em> if damping should be used in NR iterations</li>
+<li><code class="docutils literal notranslate"><span class="pre">e_nr_dmp_itermax</span></code>: number of NR iterations for which damping should be applied</li>
+<li><code class="docutils literal notranslate"><span class="pre">e_nr_dmp_k</span></code>: damping factor for NR iterations</li>
+<li><code class="docutils literal notranslate"><span class="pre">e_nr_itermax0</span></code>, <code class="docutils literal notranslate"><span class="pre">e_nr_dmp0</span></code>, <code class="docutils literal notranslate"><span class="pre">e_nr_dmp_itermax0</span></code>, <code class="docutils literal notranslate"><span class="pre">e_nr_dmp_k0</span></code>: like
+the above NR parameters except that these apply to the first time point.</li>
+<li><code class="docutils literal notranslate"><span class="pre">e_nr_check_spice</span></code>: <em>yes</em> if the SPICE norm should be used
+for convergence (see <a class="reference internal" href="nr.html#spice-norm"><span class="std std-ref">SPICE norm</span></a>)</li>
+<li><code class="docutils literal notranslate"><span class="pre">e_nr_check_delx_all</span></code>: <em>yes</em> if the <span class="math notranslate nohighlight">\(\Delta x\)</span> norm should be used
+for convergence (see <a class="reference internal" href="nr.html#delx-norm"><span class="std std-ref">delx norm</span></a>)</li>
+<li><code class="docutils literal notranslate"><span class="pre">e_nr_write_rhs2</span></code>: <em>yes</em> for writing the 2-norm to the console (used for debugging)</li>
+<li><code class="docutils literal notranslate"><span class="pre">e_nr_spice_vntol</span></code>, <code class="docutils literal notranslate"><span class="pre">e_nr_spice_abstol</span></code>, <code class="docutils literal notranslate"><span class="pre">e_nr_spice_reltol</span></code>: the SPICE norms
+<code class="docutils literal notranslate"><span class="pre">VNTOL</span></code>, <code class="docutils literal notranslate"><span class="pre">ABSTOL</span></code>, <code class="docutils literal notranslate"><span class="pre">RELTOL</span></code>, respectively
+(see <a class="reference internal" href="nr.html#spice-norm"><span class="std std-ref">SPICE norm</span></a>)</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">ex_nr</span></code>: Parameters in this group are related to NR convergence for <code class="docutils literal notranslate"><span class="pre">ex</span></code> circuits.<ul>
+<li><code class="docutils literal notranslate"><span class="pre">ex_nr_itermax</span></code>: maximum number of Newton-Raphson (NR) iterations</li>
+<li><code class="docutils literal notranslate"><span class="pre">ex_nr_dmp</span></code>: <em>yes</em> if damping should be used in NR iterations</li>
+<li><code class="docutils literal notranslate"><span class="pre">ex_nr_dmp_itermax</span></code>: number of NR iterations for which damping should be applied</li>
+<li><code class="docutils literal notranslate"><span class="pre">ex_nr_dmp_k</span></code>: damping factor for NR iterations</li>
+<li><code class="docutils literal notranslate"><span class="pre">ex_nr_itermax0</span></code>, <code class="docutils literal notranslate"><span class="pre">ex_nr_dmp0</span></code>, <code class="docutils literal notranslate"><span class="pre">ex_nr_dmp_itermax0</span></code>, <code class="docutils literal notranslate"><span class="pre">ex_nr_dmp_k0</span></code>: like
+the above NR parameters except that these apply to the first time point.</li>
+<li><code class="docutils literal notranslate"><span class="pre">ex_nr_check_delx_all</span></code>: <em>yes</em> if the <span class="math notranslate nohighlight">\(\Delta x\)</span> norm should be used
+for convergence (see <a class="reference internal" href="nr.html#delx-norm"><span class="std std-ref">delx norm</span></a>)</li>
+<li><code class="docutils literal notranslate"><span class="pre">ex_nr_eps_delx_all</span></code>: tolerance value for the <span class="math notranslate nohighlight">\(\Delta x\)</span> norm</li>
+<li><code class="docutils literal notranslate"><span class="pre">ex_nr_write_rhs2</span></code>: <em>yes</em> for writing the 2-norm to the console (used for debugging)</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">SSW</span></code>: parameters in this group are related to steady-state waveform computation.<ul>
+<li><code class="docutils literal notranslate"><span class="pre">ssw_period</span></code>, <code class="docutils literal notranslate"><span class="pre">ssw_frequency</span></code>: period and frequency, respectively. One of
+these should be specified.</li>
+<li><code class="docutils literal notranslate"><span class="pre">ssw_period_mult</span></code>: number of SSW periods to be simulated.
+Only one period is really required to be simulated. However, the user may want
+to view a graph showing a few periods, and therefore this option is made
+available.</li>
+<li><code class="docutils literal notranslate"><span class="pre">ssw_nr_eps_rhs</span></code>: 2-norm to check for convergence of the outer NR loop in
+the <a class="reference internal" href="ssw.html#ssw-flowchart"><span class="std std-ref">SSW flow chart</span></a></li>
+<li><code class="docutils literal notranslate"><span class="pre">ssw_ndiv</span></code>: This parameter is used to compute the time step (given by the
+period divided by <code class="docutils literal notranslate"><span class="pre">ssw_ndiv</span></code>). If the time step is already specified
+(using <code class="docutils literal notranslate"><span class="pre">tstep0_x</span></code>, <code class="docutils literal notranslate"><span class="pre">tstep0_e</span></code>, or <code class="docutils literal notranslate"><span class="pre">tstep0_ex</span></code>), then <code class="docutils literal notranslate"><span class="pre">ssw_ndiv</span></code> is
+ignored.</li>
+<li><code class="docutils literal notranslate"><span class="pre">ssw_nr_itermax</span></code>: Maximum number of outer NR iterations
+(see <a class="reference internal" href="ssw.html#ssw-flowchart"><span class="std std-ref">SSW flow chart</span></a>)</li>
+<li><code class="docutils literal notranslate"><span class="pre">ssw_nr_dmp</span></code>: <em>yes</em> if damping is to be used for the outer NR iterations</li>
+<li><code class="docutils literal notranslate"><span class="pre">ssw_nr_dmp_k</span></code>: damping factor <span class="math notranslate nohighlight">\(k\)</span> (<span class="math notranslate nohighlight">\(0 &lt; k &lt; 1\)</span>) for the outer NR loop
+(see <a class="reference internal" href="nr.html#nr-damping-1"><span class="std std-ref">damping</span></a>).
+Relevant only if <code class="docutils literal notranslate"><span class="pre">ssw_nr_dmp</span></code> is set to <em>yes</em>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">ssw_nr_dmp_itermax</span></code>: number of outer NR iterations for which damping should
+be applied.</li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -193,23 +338,29 @@ set to two to three orders of magnitude smaller than <code class="docutils liter
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">GSEIM Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="elements.html">Blocks and ports</a></li>
 <li class="toctree-l1"><a class="reference internal" href="new_project.html">Creating a new project</a></li>
 <li class="toctree-l1"><a class="reference internal" href="organisation.html">GSEIM Organisation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="xbe.html">Element templates (<code class="docutils literal notranslate"><span class="pre">xbe</span></code>)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="functions.html"><code class="docutils literal notranslate"><span class="pre">f</span></code>, <code class="docutils literal notranslate"><span class="pre">g</span></code>, <code class="docutils literal notranslate"><span class="pre">h</span></code> functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">Element templates</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Solve Blocks</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#solve-block-statements">Solve Block Statements</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="subckt.html">Subcircuits</a></li>
-<li class="toctree-l1"><a class="reference internal" href="xbedocs.html">xbe Documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bedocs.html">Block Documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proj_list.html">GSEIM projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mna.html">Modified nodal analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nr.html">Newton-Raphson method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numerical.html">Numerical methods for ODEs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ssw.html">SSW computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="startup.html">Start-up simulation</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="functions.html" title="previous chapter"><code class="docutils literal notranslate"><span class="pre">f</span></code>, <code class="docutils literal notranslate"><span class="pre">g</span></code>, <code class="docutils literal notranslate"><span class="pre">h</span></code> functions</a></li>
+      <li>Previous: <a href="templates.html" title="previous chapter">Element templates</a></li>
       <li>Next: <a href="subckt.html" title="next chapter">Subcircuits</a></li>
   </ul></li>
 </ul>
@@ -231,7 +382,7 @@ set to two to three orders of magnitude smaller than <code class="docutils liter
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2021, Mahesh Patil.
+      &copy;2022, Mahesh Patil.
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>

@@ -1,0 +1,338 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Modified nodal analysis &#8212; GSEIM 0.0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Newton-Raphson method" href="nr.html" />
+    <link rel="prev" title="GSEIM projects" href="proj_list.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="modified-nodal-analysis">
+<span id="mna"></span><h1>Modified nodal analysis<a class="headerlink" href="#modified-nodal-analysis" title="Permalink to this headline">¶</a></h1>
+<p>In this section, we will look at the Modified Nodal Analysis (MNA)
+approach which is used by GSEIM for assemling equations arising
+from electrical circuits.
+To find the solution for an electrical circuit, the following constraints
+need to be satisfied simultaneously:</p>
+<ul class="simple">
+<li>Kirchoff’s current law (KCL) at each node,</li>
+<li>Kirchoff’s voltage law (KVL) for each loop,</li>
+<li>equation(s) describing the behaviour of each element involved
+in the circuit (e.g., resistor, capacitor, diode, transistor, switch,
+transformer).</li>
+</ul>
+<p>The most common approach employed to solve this set of equations
+is Modified Nodal Analysis. As the name suggests, MNA is a
+modified version of Nodal Analysis (NA) which is based on KCL equations
+written in terms of node voltages. In the following, we will describe
+the NA approach with the help of an example, see why it needs to be
+modified, and then look at the MNA approach. For now, we will restrict
+our discussion to linear circuits operating under DC conditions.
+In later sections, we will see how the MNA approach can be used for circuits
+involving nonlinear components and time derivatives.</p>
+<div class="section" id="nodal-analysis">
+<span id="nodal"></span><h2>Nodal analysis<a class="headerlink" href="#nodal-analysis" title="Permalink to this headline">¶</a></h2>
+<p>In nodal analysis, one of the circuit nodes is taken as the reference node
+(ground) and is assigned a node voltage of <span class="math notranslate nohighlight">\(0\,{\textrm{V}}\)</span>. All
+other node voltages are defined with respect to the reference node.
+The element currents are written in terms of the node voltages, and the
+sum of the element currents at each node is equated to zero, as required
+by KCL. The resulting set of equations is then solved for the
+unknowns – the node voltages. Other quantities of interest such as
+currents, branch voltages are computed by post-processing the solution
+vector, i.e., the node voltages. Let us illustrate this process with an
+example.</p>
+<p>Consider the circuit shown below.</p>
+<a class="reference internal image-reference" href="_images/mna1.png"><img alt="nodal analysis example" src="_images/mna1.png" style="width: 230px;" /></a>
+<p>We take one of the nodes (node A) as the
+reference node. The other nodes (B, C, D) are assigned node voltages
+<span class="math notranslate nohighlight">\(V_1\)</span>,
+<span class="math notranslate nohighlight">\(V_2\)</span>,
+<span class="math notranslate nohighlight">\(V_3\)</span>. We write the various element currents in terms of the node
+voltages, e.g.,
+<span class="math notranslate nohighlight">\(I_1 = G_1(V_1-V_2)\)</span>,
+<span class="math notranslate nohighlight">\(I_3 = G_3(0-V_3)\)</span>, where
+<span class="math notranslate nohighlight">\(G_1 = 1/R_1\)</span>, etc. Finally, we substitute the expressions for
+the currents in the KCL equations at nodes B, C, D, and get the following
+set of equations.</p>
+<div class="math notranslate nohighlight" id="equation-eq-mna-1">
+<span class="eqno">(53)<a class="headerlink" href="#equation-eq-mna-1" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{align}
+ {\textrm{KCL at B}}:~~ &amp;
+ -I_0 + I_1 = 0
+ \,, \\
+ {\textrm{KCL at C}}:~~ &amp;
+ -I_1 - I_2 + I_4 + I_5 = 0
+ \,, \\
+ {\textrm{KCL at D}}:~~ &amp;
+ -I_3 - I_4 - I_5 = 0
+ \,.
+\end{align}\end{split}\]</div>
+<p>In terms of node voltages, we have</p>
+<div class="math notranslate nohighlight" id="equation-eq-mna-2">
+<span class="eqno">(54)<a class="headerlink" href="#equation-eq-mna-2" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{align}
+ -I_0 + G_1(V_1-V_2) &amp; = &amp; 0\,,\\
+ - G_1(V_1-V_2) +G_2 V_2 + (G_4+G_5)(V_2-V_3)&amp; = &amp; 0\,,\\
+ G_3V_3 - (G_4+G_5)(V_2-V_3)&amp; = &amp; 0\,.
+\end{align}\end{split}\]</div>
+<p>The above equations can be written in a matrix form:</p>
+<div class="math notranslate nohighlight" id="equation-eq-mna-3">
+<span class="eqno">(55)<a class="headerlink" href="#equation-eq-mna-3" title="Permalink to this equation">¶</a></span>\[\begin{split}\left[
+\begin{array}{ccc}
+ G_1 ~&amp;
+ -G_1 ~&amp;
+ 0
+\\
+ -G_1 ~&amp;
+ G_1+G_2+G_4+G_5 ~&amp;
+ -G_4-G_5
+\\
+ 0 &amp;
+ -G_4-G_5 &amp;
+ G_3+G_4+G_5
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+ V_1 \\
+ V_2 \\
+ V_3
+\end{array}
+\right]
+\thinspace
+=
+\left[
+\begin{array}{c}
+I_0 \\
+0 \\
+0
+\end{array}
+\right]
+\,.\end{split}\]</div>
+<p>We now have a matrix description of the circuit equations:
+<span class="math notranslate nohighlight">\({\bf{Y}}{\bf{V}} = {\bf{I}}_S\)</span>. The matrix <span class="math notranslate nohighlight">\({\bf{Y}}\)</span>
+is called the admittance matrix, <span class="math notranslate nohighlight">\({\bf{V}}\)</span> is the vector
+of node voltages which we want to obtain, and <span class="math notranslate nohighlight">\({\bf{I}}_S\)</span>
+is the current source vector, which contains <span class="math notranslate nohighlight">\(\pm I_k\)</span>,
+<span class="math notranslate nohighlight">\(I_k\)</span> being the current of an independent current source
+connected at node <span class="math notranslate nohighlight">\(k\)</span>. For larger circuits, the admittance
+matrix is typically sparse, with only 10 to 15% non-zero entries.
+The sparse nature of the admittance matrix can be exploited to
+reduce the storage requirement and the number of arithmetic
+operations (and therefore the CPU time) in solving the linear system.</p>
+</div>
+<div class="section" id="modifiednodal">
+<span id="id1"></span><h2>MNA<a class="headerlink" href="#modifiednodal" title="Permalink to this headline">¶</a></h2>
+<p>If there are voltage sources in the circuit, the NA approach needs
+to be modified. As an example, consider the following circuit.</p>
+<a class="reference internal image-reference" href="_images/mna2.png"><img alt="MNA example" src="_images/mna2.png" style="width: 300px;" /></a>
+<p>We take A as the reference node and assign
+<span class="math notranslate nohighlight">\(V_1\)</span>,
+<span class="math notranslate nohighlight">\(V_2\)</span>,
+<span class="math notranslate nohighlight">\(V_3\)</span> to the remaining nodes. When we attempt to write KCL at node
+B or C, we encounter a problem – the current through the voltage
+source cannot be written in terms of the node voltages <span class="math notranslate nohighlight">\(V_1\)</span>
+and <span class="math notranslate nohighlight">\(V_2\)</span>, and the nodal analysis approach therefore needs to
+be modified. In the MNA approach, we augment the solution vector
+with currents through voltage sources, and the KCL equations are
+written in terms of the node voltages as well as these additional
+variables, i.e., currents through voltage sources (including dependent
+voltage sources CCVS, VCVS).</p>
+<p>Using the MNA approach for the above circuit, we get</p>
+<div class="math notranslate nohighlight" id="equation-eq-mna-4">
+<span class="eqno">(56)<a class="headerlink" href="#equation-eq-mna-4" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{align}
+ {\textrm{KCL at B}}:~~ &amp;
+ G_1V_1 + I_s &amp;\hspace{-2mm}= 0
+ \,, \\
+ {\textrm{KCL at C}}:~~ &amp;
+ -I_s + G_2V_2 +G_3(V_2-V_3) &amp;\hspace{-2mm}= 0
+ \,, \\
+ {\textrm{KCL at D}}:~~ &amp;
+ -I_0 + G_3(V_3-V_2) &amp;\hspace{-2mm}= 0
+ \,.
+\end{align}\end{split}\]</div>
+<p>We now have four unknowns (<span class="math notranslate nohighlight">\(V_1\)</span>, <span class="math notranslate nohighlight">\(V_2\)</span>, <span class="math notranslate nohighlight">\(V_3\)</span>,
+<span class="math notranslate nohighlight">\(I_s\)</span>) but only three equations. The fourth equations comes
+from the element equation for the voltage source, viz.,
+<span class="math notranslate nohighlight">\(V_2 - V_1 = V_0\)</span>. The equations can be written in a matrix form:</p>
+<div class="math notranslate nohighlight" id="equation-eq-mna-5">
+<span class="eqno">(57)<a class="headerlink" href="#equation-eq-mna-5" title="Permalink to this equation">¶</a></span>\[\begin{split} \left[
+ \begin{array}{cccc}
+  G_1 ~&amp;
+  0 ~&amp;
+  0 ~&amp;
+  1
+ \\
+  0 ~&amp;
+  G_2+G_3 ~&amp;
+  -G_3 ~&amp;
+  -1
+ \\
+  0 &amp;
+  -G_3 &amp;
+  G_3 ~&amp;
+  0
+ \\
+  -1 &amp;
+  1 &amp;
+  0 ~&amp;
+  0
+ \end{array}
+ \right]
+ \left[
+ \begin{array}{c}
+  V_1 \\
+  V_2 \\
+  V_3 \\
+  I_s
+ \end{array}
+ \right]
+ \thinspace
+ =
+ \left[
+ \begin{array}{c}
+ 0 \\
+ 0 \\
+ I_0 \\
+ V_0
+ \end{array}
+ \right]
+ \,.\end{split}\]</div>
+<p>We can already guess what a circuit simulator
+must be doing behind the scenes for a linear circuit under DC conditions:</p>
+<ul class="simple">
+<li>Read the “netlist” (see <a class="reference internal" href="organisation.html#gseimorg"><span class="std std-ref">GSEIM Organisation</span></a>), which is a description of the connections
+in the circuit (the <em>topology</em>) and the specification of each element (the <em>behaviour</em>).</li>
+<li>Decide “what goes where” in the matrix equation: This step is called “parsing”
+where we need to figure out the following.<ul>
+<li>How many variables (unknowns)?</li>
+<li>What does each row of the matrix correspond to? A KCL
+or the branch equation for one of the voltage sources?</li>
+<li>Where are the non-zero entries in the MNA matrix? How is each
+entry computed in terms of the circuit parameters?</li>
+</ul>
+</li>
+<li>Solve the matrix equation: This is the most crucial part of a circuit simulator
+since it generally takes the largest chunk of the CPU time, particularly for
+large circuits. The reason is easy to understand: The number of multiplications
+involved in solving <span class="math notranslate nohighlight">\({\bf{A}}{\bf{x}} = {\bf{b}}\)</span>, where <span class="math notranslate nohighlight">\({\bf{A}}\)</span> is an
+<span class="math notranslate nohighlight">\(N\times N\)</span> matrix, goes as <span class="math notranslate nohighlight">\(N^3\)</span>. By exploiting sparsity, the number of
+multiplications can be reduced, but the dependence on <span class="math notranslate nohighlight">\(N\)</span> remains superlinear.</li>
+<li>Calculate the quantities of interest by post-processing. Solving the MNA circuit
+equations yields the node voltages and voltage source currents. These can be used
+to obtain other quantities simply by post-processing, i.e., without solving any
+additional equations.</li>
+</ul>
+<p>Note that we have described the MNA approach for linear circuits in
+a DC situation only. It needs to be extended to nonlinear circuits and also
+to elements involving time derivatives (e.g., capacitors and
+inductors). We will consider that in later sections.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">GSEIM</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">GSEIM Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="elements.html">Blocks and ports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="new_project.html">Creating a new project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="organisation.html">GSEIM Organisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">Element templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solve.html">Solve Blocks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="subckt.html">Subcircuits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bedocs.html">Block Documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proj_list.html">GSEIM projects</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Modified nodal analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#nodal-analysis">Nodal analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#modifiednodal">MNA</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="nr.html">Newton-Raphson method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numerical.html">Numerical methods for ODEs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ssw.html">SSW computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="startup.html">Start-up simulation</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="proj_list.html" title="previous chapter">GSEIM projects</a></li>
+      <li>Next: <a href="nr.html" title="next chapter">Newton-Raphson method</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Mahesh Patil.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/mna.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

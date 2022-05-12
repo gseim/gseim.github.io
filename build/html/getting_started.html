@@ -17,7 +17,7 @@
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Creating a new project" href="new_project.html" />
+    <link rel="next" title="Blocks and ports" href="elements.html" />
     <link rel="prev" title="GSEIM Installation" href="installation.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -34,54 +34,87 @@
             
   <div class="section" id="getting-started">
 <span id="id1"></span><h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
-<p>It is assumed that you have successfully
-installed GSEIM on a linux computer. In this section, you will see
-how to run an existing project (which is already available in the GSEIM
-distribution).</p>
-<p>We consider free acceleration of an induction motor
-(project file <code class="docutils literal notranslate"><span class="pre">m_indmc.grc</span></code>) and demonstrate how to load this project,
-run the simulation, and view the results.</p>
+<p>It is assumed that the user has successfully installed GSEIM on a linux
+computer. In this section, we will see how to run an existing GSEIM
+project (which is already available in the GSEIM distribution), and
+view the simulation results.</p>
+<div class="section" id="free-acceleration-of-induction-motor">
+<h2>Free acceleration of induction motor<a class="headerlink" href="#free-acceleration-of-induction-motor" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><p class="first">File menu <span class="math notranslate nohighlight">\(\rightarrow\)</span> Open
 <span class="math notranslate nohighlight">\(\rightarrow\)</span> Select the <strong>project file</strong>
-<code class="docutils literal notranslate"><span class="pre">~/gseim_gui/proj_grc/m_indmc.grc</span></code>
+<code class="docutils literal notranslate"><span class="pre">~/gseim_grc/proj_grc/machines/indmc_free.grc</span></code>
 as shown below.</p>
-<a class="reference internal image-reference" href="_images/open_project.png"><img alt="Alternative text" src="_images/open_project.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="_images/open_project.png"><img alt="open project" src="_images/open_project.png" style="width: 600px;" /></a>
 <p>The project schematic diagram will appear as shown below.</p>
-<a class="reference internal image-reference" href="_images/demo_project_1.png"><img alt="Alternative text" src="_images/demo_project_1.png" style="width: 600px;" /></a>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
+<a class="reference internal image-reference" href="_images/indmc_schematic.png"><img alt="demo project" src="_images/indmc_schematic.png" style="width: 600px;" /></a>
 </li>
-<li><p class="first">Click on <code class="docutils literal notranslate"><span class="pre">Generate</span> <span class="pre">flow</span> <span class="pre">graph</span></code>. This would create the <strong>circuit file</strong>
-<code class="docutils literal notranslate"><span class="pre">~/gseim_gui/gseim/output/m_indmc.in</span></code> which is used by the GSEIM solver
+<li><p class="first">Click on <code class="docutils literal notranslate"><span class="pre">Generate</span> <span class="pre">circuit</span> <span class="pre">file</span></code>. This would create the <strong>circuit file</strong>
+<code class="docutils literal notranslate"><span class="pre">~/gseim_grc/gseim/output/indmc_free.in</span></code> which is used by the GSEIM solver
 for solving the set of ODEs associated with the project schematic.
 Notice that a separate window opens to show the progress of this step.
 If the flow graph generation is successful, <strong>Program Completed</strong> will
-appear at the bottom of that window.</p>
+appear at the bottom of that window. Close the window.</p>
 </li>
-<li><p class="first">Click on <code class="docutils literal notranslate"><span class="pre">Execute</span> <span class="pre">flow</span> <span class="pre">graph</span></code>. This invokes the solver which runs the
+<li><p class="first">Click on <code class="docutils literal notranslate"><span class="pre">Run</span> <span class="pre">simulation</span></code>. This invokes the solver which runs the
 simulation and creates the data files as specified for this project.
 Again, a separate window opens to show the progress made by the solver.
 The data files are created in the directory
-<code class="docutils literal notranslate"><span class="pre">~/gseim_gui/gseim/output</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">~/gseim_grc/gseim/output</span></code>.</p>
 </li>
 <li><p class="first">Click on <code class="docutils literal notranslate"><span class="pre">View</span> <span class="pre">results</span></code>. The plotting GUI would show up as a separate
 application, as shown below.</p>
-<a class="reference internal image-reference" href="_images/plotting_gui.png"><img alt="Alternative text" src="_images/plotting_gui.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/plotting_gui.png"><img alt="plotting GUI" src="_images/plotting_gui.png" style="width: 600px;" /></a>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 </li>
-<li><p class="first">Click on <code class="docutils literal notranslate"><span class="pre">Browse</span> <span class="pre">files</span></code>, and select the circuit file
-<code class="docutils literal notranslate"><span class="pre">~/gseim_gui/gseim/output/m_indmc.in</span></code>. The data file created by GSEIM
+<li><p class="first">Click on <code class="docutils literal notranslate"><span class="pre">Load</span> <span class="pre">File</span></code>, and select the circuit file
+<code class="docutils literal notranslate"><span class="pre">~/gseim_grc/gseim/output/indmc_free.in</span></code>. The data file created by GSEIM
 for this particular project will appear as shown below. Names of the
 variables stored in the data file are listed. Select <code class="docutils literal notranslate"><span class="pre">time</span></code> as
-x-axis and <code class="docutils literal notranslate"><span class="pre">wrm</span></code> (the angular speed of the motor) as the y-axis to
+the x-axis and <code class="docutils literal notranslate"><span class="pre">wrm</span></code> (the angular speed of the motor) as the y-axis to
 obtain the plot shown below.</p>
-<a class="reference internal image-reference" href="_images/plotting_gui_1.png"><img alt="Alternative text" src="_images/plotting_gui_1.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/indmc_results.png"><img alt="indmc plot" src="_images/indmc_results.png" style="width: 600px;" /></a>
 </li>
 </ul>
+</div>
+<div class="section" id="neutral-point-clamped-inverter">
+<h2>Neutral point clamped inverter<a class="headerlink" href="#neutral-point-clamped-inverter" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">File menu <span class="math notranslate nohighlight">\(\rightarrow\)</span> Open
+<span class="math notranslate nohighlight">\(\rightarrow\)</span> Select the <strong>project file</strong>
+<code class="docutils literal notranslate"><span class="pre">~/gseim_grc/proj_grc/dc_to_ac/npc_inverter.grc</span></code>.
+The project schematic diagram will appear as shown below.</p>
+<a class="reference internal image-reference" href="_images/npc_schematic.png"><img alt="npc schematic" src="_images/npc_schematic.png" style="width: 600px;" /></a>
+</li>
+<li><p class="first">Click on <code class="docutils literal notranslate"><span class="pre">Generate</span> <span class="pre">circuit</span> <span class="pre">file</span></code>. After the <strong>Program Completed</strong> message
+appears, close the window, and click on <code class="docutils literal notranslate"><span class="pre">Run</span> <span class="pre">simulation</span></code>.
+Close the window when the program is completed.</p>
+</li>
+<li><p class="first">Click on <code class="docutils literal notranslate"><span class="pre">View</span> <span class="pre">results</span></code>. In the plotting GUI, click on <code class="docutils literal notranslate"><span class="pre">Load</span> <span class="pre">File</span></code>,
+and select the circuit file <code class="docutils literal notranslate"><span class="pre">~/gseim_grc/gseim/output/npc_inverter.in</span></code>.
+Select <code class="docutils literal notranslate"><span class="pre">time</span></code> as the x-axis and <code class="docutils literal notranslate"><span class="pre">ia</span></code> as the y-axis to
+obtain the plot shown below.</p>
+<a class="reference internal image-reference" href="_images/npc_results_1.png"><img alt="npc results-1" src="_images/npc_results_1.png" style="width: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</li>
+<li><p class="first">We can view the Fourier components of the signal <code class="docutils literal notranslate"><span class="pre">ia</span></code> by clicking on
+<code class="docutils literal notranslate"><span class="pre">Fourier</span></code> in the plotting GUI and entering values for <code class="docutils literal notranslate"><span class="pre">tStart</span></code> and
+<code class="docutils literal notranslate"><span class="pre">tEnd</span></code>, as shown below. Note that the difference between <code class="docutils literal notranslate"><span class="pre">tStart</span></code>
+and <code class="docutils literal notranslate"><span class="pre">tEnd</span></code> is expected to be one period of the signal being analysed.</p>
+<a class="reference internal image-reference" href="_images/gui_fourier_1.png"><img alt="fourier options" src="_images/gui_fourier_1.png" style="width: 200px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</li>
+<li><p class="first">The Fourier components for <code class="docutils literal notranslate"><span class="pre">ia</span></code> will be displayed by the GUI.</p>
+<a class="reference internal image-reference" href="_images/npc_results_2.png"><img alt="npc results-2" src="_images/npc_results_2.png" style="width: 600px;" /></a>
+</li>
+</ul>
+</div>
 </div>
 
 
@@ -104,14 +137,24 @@ obtain the plot shown below.</p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">GSEIM Installation</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#free-acceleration-of-induction-motor">Free acceleration of induction motor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#neutral-point-clamped-inverter">Neutral point clamped inverter</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="elements.html">Blocks and ports</a></li>
 <li class="toctree-l1"><a class="reference internal" href="new_project.html">Creating a new project</a></li>
 <li class="toctree-l1"><a class="reference internal" href="organisation.html">GSEIM Organisation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="xbe.html">Element templates (<code class="docutils literal notranslate"><span class="pre">xbe</span></code>)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="functions.html"><code class="docutils literal notranslate"><span class="pre">f</span></code>, <code class="docutils literal notranslate"><span class="pre">g</span></code>, <code class="docutils literal notranslate"><span class="pre">h</span></code> functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">Element templates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="solve.html">Solve Blocks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="subckt.html">Subcircuits</a></li>
-<li class="toctree-l1"><a class="reference internal" href="xbedocs.html">xbe Documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bedocs.html">Block Documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proj_list.html">GSEIM projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mna.html">Modified nodal analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nr.html">Newton-Raphson method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numerical.html">Numerical methods for ODEs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ssw.html">SSW computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="startup.html">Start-up simulation</a></li>
 </ul>
 
 <div class="relations">
@@ -119,7 +162,7 @@ obtain the plot shown below.</p>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
       <li>Previous: <a href="installation.html" title="previous chapter">GSEIM Installation</a></li>
-      <li>Next: <a href="new_project.html" title="next chapter">Creating a new project</a></li>
+      <li>Next: <a href="elements.html" title="next chapter">Blocks and ports</a></li>
   </ul></li>
 </ul>
 </div>
@@ -140,7 +183,7 @@ obtain the plot shown below.</p>
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2021, Mahesh Patil.
+      &copy;2022, Mahesh Patil.
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>

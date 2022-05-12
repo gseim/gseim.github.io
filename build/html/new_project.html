@@ -18,7 +18,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="GSEIM Organisation" href="organisation.html" />
-    <link rel="prev" title="Getting Started" href="getting_started.html" />
+    <link rel="prev" title="Blocks and ports" href="elements.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -33,11 +33,12 @@
           <div class="body" role="main">
             
   <div class="section" id="creating-a-new-project">
-<h1>Creating a new project<a class="headerlink" href="#creating-a-new-project" title="Permalink to this headline">¶</a></h1>
-<p>It is assumed that you have successfully
-installed GSEIM on a linux computer. In this section,
-you will see how to make up a new GSEIM project,
+<span id="new-project"></span><h1>Creating a new project<a class="headerlink" href="#creating-a-new-project" title="Permalink to this headline">¶</a></h1>
+<p>It is assumed that the user has successfully installed GSEIM on a linux
+computer. In this section, we will see how to make up a new GSEIM project,
 simulate it, and view the simulation results.</p>
+<div class="section" id="example-1">
+<span id="id1"></span><h2>Example 1<a class="headerlink" href="#example-1" title="Permalink to this headline">¶</a></h2>
 <p>Consider the ODE given by</p>
 <div class="math notranslate nohighlight">
 \[\frac{dy}{dt} = 4 \cos \omega t + 3 \sin \omega t\]</div>
@@ -45,19 +46,19 @@ simulate it, and view the simulation results.</p>
 by rewriting it as</p>
 <div class="math notranslate nohighlight">
 \[ \begin{align}\begin{aligned}x_1 = 4 \cos \omega t\\x_2 = 3 \sin \omega t\\y = \int (x_1 + x_2)\,dt\end{aligned}\end{align} \]</div>
-<p>In the following, a step-by-step procedure is given to make
-up the schematic diagram and obtain the simulation results
-for the above equations. Note that this is a rather simple
-ODE for which the analytic solution can be easily found and
-compared with the numerical solution given by GSEIM.</p>
+<p>In the following, a step-by-step procedure is given to implement
+the above equations with a schematic diagram and obtain the simulation
+results. Note that this is a rather simple ODE for which the analytic
+solution can be easily found and compared with the numerical solution
+given by GSEIM.</p>
 <ul>
 <li><p class="first">Start a new project. A canvas with an <code class="docutils literal notranslate"><span class="pre">Options</span></code> block will
 appear. Double-click on the options block, and set <code class="docutils literal notranslate"><span class="pre">Id</span></code>
 and <code class="docutils literal notranslate"><span class="pre">Title</span></code>. Note that Id should only contain letters, digits,
-and the underscore character. In the <code class="docutils literal notranslate"><span class="pre">Generate</span> <span class="pre">option</span></code> field,
+and the underscore character. In the <code class="docutils literal notranslate"><span class="pre">Generate</span> <span class="pre">options</span></code> field,
 choose <code class="docutils literal notranslate"><span class="pre">Circuit</span></code> to indicate that this schematic diagram is
 for a complete stand-alone circuit (system) and not a hierarchical block.</p>
-<a class="reference internal image-reference" href="_images/new_project_1.png"><img alt="Alternative text" src="_images/new_project_1.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/new_project_1.png"><img alt="Options block" src="_images/new_project_1.png" style="width: 350px;" /></a>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -69,61 +70,63 @@ elements for
 <span class="math notranslate nohighlight">\(x_2\)</span>,
 a <code class="docutils literal notranslate"><span class="pre">sum_2</span></code> element and an <code class="docutils literal notranslate"><span class="pre">integrator</span></code>. To bring <code class="docutils literal notranslate"><span class="pre">src_ac</span></code>
 into the canvas, select it from the library, and drag it into
-the canvas.</p>
-<a class="reference internal image-reference" href="_images/new_project_2.png"><img alt="Alternative text" src="_images/new_project_2.png" style="width: 250px;" /></a>
+the canvas. (Instead of navigating the block tree panel, one
+can also use the <code class="docutils literal notranslate"><span class="pre">Search</span> <span class="pre">for</span> <span class="pre">a</span> <span class="pre">block</span> <span class="pre">by</span> <span class="pre">name</span></code> button in
+the menu bar.)</p>
+<a class="reference internal image-reference" href="_images/new_project_2.png"><img alt="Block tree panel" src="_images/new_project_2.png" style="width: 180px;" /></a>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 </li>
 <li><p class="first">Place the components, keeping in mind the connections you will
 need to make.</p>
-<a class="reference internal image-reference" href="_images/new_project_3.png"><img alt="Alternative text" src="_images/new_project_3.png" style="width: 350px;" /></a>
+<a class="reference internal image-reference" href="_images/new_project_3.png"><img alt="placing blocks" src="_images/new_project_3.png" style="width: 180px;" /></a>
 </li>
-<li><p class="first">Next, we need to set the properties (parameters) for each of the
+<li><p class="first">Next, we need to set the properties (parameter values) for each of the
 elements. In this example, the parameters for <code class="docutils literal notranslate"><span class="pre">sum_2</span></code> and
 <code class="docutils literal notranslate"><span class="pre">integrator</span></code> are not required to be changed (from their
 default values). For the <code class="docutils literal notranslate"><span class="pre">src_ac</span></code> elements, we need to set
 the amplitude, frequency, and phase. Double-click on the element
 of interest, and edit its parameter values.
-For <span class="math notranslate nohighlight">\(x_1 = 4 \cos \omega t\)</span>, the parameters
+For the <code class="docutils literal notranslate"><span class="pre">src_ac</span></code> element corresponding to <span class="math notranslate nohighlight">\(x_1\)</span>, the parameters
 <code class="docutils literal notranslate"><span class="pre">a</span></code>, <code class="docutils literal notranslate"><span class="pre">f_hz</span></code>, <code class="docutils literal notranslate"><span class="pre">phi_deg</span></code>
 should be set to 4, 10, and 90, respectively.
-For <span class="math notranslate nohighlight">\(x_2 = 3 \sin \omega t\)</span>, they
-should be set to 3, 10, and 0, respectively, as shown below.</p>
-<a class="reference internal image-reference" href="_images/new_project_4.png"><img alt="Alternative text" src="_images/new_project_4.png" style="width: 600px;" /></a>
+For the other source, they should be set to 3, 10, and 0, respectively.</p>
+<a class="reference internal image-reference" href="_images/new_project_4.png"><img alt="parameter values" src="_images/new_project_4.png" style="width: 350px;" /></a>
 <p>(Note that it is also possible to add comments about a block
-by double-clicking on it and then selecting the <code class="docutils literal notranslate"><span class="pre">Advacned</span></code> tab.)</p>
+using the <code class="docutils literal notranslate"><span class="pre">Advacned</span></code> tab in the <code class="docutils literal notranslate"><span class="pre">Properties</span></code> window.)</p>
 </li>
 <li><p class="first">Connect the elements as required. To make a connection between two
-ports, click on one of the ports and then the other.</p>
-<a class="reference internal image-reference" href="_images/new_project_5.png"><img alt="Alternative text" src="_images/new_project_5.png" style="width: 350px;" /></a>
+ports, click on one of the ports and then on the other.</p>
+<a class="reference internal image-reference" href="_images/new_project_5.png"><img alt="connections" src="_images/new_project_5.png" style="width: 180px;" /></a>
 </li>
 <li><p class="first">We now want to indicate to the simulator which variables it should
-save (and make available for plotting). These are of two types:</p>
+save (and make available for plotting). These <strong>output variables</strong>
+are of two types:</p>
 <ul>
-<li><p class="first">Node value: This is the value of the variable represented by a
+<li><p class="first"><strong>Node value</strong>: This is the value of the variable represented by a
 node (wire). To select a node value as an output variable,
-left-click on the node (wire), and it will appear in a different
+left-click on that wire, and it will appear in a different
 colour as shown below.</p>
-<a class="reference internal image-reference" href="_images/new_project_6.png"><img alt="Alternative text" src="_images/new_project_6.png" style="width: 350px;" /></a>
-<p>Now, right click on that wire and select <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">to</span> <span class="pre">outvars</span></code>. A box
-which describes the node (as a connection between node x of element xx
-and node y of element yy) appears. Give a suitable name to this output
-variable as shown below.</p>
-<a class="reference internal image-reference" href="_images/new_project_7.png"><img alt="Alternative text" src="_images/new_project_7.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="_images/new_project_6.png"><img alt="outvar selection" src="_images/new_project_6.png" style="width: 180px;" /></a>
+<p>Now, right click on the wire and select <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">to</span> <span class="pre">outvars</span></code>. A box
+which appears which describes the node as a connection between
+node x of element xx and node y of element yy. Give a suitable
+name to this output variable, as shown below.</p>
+<a class="reference internal image-reference" href="_images/new_project_7.png"><img alt="outvar selection" src="_images/new_project_7.png" style="width: 300px;" /></a>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 </li>
-<li><p class="first">Output parameter of an element: For each element, a few output
+<li><p class="first"><strong>Output parameter of an element</strong>: For each element, a few output
 parameters are declared in the library. To select an output parameter
-of a specific element, right-click on that element and select
-<code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">to</span> <span class="pre">outvars</span></code>. The output parameters available for that element
-will appear. For example, if you click on the <code class="docutils literal notranslate"><span class="pre">integrator</span></code>, the
-following dialog box will be displayed.
+of a specific element, first select the element with left-click, and
+then right-click and select <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">to</span> <span class="pre">outvars</span></code>. The output parameters
+available for that element will appear. For example, for the
+<code class="docutils literal notranslate"><span class="pre">integrator</span></code>, the following dialog box will be displayed.
 Select <code class="docutils literal notranslate"><span class="pre">y</span></code> and give a suitable name to the corresponding output
 variable.</p>
-<a class="reference internal image-reference" href="_images/new_project_8.png"><img alt="Alternative text" src="_images/new_project_8.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="_images/new_project_8.png"><img alt="outvar selection" src="_images/new_project_8.png" style="width: 320px;" /></a>
 </li>
 </ul>
 <div class="line-block">
@@ -135,20 +138,16 @@ choice of numerical method, etc. This is done by preparing one or
 more <code class="docutils literal notranslate"><span class="pre">solve</span> <span class="pre">blocks</span></code>. In most cases, including the present example,
 we only need one solve block.</p>
 <p>To begin with, we need to add a new solve block. Click on
-<code class="docutils literal notranslate"><span class="pre">Edit</span></code>
-<span class="math notranslate nohighlight">\(\rightarrow\)</span>
 <code class="docutils literal notranslate"><span class="pre">SolveBlocks</span></code>
 <span class="math notranslate nohighlight">\(\rightarrow\)</span>
 <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">Solve</span> <span class="pre">Block</span></code>.
 A dialog box for a new solve block appears as shown below.
 Choose a suitable name for this solve block. The <code class="docutils literal notranslate"><span class="pre">index</span></code> of
 this block can keep its default value.</p>
-<a class="reference internal image-reference" href="_images/new_project_9.png"><img alt="Alternative text" src="_images/new_project_9.png" style="width: 250px;" /></a>
+<a class="reference internal image-reference" href="_images/new_project_9.png"><img alt="solve block" src="_images/new_project_9.png" style="width: 200px;" /></a>
 <p>We have now added a solve block called <code class="docutils literal notranslate"><span class="pre">S1(0)</span></code>.</p>
 </li>
 <li><p class="first">Next, we edit the properties of the solve block <code class="docutils literal notranslate"><span class="pre">S1(0)</span></code>. Click on
-<code class="docutils literal notranslate"><span class="pre">Edit</span></code>
-<span class="math notranslate nohighlight">\(\rightarrow\)</span>
 <code class="docutils literal notranslate"><span class="pre">SolveBlocks</span></code>
 <span class="math notranslate nohighlight">\(\rightarrow\)</span>
 <code class="docutils literal notranslate"><span class="pre">Edit</span> <span class="pre">Solve</span> <span class="pre">Block</span></code>.
@@ -159,56 +158,313 @@ we only need to set the following.</p>
 <li><code class="docutils literal notranslate"><span class="pre">t_start</span></code> and <code class="docutils literal notranslate"><span class="pre">t_end</span></code>, the starting and ending times for the simulation</li>
 <li>the time step <code class="docutils literal notranslate"><span class="pre">tstep0_x</span></code></li>
 </ul>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<a class="reference internal image-reference" href="_images/new_project_10.png"><img alt="Alternative text" src="_images/new_project_10.png" style="width: 400px;" /></a>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
+<a class="reference internal image-reference" href="_images/new_project_10.png"><img alt="solve block parameters" src="_images/new_project_10.png" style="width: 400px;" /></a>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">tstep0_x</span></code> can be assigned by clicking on <code class="docutils literal notranslate"><span class="pre">time_step_x</span></code>
+and then selecting <code class="docutils literal notranslate"><span class="pre">tstep0_x</span></code>.</p>
 </li>
 <li><p class="first">We now need to prepare an <code class="docutils literal notranslate"><span class="pre">output</span> <span class="pre">block</span></code> to inform the simulator
 about what data files should be created and which variables should
 be stored in each of them. For this purpose, we first need to add
 an output block.  Click on
-<code class="docutils literal notranslate"><span class="pre">Edit</span></code>
-<span class="math notranslate nohighlight">\(\rightarrow\)</span>
 <code class="docutils literal notranslate"><span class="pre">OutputBlocks</span></code>
 <span class="math notranslate nohighlight">\(\rightarrow\)</span>
 <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">Output</span> <span class="pre">Block</span></code>.
 The following dialog box appears.</p>
-<a class="reference internal image-reference" href="_images/new_project_11.png"><img alt="Alternative text" src="_images/new_project_11.png" style="width: 200px;" /></a>
+<a class="reference internal image-reference" href="_images/new_project_11.png"><img alt="output block" src="_images/new_project_11.png" style="width: 250px;" /></a>
 <p>Each output block is associated with a parent solve block.
 In this case, there is only one solve block, so there is no need to
 exercise any choice.</p>
 </li>
 <li><p class="first">Edit the output block added in the previous step by clicking on
-<code class="docutils literal notranslate"><span class="pre">Edit</span></code>
-<span class="math notranslate nohighlight">\(\rightarrow\)</span>
 <code class="docutils literal notranslate"><span class="pre">OutputBlocks</span></code>
 <span class="math notranslate nohighlight">\(\rightarrow\)</span>
 <code class="docutils literal notranslate"><span class="pre">Edit</span> <span class="pre">Output</span> <span class="pre">Block</span></code>.
 The following dialog box appears.</p>
-<a class="reference internal image-reference" href="_images/new_project_12.png"><img alt="Alternative text" src="_images/new_project_12.png" style="width: 450px;" /></a>
+<a class="reference internal image-reference" href="_images/new_project_12.png"><img alt="edit output block" src="_images/new_project_12.png" style="width: 380px;" /></a>
 <p>Note that the output variables listed in this box are those declared
 earlier. Select the output variables of interest, and assign a name to
 the output file (which will be created by this output block).</p>
 </li>
 <li><p class="first">You are now ready to simulate the system. Save the project
 file in the directory of your choice, naming it
-<code class="docutils literal notranslate"><span class="pre">test_1.grc</span></code> (where <code class="docutils literal notranslate"><span class="pre">test_`</span></code> comes from the <code class="docutils literal notranslate"><span class="pre">Id</span></code> in the
-<code class="docutils literal notranslate"><span class="pre">Options</span></code> block). Click on
-<code class="docutils literal notranslate"><span class="pre">Generate</span> <span class="pre">flow</span> <span class="pre">graph</span></code>, then
-<code class="docutils literal notranslate"><span class="pre">Execute</span> <span class="pre">flow</span> <span class="pre">graph</span></code>.
+<code class="docutils literal notranslate"><span class="pre">test_1.grc</span></code> (where <code class="docutils literal notranslate"><span class="pre">test_1</span></code> is the value we assigned to
+<code class="docutils literal notranslate"><span class="pre">Id</span></code> in the <code class="docutils literal notranslate"><span class="pre">Options</span></code> block). Click on <code class="docutils literal notranslate"><span class="pre">Generate</span> <span class="pre">circuit</span> <span class="pre">file</span></code>,
+then <code class="docutils literal notranslate"><span class="pre">Run</span> <span class="pre">simulation</span></code>.
 At this stage, the data file specified in your output block would
 be created in the directory
-<code class="docutils literal notranslate"><span class="pre">~/gseim_gui/gseim/output/</span></code>. Click on <code class="docutils literal notranslate"><span class="pre">View</span> <span class="pre">results</span></code>. The plotting
-GUI will appear in a separate window. Click on <code class="docutils literal notranslate"><span class="pre">Browse</span> <span class="pre">files</span></code> and select
-<code class="docutils literal notranslate"><span class="pre">~/gseim_gui/gseim/output/test_1.in</span></code>. After that, select the x and y variables
+<code class="docutils literal notranslate"><span class="pre">~/gseim_grc/gseim/output/</span></code>. Click on <code class="docutils literal notranslate"><span class="pre">View</span> <span class="pre">results</span></code>. The plotting
+GUI will appear in a separate window. Click on <code class="docutils literal notranslate"><span class="pre">Load</span> <span class="pre">File</span></code> and select
+<code class="docutils literal notranslate"><span class="pre">~/gseim_grc/gseim/output/test_1.in</span></code>. After that, select the x and y variables
 as shown in the following figure to view <span class="math notranslate nohighlight">\(y(t)\)</span>.</p>
-<a class="reference internal image-reference" href="_images/new_project_13.png"><img alt="Alternative text" src="_images/new_project_13.png" style="width: 650px;" /></a>
+<a class="reference internal image-reference" href="_images/new_project_13.png"><img alt="plot" src="_images/new_project_13.png" style="width: 650px;" /></a>
 </li>
 </ul>
+</div>
+<div class="section" id="example-2">
+<h2>Example 2<a class="headerlink" href="#example-2" title="Permalink to this headline">¶</a></h2>
+<p>We now consider an electrical circuit example, the RC circuit shown below.
+The blocks required are <code class="docutils literal notranslate"><span class="pre">r</span></code>, <code class="docutils literal notranslate"><span class="pre">c</span></code>, <code class="docutils literal notranslate"><span class="pre">vsrc_clock</span></code>, and <code class="docutils literal notranslate"><span class="pre">ground</span></code>. We will
+simulate the circuit for <span class="math notranslate nohighlight">\(8\,{\textrm{msec}}\)</span> and plot the current <span class="math notranslate nohighlight">\(i(t)\)</span>
+and the capacitor voltage <span class="math notranslate nohighlight">\(V_c(t)\)</span>.</p>
+<a class="reference internal image-reference" href="_images/rc_cct.png"><img alt="RC circuit" src="_images/rc_cct.png" style="width: 500px;" /></a>
+<p>Here are the steps to be followed.</p>
+<ul>
+<li><p class="first">Bring in the required blocks into the canvas.</p>
+<a class="reference internal image-reference" href="_images/rc_project_1.png"><img alt="RC circuit blocks" src="_images/rc_project_1.png" style="width: 200px;" /></a>
+</li>
+<li><p class="first">Select the capacitor and rotate it clockwise through <span class="math notranslate nohighlight">\(90^{\circ}\)</span> using
+the <code class="docutils literal notranslate"><span class="pre">Rotate</span> <span class="pre">CW</span> <span class="pre">90</span> <span class="pre">deg</span></code> button in the menu bar.</p>
+<a class="reference internal image-reference" href="_images/rc_project_2.png"><img alt="RC circuit blocks" src="_images/rc_project_2.png" style="width: 170px;" /></a>
+</li>
+<li><p class="first">Place the blocks suitably. As discussed in the
+<a class="reference internal" href="elements.html#blocksports"><span class="std std-ref">Blocks and ports</span></a> section, connectors are often useful
+in making the wiring neater. Bring in <code class="docutils literal notranslate"><span class="pre">connector_e_3</span></code>, rotate it, and place
+it near the ground as shown below.</p>
+<a class="reference internal image-reference" href="_images/rc_project_3.png"><img alt="RC circuit blocks" src="_images/rc_project_3.png" style="width: 160px;" /></a>
+</li>
+<li><p class="first">The next step is wiring. The procedure is the same as that followed in
+<a class="reference internal" href="#example-1"><span class="std std-ref">Example 1</span></a>.</p>
+<a class="reference internal image-reference" href="_images/rc_project_4.png"><img alt="RC circuit blocks" src="_images/rc_project_4.png" style="width: 160px;" /></a>
+</li>
+<li><p class="first">In the interest of a more compact schematic, the ground block can be
+moved to obtain the following. (This is purely a cosmetic step and can
+be skipped.)</p>
+<a class="reference internal image-reference" href="_images/rc_project_5.png"><img alt="RC circuit blocks" src="_images/rc_project_5.png" style="width: 160px;" /></a>
+</li>
+<li><p class="first">Next, assign the following parameter values:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">r</span></code>: <code class="docutils literal notranslate"><span class="pre">r</span> <span class="pre">=</span> <span class="pre">1k</span></code> (i.e., <span class="math notranslate nohighlight">\(1\,{\textrm{k}}\Omega\)</span>)</li>
+<li><code class="docutils literal notranslate"><span class="pre">c</span></code>: <code class="docutils literal notranslate"><span class="pre">c</span> <span class="pre">=</span> <span class="pre">1u</span></code> (i.e., <span class="math notranslate nohighlight">\(1\,\mu{\textrm{F}}\)</span>)</li>
+<li><code class="docutils literal notranslate"><span class="pre">vsrc_clock</span></code>:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">T1</span> <span class="pre">=</span> <span class="pre">0.5m</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">T2</span> <span class="pre">=</span> <span class="pre">0.5m</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">L1</span> <span class="pre">=</span> <span class="pre">0</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">L2</span> <span class="pre">=</span> <span class="pre">5</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">delta1</span> <span class="pre">=</span> <span class="pre">0.02m</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">delta2</span> <span class="pre">=</span> <span class="pre">0.02m</span></code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p class="first">The block parameter values can be (optionally) displayed on the canvas
+by selecting the block by left-clicking
+<span class="math notranslate nohighlight">\(\rightarrow\)</span>
+right click
+<span class="math notranslate nohighlight">\(\rightarrow\)</span>
+<code class="docutils literal notranslate"><span class="pre">Show</span> <span class="pre">parameter</span></code>
+<span class="math notranslate nohighlight">\(\rightarrow\)</span>
+select desired parameter.
+The parameter value – in reality, a <code class="docutils literal notranslate"><span class="pre">show_parameter</span></code> block – appears
+next to the selected block. The <code class="docutils literal notranslate"><span class="pre">show_parameter</span></code> block can be moved around
+like any other block.</p>
+<a class="reference internal image-reference" href="_images/rc_project_6.png"><img alt="RC circuit blocks" src="_images/rc_project_6.png" style="width: 160px;" /></a>
+</li>
+<li><p class="first">Output variables: For electrical circuits, using the <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">to</span> <span class="pre">outvars</span></code> option
+for a wire creates an output variable of type node voltage (i.e., voltage of
+that node with respect to ground). For the RC circuit, we can define the
+following output variables:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">v_s</span></code>: This can be either the node voltage of the wire connecting the
+source and the resistor or the outvar <code class="docutils literal notranslate"><span class="pre">v</span></code> of the source.</li>
+<li><code class="docutils literal notranslate"><span class="pre">v_c</span></code>: This can be either the node voltage of the wire connecting the
+resistor and the capacitor or the outvar <code class="docutils literal notranslate"><span class="pre">v</span></code> of the capacitor.</li>
+<li><code class="docutils literal notranslate"><span class="pre">i</span></code>: This can be selected as the <code class="docutils literal notranslate"><span class="pre">i</span></code> outvar of either the resistor
+or the capacitor.</li>
+</ul>
+<p>The following figure shows one way of assigning the output variables.</p>
+<a class="reference internal image-reference" href="_images/rc_project_7.png"><img alt="RC circuit outvars" src="_images/rc_project_7.png" style="width: 350px;" /></a>
+</li>
+<li><p class="first">Solve block: For simulation of electrical circuits, GSEIM allows only
+implicits methods. In this example, we will select the backward Euler
+method and simulate the circuit for <span class="math notranslate nohighlight">\(8\,{\textrm{msec}}\)</span> with
+a time step of <span class="math notranslate nohighlight">\(0.02\,{\textrm{msec}}\)</span> by making the following
+assignments:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">solve_type</span></code>: <code class="docutils literal notranslate"><span class="pre">trns</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">algorithm_e</span></code>: <code class="docutils literal notranslate"><span class="pre">backward_euler</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">t_end</span></code>: <code class="docutils literal notranslate"><span class="pre">8m</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">time_step_x</span></code> <span class="math notranslate nohighlight">\(\rightarrow\)</span> <code class="docutils literal notranslate"><span class="pre">tstep0_e</span></code>: <code class="docutils literal notranslate"><span class="pre">0.02m</span></code></li>
+</ul>
+</li>
+<li><p class="first">Create an output block as shown below.</p>
+<a class="reference internal image-reference" href="_images/rc_project_8.png"><img alt="RC output block" src="_images/rc_project_8.png" style="width: 300px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</li>
+<li><p class="first">In the <code class="docutils literal notranslate"><span class="pre">Options</span></code> block, make these assignments:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">Id</span></code>: <code class="docutils literal notranslate"><span class="pre">test_2</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">Title</span></code>: RC Circuit</li>
+</ul>
+<p>Save the file as <code class="docutils literal notranslate"><span class="pre">test_2.grc</span></code> in the directory of your choice.</p>
+</li>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">Generate</span> <span class="pre">circuit</span> <span class="pre">file</span></code>
+<span class="math notranslate nohighlight">\(\rightarrow\)</span>
+<code class="docutils literal notranslate"><span class="pre">Run</span> <span class="pre">simulation</span></code>
+<span class="math notranslate nohighlight">\(\rightarrow\)</span>
+<code class="docutils literal notranslate"><span class="pre">View</span> <span class="pre">results</span></code></p>
+<p>Select <code class="docutils literal notranslate"><span class="pre">~/gseim_grc/gseim/output/test_2.in</span></code> in the plotting GUI
+and plot <code class="docutils literal notranslate"><span class="pre">v_s</span></code> and <code class="docutils literal notranslate"><span class="pre">v_c</span></code>. You should see the following plot.</p>
+<a class="reference internal image-reference" href="_images/rc_project_9.png"><img alt="RC plot 1" src="_images/rc_project_9.png" style="width: 650px;" /></a>
+<p>If we want to view the current <code class="docutils literal notranslate"><span class="pre">i</span></code> and the capacitor voltage
+<code class="docutils literal notranslate"><span class="pre">v_c</span></code> simultaneously, there is a problem: <code class="docutils literal notranslate"><span class="pre">i</span></code> is of the
+order of
+<span class="math notranslate nohighlight">\(10^{-3}\)</span>
+whereas <code class="docutils literal notranslate"><span class="pre">v_c</span></code> is of the order of
+<span class="math notranslate nohighlight">\(10^0\)</span>, and the current will show up as zero. There are two
+options to circumvent this situation.</p>
+<ul>
+<li><p class="first">Use different y-axes – say, left for <code class="docutils literal notranslate"><span class="pre">v_c</span></code> and right for
+<code class="docutils literal notranslate"><span class="pre">i</span></code> – to get the following plot.</p>
+<a class="reference internal image-reference" href="_images/rc_project_10.png"><img alt="RC plot 2" src="_images/rc_project_10.png" style="width: 650px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</li>
+<li><p class="first">Use the MultiPlot option provided by the plotting GUI to get
+the following plot.</p>
+<a class="reference internal image-reference" href="_images/rc_project_11.png"><img alt="RC plot 3" src="_images/rc_project_11.png" style="width: 650px;" /></a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="example-3">
+<h2>Example 3<a class="headerlink" href="#example-3" title="Permalink to this headline">¶</a></h2>
+<p>We will now simulate the buck converter shown below.</p>
+<a class="reference internal image-reference" href="_images/buck_cct.png"><img alt="buck converter" src="_images/buck_cct.png" style="width: 330px;" /></a>
+<p>It differs from the RC circuit in the last example in two aspects:</p>
+<ul class="simple">
+<li>It is nonlinear (because of the diode).</li>
+<li>It involves both flow-graph elements (the gate signal source) and
+electrical elements.</li>
+</ul>
+<p>GSEIM uses the Newton-Raphson (N-R) method for nonlinear electrical
+circuits, and therefore solve block parameters related to the N-R
+method need to be assigned appropriately. This is the main difference
+with respect to the RC circuit. The steps involved in simulating the
+buck converter are given below.</p>
+<ul>
+<li><p class="first">Bring in the blocks
+<code class="docutils literal notranslate"><span class="pre">r</span></code>,
+<code class="docutils literal notranslate"><span class="pre">l</span></code>,
+<code class="docutils literal notranslate"><span class="pre">c</span></code>,
+<code class="docutils literal notranslate"><span class="pre">diode_r</span></code>,
+<code class="docutils literal notranslate"><span class="pre">switch_1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">vsrc_dc</span></code>,
+<code class="docutils literal notranslate"><span class="pre">clock_1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">ground</span></code>,
+and connectors. Place the blocks and wire the circuit.</p>
+</li>
+<li><p class="first">Assign the parameter values as follows. Note that <code class="docutils literal notranslate"><span class="pre">diode_r</span></code> and
+<code class="docutils literal notranslate"><span class="pre">switch_1</span></code> are idealised components with resistance <code class="docutils literal notranslate"><span class="pre">r_on</span></code>
+when conducting and <code class="docutils literal notranslate"><span class="pre">r_off</span></code> when not conducting. In addition,
+<code class="docutils literal notranslate"><span class="pre">switch_1</span></code> has a parameter <code class="docutils literal notranslate"><span class="pre">x_high</span></code> which indicates what
+value of the input variable (of type flow-graph) should be
+interpreted as high.</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">r</span></code>: <code class="docutils literal notranslate"><span class="pre">r</span> <span class="pre">=</span> <span class="pre">50</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">c</span></code>: <code class="docutils literal notranslate"><span class="pre">c</span> <span class="pre">=</span> <span class="pre">100u</span></code> (i.e., <span class="math notranslate nohighlight">\(100\,\mu{\textrm{F}}\)</span>)</li>
+<li><code class="docutils literal notranslate"><span class="pre">l</span></code>: <code class="docutils literal notranslate"><span class="pre">l</span> <span class="pre">=</span> <span class="pre">600u</span></code> (i.e., <span class="math notranslate nohighlight">\(600\,\mu{\textrm{H}}\)</span>)</li>
+<li><code class="docutils literal notranslate"><span class="pre">vsrc_dc</span></code>: <code class="docutils literal notranslate"><span class="pre">vdc</span> <span class="pre">=</span> <span class="pre">50</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">diode_r</span></code>: <code class="docutils literal notranslate"><span class="pre">r_on</span> <span class="pre">=</span> <span class="pre">1m</span></code>, <code class="docutils literal notranslate"><span class="pre">r_off</span> <span class="pre">=</span> <span class="pre">10M</span></code> (m for milli, M for mega)</li>
+<li><code class="docutils literal notranslate"><span class="pre">switch_1</span></code>: <code class="docutils literal notranslate"><span class="pre">r_on</span> <span class="pre">=</span> <span class="pre">1m</span></code>, <code class="docutils literal notranslate"><span class="pre">r_off</span> <span class="pre">=</span> <span class="pre">10M</span></code>, <code class="docutils literal notranslate"><span class="pre">x_high</span> <span class="pre">=</span> <span class="pre">1</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">clock_1</span></code>:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">f_hz</span> <span class="pre">=</span> <span class="pre">25k</span></code> (i.e., 25 kHz)</li>
+<li><code class="docutils literal notranslate"><span class="pre">D</span> <span class="pre">=</span> <span class="pre">0.6</span></code> (duty cycle)</li>
+<li><code class="docutils literal notranslate"><span class="pre">y_high</span> <span class="pre">=</span> <span class="pre">1</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">delta1</span> <span class="pre">=</span> <span class="pre">0.1u</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">delta2</span> <span class="pre">=</span> <span class="pre">0.1u</span></code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p class="first">Use the <code class="docutils literal notranslate"><span class="pre">Show</span> <span class="pre">parameter</span></code> option to display the salient component
+values. The circuit would look like this:</p>
+<a class="reference internal image-reference" href="_images/buck_project_1.png"><img alt="buck converter project" src="_images/buck_project_1.png" style="width: 350px;" /></a>
+</li>
+<li><p class="first">Select the inductor current and resistor voltage as output variables;
+name them as <code class="docutils literal notranslate"><span class="pre">IL</span></code> and <code class="docutils literal notranslate"><span class="pre">v_out</span></code>, respectively.</p>
+</li>
+<li><p class="first">Add a solve block and make the following assignments. (Note that <code class="docutils literal notranslate"><span class="pre">_ex</span></code>
+in a solve block parameter name indicates that it is related to a circuit
+involving both <code class="docutils literal notranslate"><span class="pre">ebe</span></code> and <code class="docutils literal notranslate"><span class="pre">xbe</span></code> elements.)</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">solve_type</span> <span class="pre">=</span> <span class="pre">trns</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">algorithm_ex</span> <span class="pre">=</span> <span class="pre">backward_euler</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">t_end</span> <span class="pre">=</span> <span class="pre">40m</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">time_step_ex</span></code> <span class="math notranslate nohighlight">\(\rightarrow\)</span> <code class="docutils literal notranslate"><span class="pre">tstep0_ex</span></code>: <code class="docutils literal notranslate"><span class="pre">0.2u</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">e_nr</span></code>:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">e_nr_spice_vntol</span> <span class="pre">=</span> <span class="pre">1e-4</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">e_nr_spice_abstol</span> <span class="pre">=</span> <span class="pre">1e-6</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">e_nr_spice_reltol</span> <span class="pre">=</span> <span class="pre">1e-3</span></code></li>
+</ul>
+</li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">vntol</span></code>, <code class="docutils literal notranslate"><span class="pre">abstol</span></code>, and <code class="docutils literal notranslate"><span class="pre">reltol</span></code> parameters have to do with
+SPICE convergence criteria, described in the section on
+<a class="reference internal" href="numerical.html#numerical"><span class="std std-ref">numerical methods</span></a>.</p>
+</li>
+<li><p class="first">Add an output block and add <code class="docutils literal notranslate"><span class="pre">IL</span></code> and <code class="docutils literal notranslate"><span class="pre">v_out</span></code> to its list of
+variables.</p>
+</li>
+<li><p class="first">In the <code class="docutils literal notranslate"><span class="pre">Options</span></code> block, set <code class="docutils literal notranslate"><span class="pre">Id</span></code> to <code class="docutils literal notranslate"><span class="pre">buck</span></code>, <code class="docutils literal notranslate"><span class="pre">Title</span></code> to
+<code class="docutils literal notranslate"><span class="pre">buck</span> <span class="pre">converter</span></code>, save the project as <code class="docutils literal notranslate"><span class="pre">buck.grc</span></code> (in a directory
+of your choice).</p>
+</li>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">Generate</span> <span class="pre">circuit</span> <span class="pre">file</span></code>
+<span class="math notranslate nohighlight">\(\rightarrow\)</span>
+<code class="docutils literal notranslate"><span class="pre">Run</span> <span class="pre">simulation</span></code>
+<span class="math notranslate nohighlight">\(\rightarrow\)</span>
+<code class="docutils literal notranslate"><span class="pre">View</span> <span class="pre">results</span></code></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">v_out</span></code> versus time plot is shown below. The circuit takes about
+<span class="math notranslate nohighlight">\(35\,{\textrm{msec}}\)</span> to reach the steady state.</p>
+<a class="reference internal image-reference" href="_images/buck_project_2.png"><img alt="buck converter project" src="_images/buck_project_2.png" style="width: 650px;" /></a>
+</li>
+</ul>
+<p>If we are only interested in the steady-state behaviour of the circuit,
+the transient simulation approach has two drawbacks:</p>
+<ul class="simple">
+<li>The number of cycles required to reach the steady state can be
+substantially large. In our examples, it is about
+<span class="math notranslate nohighlight">\(35\times 10^{-3}/40\times 10^{-6}\)</span> or 875 cycles. However,
+we are interested in just one cycle in the steady state. Clearly,
+the transient simulation approach is wasteful in terms of simulation
+time.</li>
+<li>With the transient simulation approach, it is not know <em>a priori</em>
+how long the circuit would take to reach the steady state, thus
+entailing a trial-and-error loop.</li>
+</ul>
+<p>GSEIM provides a way to directly compute the steady-state solution,
+without having to go through a (possibly long) transient. This
+option is called Steady-State Waveform (SSW) and is the same as
+that implemented in
+<a class="reference external" href="https://www.ee.iitb.ac.in/~sequel/">SEQUEL</a>.</p>
+<p>We can try out the SSW option for the buck converter example by
+making the following assignments in the solve block already created.</p>
+<ul>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">solve_type</span> <span class="pre">=</span> <span class="pre">ssw</span></code></p>
+</li>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">SSW</span></code> <span class="math notranslate nohighlight">\(\rightarrow\)</span> <code class="docutils literal notranslate"><span class="pre">ssw_frequency</span></code>: <code class="docutils literal notranslate"><span class="pre">25k</span></code></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">ssw_frequency</span></code> parameter is used by GSEIM to find the
+period <span class="math notranslate nohighlight">\(T\)</span>. Alternatively, we could have set
+<code class="docutils literal notranslate"><span class="pre">ssw_period</span> <span class="pre">=</span> <span class="pre">40u</span></code>.</p>
+</li>
+</ul>
+<p>Doing
+<code class="docutils literal notranslate"><span class="pre">Generate</span> <span class="pre">circuit</span> <span class="pre">file</span></code>
+<span class="math notranslate nohighlight">\(\rightarrow\)</span>
+<code class="docutils literal notranslate"><span class="pre">Run</span> <span class="pre">simulation</span></code>
+<span class="math notranslate nohighlight">\(\rightarrow\)</span>
+<code class="docutils literal notranslate"><span class="pre">View</span> <span class="pre">results</span></code>
+once again, and selecting <code class="docutils literal notranslate"><span class="pre">IL</span></code> for plotting, we get the following
+plot.</p>
+<a class="reference internal image-reference" href="_images/buck_project_3.png"><img alt="buck converter project" src="_images/buck_project_3.png" style="width: 650px;" /></a>
+<p>If the inductance value is changed to <code class="docutils literal notranslate"><span class="pre">200u</span></code>, we get discontinuous
+inductor current as shown below.</p>
+<a class="reference internal image-reference" href="_images/buck_project_4.png"><img alt="buck converter project" src="_images/buck_project_4.png" style="width: 650px;" /></a>
+</div>
 </div>
 
 
@@ -232,20 +488,31 @@ as shown in the following figure to view <span class="math notranslate nohighlig
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">GSEIM Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Creating a new project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="elements.html">Blocks and ports</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Creating a new project</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#example-1">Example 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-2">Example 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-3">Example 3</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="organisation.html">GSEIM Organisation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="xbe.html">Element templates (<code class="docutils literal notranslate"><span class="pre">xbe</span></code>)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="functions.html"><code class="docutils literal notranslate"><span class="pre">f</span></code>, <code class="docutils literal notranslate"><span class="pre">g</span></code>, <code class="docutils literal notranslate"><span class="pre">h</span></code> functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">Element templates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="solve.html">Solve Blocks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="subckt.html">Subcircuits</a></li>
-<li class="toctree-l1"><a class="reference internal" href="xbedocs.html">xbe Documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bedocs.html">Block Documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proj_list.html">GSEIM projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mna.html">Modified nodal analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nr.html">Newton-Raphson method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numerical.html">Numerical methods for ODEs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ssw.html">SSW computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="startup.html">Start-up simulation</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="getting_started.html" title="previous chapter">Getting Started</a></li>
+      <li>Previous: <a href="elements.html" title="previous chapter">Blocks and ports</a></li>
       <li>Next: <a href="organisation.html" title="next chapter">GSEIM Organisation</a></li>
   </ul></li>
 </ul>
@@ -267,7 +534,7 @@ as shown in the following figure to view <span class="math notranslate nohighlig
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2021, Mahesh Patil.
+      &copy;2022, Mahesh Patil.
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>

@@ -1,0 +1,161 @@
+
+===============
+Block Documents
+===============
+
+In this section, documents for all blocks are
+presented. These documents can also be accessed
+from the GSEIM schematic capture GUI as follows.
+
+- From the block tree panel (right-hand menu in the GUI),
+  select the block of interest by left-clicking.
+  Then right-click to view the document.
+- To view the document for a specific block in a
+  circuit schematic, right-click on that block
+  and then select ``Show Document.``
+
+
+xbe: comparators
+================
+
+- :download:`cmpr_1_1 <be_docs/be_cmpr_1_1.pdf>`
+- :download:`cmpr_1_2 <be_docs/be_cmpr_1_2.pdf>`
+- :download:`cmpr_2_1 <be_docs/be_cmpr_2_1.pdf>`
+- :download:`cmpr_2_2 <be_docs/be_cmpr_2_2.pdf>`
+- :download:`cmpr_simple_2_1 <be_docs/be_cmpr_simple_2_1.pdf>`
+- :download:`cmpr_simple_2_2 <be_docs/be_cmpr_simple_2_2.pdf>`
+- :download:`cmprh_1_1 <be_docs/be_cmprh_1_1.pdf>`
+- :download:`cmprh_2_1 <be_docs/be_cmprh_2_1.pdf>`
+
+xbe: power electronics
+======================
+
+- :download:`abc_to_alphabeta_3 <be_docs/be_abc_to_alphabeta_3.pdf>`
+- :download:`abc_to_dq <be_docs/be_abc_to_dq.pdf>`
+- :download:`abc_to_dq_2 <be_docs/be_abc_to_dq_2.pdf>`
+- :download:`abc_to_dq0_2 <be_docs/be_abc_to_dq0_2.pdf>`
+- :download:`dq_to_abc <be_docs/be_dq_to_abc.pdf>`
+- :download:`dq0_to_abc_2 <be_docs/be_dq0_to_abc_2.pdf>`
+- :download:`vsi_3ph_1 <be_docs/be_vsi_3ph_1.pdf>`
+
+xbe: sources
+============
+
+- :download:`clock <be_docs/be_clock.pdf>`
+- :download:`clock_1 <be_docs/be_clock_1.pdf>`
+- :download:`clock_3 <be_docs/be_clock_3.pdf>`
+- :download:`clock_3ph <be_docs/be_clock_3ph.pdf>`
+- :download:`clock_thyr <be_docs/be_clock_thyr.pdf>`
+- :download:`const <be_docs/be_const.pdf>`
+- :download:`pulse10 <be_docs/be_pulse10.pdf>`
+- :download:`pwl20 <be_docs/be_pwl20.pdf>`
+- :download:`pwm20_1 <be_docs/be_pwm20_1.pdf>`
+- :download:`src_ac <be_docs/be_src_ac.pdf>`
+- :download:`triangle_1 <be_docs/be_triangle_1.pdf>`
+- :download:`triangle_2 <be_docs/be_triangle_2.pdf>`
+- :download:`triangle_3 <be_docs/be_triangle_3.pdf>`
+
+xbe: logic operations
+=====================
+
+- :download:`not <be_docs/be_not.pdf>`
+- :download:`and_2 <be_docs/be_and_2.pdf>`
+- :download:`or_2 <be_docs/be_or_2.pdf>`
+
+xbe: math Operations
+====================
+
+- :download:`abs <be_docs/be_abs.pdf>`
+- :download:`atan2_rad <be_docs/be_atan2_rad.pdf>`
+- :download:`cos <be_docs/be_cos.pdf>`
+- :download:`diff <be_docs/be_diff.pdf>`
+- :download:`edge_delay <be_docs/be_edge_delay.pdf>`
+- :download:`integrator <be_docs/be_integrator.pdf>`
+- :download:`integrator_1 <be_docs/be_integrator_1.pdf>`
+- :download:`lag_1 <be_docs/be_lag_1.pdf>`
+- :download:`lag_2 <be_docs/be_lag_2.pdf>`
+- :download:`limiter <be_docs/be_limiter.pdf>`
+- :download:`linear <be_docs/be_linear.pdf>`
+- :download:`modulo <be_docs/be_modulo.pdf>`
+- :download:`modulo_twopi <be_docs/be_modulo_twopi.pdf>`
+- :download:`monostable_1 <be_docs/be_monostable_1.pdf>`
+- :download:`multscl <be_docs/be_multscl.pdf>`
+- :download:`mult_2 <be_docs/be_mult_2.pdf>`
+- :download:`pwl10_xy <be_docs/be_pwl10_xy.pdf>`
+- :download:`sin <be_docs/be_sin.pdf>`
+- :download:`sum_2 <be_docs/be_sum_2.pdf>`
+- :download:`sum_3 <be_docs/be_sum_3.pdf>`
+
+xbe: sample/delay
+=================
+
+- :download:`sampler <be_docs/be_sampler.pdf>`
+- :download:`delay_discrete <be_docs/be_delay_discrete.pdf>`
+- :download:`delay_onestep <be_docs/be_delay_onestep.pdf>`
+
+xbe: filters
+============
+
+- :download:`xfer_fn <be_docs/be_xfer_fn.pdf>`
+
+xbe: electrical machines
+========================
+
+- :download:`indmc1 <be_docs/be_indmc1.pdf>`
+- :download:`indmc2a <be_docs/be_indmc2a.pdf>`
+- :download:`indmc2b <be_docs/be_indmc2b.pdf>`
+
+xbe: user-defined functions
+===========================
+
+- :download:`user_fn_1_1 <be_docs/be_user_fn_1_1.pdf>`
+- :download:`user_fn_2_1 <be_docs/be_user_fn_2_1.pdf>`
+- :download:`user_fn_3_1 <be_docs/be_user_fn_3_1.pdf>`
+- :download:`user_fn_4_3 <be_docs/be_user_fn_4_3.pdf>`
+- :download:`user_fn_5_3 <be_docs/be_user_fn_5_3.pdf>`
+
+ebe: meters
+===========
+
+- :download:`ammeter <be_docs/be_ammeter.pdf>`
+- :download:`ammeter_fb <be_docs/be_ammeter_fb.pdf>`
+- :download:`voltmeter <be_docs/be_voltmeter.pdf>`
+- :download:`voltmeter_1 <be_docs/be_voltmeter_1.pdf>`
+- :download:`voltmeter_fb <be_docs/be_voltmeter_fb.pdf>`
+
+ebe: passive
+============
+
+- :download:`c <be_docs/be_c.pdf>`
+- :download:`l <be_docs/be_l.pdf>`
+- :download:`r <be_docs/be_r.pdf>`
+
+ebe: sources
+============
+
+- :download:`vsrc_ac <be_docs/be_vsrc_ac.pdf>`
+- :download:`vsrc_clock <be_docs/be_vsrc_clock.pdf>`
+- :download:`vsrc_dc <be_docs/be_vsrc_dc.pdf>`
+- :download:`vsrc_pulse10 <be_docs/be_vsrc_pulse10.pdf>`
+- :download:`vsrc_x <be_docs/be_vsrc_x.pdf>`
+
+ebe: switches
+=============
+
+- :download:`diode_r <be_docs/be_diode_r.pdf>`
+- :download:`switch_1 <be_docs/be_switch_1.pdf>`
+- :download:`thyristor <be_docs/be_thyristor.pdf>`
+
+ebe: solar
+==========
+
+- :download:`solar_module_1 <be_docs/be_solar_module_1.pdf>`
+- :download:`solar_module_rs <be_docs/be_solar_module_rs.pdf>`
+
+ebe: transformers
+=================
+
+- :download:`xfmr_l1l2 <be_docs/be_xfmr_l1l2.pdf>`
+- :download:`xfmr_level0_1ph <be_docs/be_xfmr_level0_1ph.pdf>`
+- :download:`xfmr_level2_1ph <be_docs/be_xfmr_level2_1ph.pdf>`
+- :download:`xfmr_level0_1ph_1_2 <be_docs/be_xfmr_level0_1ph_1_2.pdf>`

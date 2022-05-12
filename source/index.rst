@@ -3,21 +3,26 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to GSEIM's documentation!
-=================================
+GSEIM documentation
+===================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: Contents:
 
    intro
    installation
    getting_started
+   elements
    new_project
    organisation
-   xbe
-   functions
+   templates
    solve
    subckt
-   xbedocs
-
+   bedocs
+   proj_list
+   mna
+   nr
+   numerical
+   ssw
+   startup

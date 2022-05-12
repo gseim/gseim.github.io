@@ -18,7 +18,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="GSEIM Installation" href="installation.html" />
-    <link rel="prev" title="Welcome to GSEIM’s documentation!" href="index.html" />
+    <link rel="prev" title="GSEIM documentation" href="index.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -35,22 +35,21 @@
   <div class="section" id="introduction">
 <h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
 <p>GSEIM (General-purpose Simulator with Explicit and Implicit
-Methods) is meant for solving a set of ordinary differential
-equations (ODEs) arising from a system (circuit) schematic
-diagram provided by the user. Its basic functionality may
-be compared with the
-<a class="reference external" href="https://in.mathworks.com/products/simulink.html">Matlab-Simulink</a>
+Methods) is meant for simulation of electrical circuits,
+especially power electronic circuits, and also for numerical
+solution of ordinary differential equations (ODEs). In terms of
+basic functionality, GSEIM is similar to commercial packages such as
+<a class="reference external" href="https://in.mathworks.com/products/simulink.html">Simulink</a>,
+<a class="reference external" href="https://in.mathworks.com/products/simscape.html">Simscape</a>,
+<a class="reference external" href="https://powersimtech.com/products/psim/capabilities-applications/">PSIM</a>,
 and
-<a class="reference external" href="http://www.scicos.org/">Scicos</a>
-packages;
-however, at this stage, GSEIM needs substantial enhancement
-particularly in terms of library elements made available to
-the user.</p>
+<a class="reference external" href="https://www.plexim.com/">PLECS</a>.
+However, at this stage, it does not handle real-time simulation.</p>
 <p>The salient features of the GSEIM package can be described as follows.</p>
 <ul>
 <li><p class="first">The solver, which handles the most intensive computation, viz.,
-numerical solution of the ODEs, is written in C++ because of
-its high performance.</p>
+numerical solution of circuit equations and ODEs, is written in
+C++ because of its high performance.</p>
 </li>
 <li><p class="first">For all other purposes, viz., schematic capture, parsing, parameter
 computation, and plotting, python is used because of the flexibility
@@ -59,7 +58,7 @@ and ease of programming it offers.</p>
 <li><p class="first">Output parameters, which determine what data gets stored in the output
 files during simulation, are specified without having to add extra
 elements, such as the <em>scope</em> in Simulink and
-Scicos, to the schematic diagram. This helps in avoiding clutter.</p>
+PLECS, to the schematic diagram. This helps in avoiding clutter.</p>
 </li>
 <li><p class="first">Subcircuits (hierarchical blocks) can be used for simplifying the
 schematic.</p>
@@ -80,19 +79,21 @@ only for nonlinear problems. In these methods, the time step is
 adjusted depending on the number of Newton-Raphson iterations
 required at a given time point.</p>
 </li>
-<li><p class="first">GSEIM provides a GUI for plotting the variables specified by the
-user. The plotting GUI allows the user
-to select the output file of interest, the x-axis variable
-(typically time), and y-axis variable(s) to be included
-in the plot. It also gives the user control over plot attributes
-such as line colour, line width, and symbol type, with appropriate
-values specified by default. Using this information, the plotting
-GUI displays the plot requested by the user.
-It also produces python code associated
-with the plot. If required, the user can edit this code in order to make the plot
-more suitable for a report or a presentation. This way,
-the user can benefit from a wide range of plotting capabilities
-offered by python.</p>
+<li><p class="first">Steady-State Waveform (SSW) analysis option is made available,
+which is particularly useful for converter circuits where
+the steady-state solution is of interest.</p>
+</li>
+<li><p class="first">GSEIM provides a plotting GUI with the following features:</p>
+<ul class="simple">
+<li>The user can control plot attributes such as line colour,
+line width, and symbol type.</li>
+<li>In addition to basic plotting, some post-processing capabilties,
+viz., computation of average/rms values, Fourier coefficients,
+THD, are included.</li>
+<li>The plotting GUI produces python code associated with the plot.
+If required, the user can edit this code in order to make the plot
+more suitable for a report or a presentation.</li>
+</ul>
 </li>
 </ul>
 </div>
@@ -118,20 +119,26 @@ offered by python.</p>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">GSEIM Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="elements.html">Blocks and ports</a></li>
 <li class="toctree-l1"><a class="reference internal" href="new_project.html">Creating a new project</a></li>
 <li class="toctree-l1"><a class="reference internal" href="organisation.html">GSEIM Organisation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="xbe.html">Element templates (<code class="docutils literal notranslate"><span class="pre">xbe</span></code>)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="functions.html"><code class="docutils literal notranslate"><span class="pre">f</span></code>, <code class="docutils literal notranslate"><span class="pre">g</span></code>, <code class="docutils literal notranslate"><span class="pre">h</span></code> functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">Element templates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="solve.html">Solve Blocks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="subckt.html">Subcircuits</a></li>
-<li class="toctree-l1"><a class="reference internal" href="xbedocs.html">xbe Documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bedocs.html">Block Documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proj_list.html">GSEIM projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mna.html">Modified nodal analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nr.html">Newton-Raphson method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numerical.html">Numerical methods for ODEs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ssw.html">SSW computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="startup.html">Start-up simulation</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="index.html" title="previous chapter">Welcome to GSEIM’s documentation!</a></li>
+      <li>Previous: <a href="index.html" title="previous chapter">GSEIM documentation</a></li>
       <li>Next: <a href="installation.html" title="next chapter">GSEIM Installation</a></li>
   </ul></li>
 </ul>
@@ -153,7 +160,7 @@ offered by python.</p>
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2021, Mahesh Patil.
+      &copy;2022, Mahesh Patil.
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>

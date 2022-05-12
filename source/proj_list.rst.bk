@@ -1,0 +1,28 @@
+
+==============
+GSEIM projects
+==============
+
+The following projects are available with the
+GSEIM distribution. The user can run these
+projects, view the results, change parameter
+values and see its effect on the results, etc.
+In addition, the user would find them useful as
+a starting point for a new project as well.
+
+Project list
+============
+
+- :download:`cmprh_1_1 <xbe_docs/xbe_cmprh_1_1.pdf>`
+- ``cmprh_2_1``
+- ``diode_rectifier_1``
+
+  .. image:: diode_rectifier_1.png
+
+- :download:`cmprh_1_1 <diode_rectifier_1.pdf>`
+
+..
+  .. image:: open_project.png
+    :width: 500
+    :alt: Alternative text
+

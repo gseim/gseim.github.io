@@ -1,0 +1,217 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Start-up simulation &#8212; GSEIM 0.0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="SSW computation" href="ssw.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="start-up-simulation">
+<span id="startup"></span><h1>Start-up simulation<a class="headerlink" href="#start-up-simulation" title="Permalink to this headline">¶</a></h1>
+<p>When we perform transient simulation of a circuit (system),
+we need to assign suitable values to all variables involved
+in the problem. There are three options.</p>
+<ul class="simple">
+<li>Assign zero to all variables (all voltages, currents,
+and any other variables).</li>
+<li>Use a previously saved solution as the starting point.</li>
+<li>Use the <strong>start-up</strong> solution as the starting point.</li>
+</ul>
+<p>The first option is frequently used although it is somewhat
+artificial (since it does not correspond to
+a valid solution for the circuit being simulated). The second
+option corresponds to a valid solution since it has been obtained
+by simulating the same circuit previously. It is the third option
+we want to discuss in this section, viz., the start-up solution.</p>
+<p>Let us illustrate the idea of a start-up solution with an example,
+the circuit shown below.</p>
+<a class="reference internal image-reference" href="_images/startup1_1.png"><img alt="start-up circuit example" src="_images/startup1_1.png" style="width: 300px;" /></a>
+<p>Suppose we
+are interested in performing transient simulation of the circuit
+from <span class="math notranslate nohighlight">\(t = 0\)</span> to some known final time <span class="math notranslate nohighlight">\(t_{\mathrm{end}}\)</span>.
+Suppose the initial values of the
+state variables,
+<span class="math notranslate nohighlight">\(V_C(0)\)</span> and
+<span class="math notranslate nohighlight">\(i_L(0)\)</span>, are known.
+Corresponding to these initial values, there is a “start-up” solution
+(consisting of the node voltages and currents) which satisfies the
+circuit equations. It is this start-up solution that we want to obtain
+first, and then use it as a starting point for transient simulation.</p>
+<p>With the conditions,
+<span class="math notranslate nohighlight">\(V_C = V_C(0)\)</span> and
+<span class="math notranslate nohighlight">\(i_L = i_L(0)\)</span>, the circuit can be replaced by that shown below.</p>
+<a class="reference internal image-reference" href="_images/startup1_2.png"><img alt="start-up circuit" src="_images/startup1_2.png" style="width: 300px;" /></a>
+<p>Since the voltage across the capacitor
+is known, we replace it with a DC voltage source. Similarly,
+since the current through the inductor is known, we replace it with
+a DC current source. We can now use the MNA approach to assemble the
+circuit equations as</p>
+<div class="math notranslate nohighlight" id="equation-eq-strt-1">
+<span class="eqno">(141)<a class="headerlink" href="#equation-eq-strt-1" title="Permalink to this equation">¶</a></span>\[G_1(V_1-V_2) + i_s = 0,\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-strt-2">
+<span class="eqno">(142)<a class="headerlink" href="#equation-eq-strt-2" title="Permalink to this equation">¶</a></span>\[G_1(V_2-V_1) + G_2(V_2-V_3) + i_C = 0,\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-strt-3">
+<span class="eqno">(143)<a class="headerlink" href="#equation-eq-strt-3" title="Permalink to this equation">¶</a></span>\[G_2(V_3-V_2) = -i_L(0),\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-strt-4">
+<span class="eqno">(144)<a class="headerlink" href="#equation-eq-strt-4" title="Permalink to this equation">¶</a></span>\[V_1 = V_s(0),\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-strt-5">
+<span class="eqno">(145)<a class="headerlink" href="#equation-eq-strt-5" title="Permalink to this equation">¶</a></span>\[V_2 = V_C(0),\]</div>
+<p>where
+<span class="math notranslate nohighlight">\(G_1 = 1/R_1\)</span>,
+<span class="math notranslate nohighlight">\(G_2 = 1/R_2\)</span>. We have introduced the capacitor
+current as an additional system variable as required by the MNA
+formulation (since the capacitor has been replaced with a voltage source).
+By solving the above equations, we obtain the start-up solution.
+Note that the start-up solution is different from the DC solution which is obtained
+by replacing capacitors with open circuits and inductors with short circuits.</p>
+<p>If there are nonlinear elements in the circuit, the procedure remains the
+same except that the equations would need to be solved iteratively,
+using the Newton-Raphson method, for example.</p>
+<p>The start-up situation also arises in flow graphs (i.e., systems without
+electrical elements). As an example, consider the flow graph shown below.</p>
+<a class="reference internal image-reference" href="_images/flowgraph3.png"><img alt="flow graph example" src="_images/flowgraph3.png" style="width: 280px;" /></a>
+<p>In this case, the integrator involves a time derivative and contributes
+a state variable. In transient simulation, we would use a discretised
+version of the integrator equation (as seen in the <a class="reference internal" href="numerical.html#numerical"><span class="std std-ref">Numerical methods for ODEs</span></a>), viz.,
+<span class="math notranslate nohighlight">\(x_4 = \displaystyle\int x_3\,dt\)</span> or
+<span class="math notranslate nohighlight">\(\displaystyle\frac{dx_4}{dt} = x_3\)</span>.
+In start-up simulation, we replace it by
+<span class="math notranslate nohighlight">\(x_4 = x_4(t_0)\)</span>, where <span class="math notranslate nohighlight">\(x_4(t_0)\)</span> is known (specified by
+the user). The complete set of equations to be solved can then be written
+as (at <span class="math notranslate nohighlight">\(t = t_0\)</span>),</p>
+<div class="math notranslate nohighlight" id="equation-eq-strt-6">
+<span class="eqno">(146)<a class="headerlink" href="#equation-eq-strt-6" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{align}
+x_1 = A_1 \sin \omega t_0\,\\
+x_2 = A_2 \sin \omega t_0\,\\
+x_3 = x_1 + x_2\,\\
+x_4 = x_4(t_0)\,\\
+x_5 = k_1\,x_4\,.
+\end{align}\end{split}\]</div>
+<p>In real life, most of the circuits (systems) we want to simulate are far
+more complex than the above examples, and we have no way of specifying
+the start-up values for the state variables. Consider, for example,
+the PI control flow graph shown below, with a step change applied in the
+load torque from
+<span class="math notranslate nohighlight">\(\tau_{L1}\)</span> to
+<span class="math notranslate nohighlight">\(\tau_{L2}\)</span>.</p>
+<a class="reference internal image-reference" href="_images/pi_indmc.png"><img alt="PI control of induction motor" src="_images/pi_indmc.png" style="width: 650px;" /></a>
+<p>For start-up simulation of this system (corresponding to the
+initial value <span class="math notranslate nohighlight">\(\tau_{L1}\)</span> of the load torue), we will need
+to specify the values of the state variables of the induction motor
+(<span class="math notranslate nohighlight">\(\psi_{ds}\)</span>,
+<span class="math notranslate nohighlight">\(\psi_{qs}\)</span>,
+<span class="math notranslate nohighlight">\(\psi_{dr}\)</span>,
+<span class="math notranslate nohighlight">\(\psi_{qr}\)</span>,
+<span class="math notranslate nohighlight">\(\omega _{rm}\)</span>), and it is difficult – if at all possible –
+to obtain these analytically. In this case, we would start with the
+zero initial solution, perform transient simulation with
+<span class="math notranslate nohighlight">\(\tau _L = \tau _{L1}\)</span>
+from 0 to <span class="math notranslate nohighlight">\(t_1\)</span>, and then apply the step change, as shown in
+the following figure.
+We need to ensure that <span class="math notranslate nohighlight">\(t_1\)</span> is sufficiently large so that
+the system reaches its steady state at <span class="math notranslate nohighlight">\(t = t_1\)</span>.</p>
+<a class="reference internal image-reference" href="_images/startup2_1.png"><img alt="step change" src="_images/startup2_1.png" style="width: 300px;" /></a>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">GSEIM</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">GSEIM Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="elements.html">Blocks and ports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="new_project.html">Creating a new project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="organisation.html">GSEIM Organisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">Element templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solve.html">Solve Blocks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="subckt.html">Subcircuits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bedocs.html">Block Documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proj_list.html">GSEIM projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mna.html">Modified nodal analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nr.html">Newton-Raphson method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numerical.html">Numerical methods for ODEs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ssw.html">SSW computation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Start-up simulation</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="ssw.html" title="previous chapter">SSW computation</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Mahesh Patil.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/startup.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

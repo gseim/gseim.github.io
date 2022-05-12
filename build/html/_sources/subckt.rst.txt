@@ -5,17 +5,19 @@
 Subcircuits
 ===========
 
-To represent a complicated system with a schematic
-diagram, subcircuits (hierarchical blocks) are very
-useful. In this section, we will first explain how
+Several circuits or systems of practical interest
+involve a large number of blocks (elements). In such
+cases, the schematic diagram can be significantly
+simplified using subcircuits (hierarchical blocks).
+In this section, we will first explain how
 a simple subcircuit can be designed using the schematic
-capture GUI. We will then look at a more complex subcircuit
-which represents an induction motor model.
+capture GUI. We will then look at more complex subcircuits,
+including an induction motor model.
 
 .. _subckt_linear2:
 
-Linear transformation subcircuit
-================================
+Linear transformation
+=====================
 
 Let us see how to make up a subcircuit to implement
 the linear transformation given by,
@@ -46,55 +48,56 @@ the linear transformation given by,
    \right]
    \,,
 
-where
-:math:`x_1`,
-:math:`x_2`
+where :math:`x_1`, :math:`x_2`
 are the input nodes (variables), and
-:math:`y_1`,
-:math:`y_2`
+:math:`y_1`, :math:`y_2`
 are the output nodes. Eq. :eq:`eq_linear` can be implemented
 as follows.
 
 .. image:: linear_2.png
   :width: 300
-  :alt: Alternative text
+  :alt: subckt example
 
-To convert this block diagram to a GSEIM subcircuit, you can use
+To convert this block diagram into a GSEIM subcircuit, we can use
 the step-by-step procedure given below.
 
 - Start a new project. A canvas with an ``Options`` block will
   appear. Double-click on the options block, and set ``Id``
   and ``Title``. Note that Id should only contain letters, digits,
-  and the underscore character. In the ``Generate option`` field,
+  and the underscore character.
+  As a convention, it is a good idea to start ``Id`` with ``s_``
+  (``s`` for subcircuit); however, it is not really required.
+  In the ``Generate option`` field,
   choose ``Hier Block`` to indicate that this schematic diagram is
   for a hierarchical block (subcircuit) and not a stand-alone
-  system. It may be a good idea to start the ``Id`` with ``s_``
-  (``s`` for subcircuit) as a convention; however, it is not
-  really required.
+  system.
 
   .. image:: sub_linear2_1.png
+    :width: 550
+    :alt: options block
+
+  |
+- Save the subcircuit schematic. It is a good practice to use a file
+  name which reflects the name (``Id``) of the subcircuit. In our
+  example, it would be ``s_linear_2.grc``.
+  The subcircuit ``.grc`` file can be saved in any directory; here,
+  we will save it in the directory where other GSEIM subcircuit
+  ``.grc.`` files are located.
+
+  .. image:: sub_linear2_9.png
     :width: 600
-    :alt: Alternative text
+    :alt: save subcircuit
 
   |
 - The next step is to bring in the required elements (blocks)
-  from the library. We need four ``multscl`` (multiply by scalar)
-  elements and
-  two ``sum_2`` elements. To bring ``multscl``
-  into the canvas, select it from the library, and drag it into
-  the canvas.
-
-  .. image:: sub_linear2_2.png
-    :width: 270
-    :alt: Alternative text
-
-  |
-- Place the components, keeping in mind the connections you will
+  from the library (see :ref:`new_project`). We need four
+  ``multscl`` (multiply by scalar) elements and two ``sum_2`` elements.
+  Place the components, keeping in mind the connections we
   need to make.
 
   .. image:: sub_linear2_3.png
-    :width: 270
-    :alt: Alternative text
+    :width: 130
+    :alt: placement of blocks
 
 - Next, we need to provide **pads** for our subcircuit. We need two
   source pads (for
@@ -105,12 +108,10 @@ the step-by-step procedure given below.
   :math:`y_2`). The source pads will show up as input pads when we invoke
   this subcircuit from a higher level; similarly, the sink pads will show
   up as output pads.
+  Bring in the source and sink pads from the block tree panel
+  :math:`\rightarrow` ``Misc``
+  :math:`\rightarrow` ``subcircuit pads``.
 
-  .. image:: sub_linear2_4.png
-    :width: 270
-    :alt: Alternative text
-
-  |
 - Double-click on each of the source and sink pads and name
   those as
   ``x1``,
@@ -125,107 +126,108 @@ the step-by-step procedure given below.
   for the input nodes (ports), and ``y1``, ``y2`` for the output nodes.
 
   .. image:: sub_linear2_5.png
-    :width: 600
-    :alt: Alternative text
+    :width: 350
+    :alt: pad properties
 
   |
-- Your schematic should now look like this:
+- Bring in two connectors,
+  ``connector_f_3a`` and
+  ``connector_f_3b``, and place them suitably.
+  Your schematic should now look like this:
 
   .. image:: sub_linear2_6.png
-    :width: 450
-    :alt: Alternative text
+    :width: 320
+    :alt: schematic 1
 
 - Connect the elements as required. To make a connection between two
   ports, click on one of the ports and then the other.
 
   .. image:: sub_linear2_7.png
-    :width: 450
-    :alt: Alternative text
+    :width: 320
+    :alt: schematic 2
 
 - Our next step is to assign the multiplier parameter (``k``)
   of each ``multscl`` element the values shown below.
 
   .. image:: sub_linear2_8.png
-    :width: 470
-    :alt: Alternative text
+    :width: 350
+    :alt: multscl parameters
 
+  |
 - Note that we will need to make
   ``a11``,
   ``a12``,
   ``a21``,
-  ``a22``,
+  ``a22``
   assignable when this subcircuit is invoked. This is achieved
   with the help of **global parameters**.
-  We first need to add four global parameters and name them
-  ``a11``,
-  ``a12``,
-  ``a21``,
-  ``a22``,
-  one-by-one.
-  Click on ``Edit``
-  :math:`\rightarrow`
-  ``GParms``
+  Click on ``GParms``
   :math:`\rightarrow`
   ``Add gparm``, and change the name as shown below.
 
   .. image:: sub_linear2_10.png
     :width: 230
-    :alt: Alternative text
+    :alt: add gparm
 
-  |
+  Repeat for
+  ``a12``,
+  ``a21``,
+  ``a22``.
+
 - We now map the global parameters to the ``k`` parameters of the
   ``multscl`` elements. Double-click on the top ``multscl`` element
-  in the schematic and change ``k`` to ``a11``. Similarly, change
-  ``k`` for the other three ``multscl`` elements.
+  in the schematic and assign ``a11`` to ``k``. Similarly, make
+  suitable assignments for the other three ``multscl`` elements.
 
   .. image:: sub_linear2_11.png
-    :width: 420
-    :alt: Alternative text
+    :width: 380
+    :alt: assignment of a11
 
   |
-- Save the subcircuit schematic. It is a good practice to use a file
-  name which reflects the name (``Id``) of the subcircuit. In our
-  example, it would be ``s_linear_2.grc``.
-
-  .. image:: sub_linear2_9.png
-    :width: 600
-    :alt: Alternative text
-
-  |
-- Click on ``Generate flow graph``. This creates a file
-  ``~/gseim_gui/subckt/s_linear_2.hblock.yml``.
-  You will find that the ``.grc`` file in the previous step appears
-  in the ``grc_source`` field of the ``.yml`` file.
+- Click on ``Generate circuit file``. This creates a file
+  ``~/gseim_grc/subckt/s_linear_2.hblock.yml``,
+  a text file which can be opened with
+  a text editor such as ``vim``, ``emacs``, ``gedit``.
+  Notice that the ``.grc`` file to which we have saved the schematic
+  appears in the ``grc_source`` field in the ``.yml`` file.
 
   End your GSEIM session and start it again. You will find the newly
   added subcircuit listed under ``GRC Hier Blocks`` as shown below:
-  Note that the label which appears in this list corresponds to the
-  ``Title`` value (not the ``Id`` value) of your subcircuit.
+  Note that the label which appears in this list (``s_linear_2``)
+  corresponds to the ``Id`` value we entered in the ``Options`` block
+  earlier.
 
   .. image:: sub_linear2_12.png
-    :width: 270
-    :alt: Alternative text
+    :width: 200
+    :alt: subckt menu
 
 - Drag and drop the subcircuit into the canvas.
 
-  .. image:: sub_linear2_13.png
-    :width: 150
-    :alt: Alternative text
+  Hovering over a port displays the name of that port.
+  By convention, ports corresponding to ``pad_source``
+  blocks in the subcircuit schematic (``x1`` and ``x2`` in our case)
+  appear on the left of the subcircuit symbol, and
+  those corresponding to ``pad_sink`` blocks (``y1`` and ``y2`` in our case)
+  appear on the right, as shown below.
+
+  .. image:: linear_2_symbol.png
+    :width: 130
+    :alt: subckt symbol
 
 - Double-clicking on the subcircuit opens the following dialog box,
   enabling the user to edit the parameter values as required.
 
   .. image:: sub_linear2_14.png
-    :width: 450
+    :width: 380
     :alt: Alternative text
 
 .. _subckt_indmc:
 
-Induction motor subcircuit
-==========================
+Induction motor
+===============
 
 We now consider the induction motor model described in
-:ref:`xbe templates <xbe>`. The model equations are reproduced
+:ref:`Element Templates <templates>`. The model equations are reproduced
 below.
 
 .. math::
@@ -310,16 +312,16 @@ As an example, Eq. :eq:`eq_indmcx_3` can be rewritten as,
 
 which can be implemented using the ``mult_2`` element (to multiply :math:`\omega _{rm}` and
 :math:`\psi _{qr}`), and the ``sum\_2`` and ``integrator`` elements described in
-:ref:`xbe templates <xbe>`.
+:ref:`Element Templates <templates>`.
 Treating
 Eqs. :eq:`eq_indmcx_1` to :eq:`eq_indmcx_5`
 in this manner, we obtain the subciruit shown below
 (the ``.grc`` file is
-``~/gseim_gui/subckt_grc/s_indmc.grc``).
+``~/gseim_grc/subckt_grc/s_indmc.grc``).
 
-.. image:: sub_indmc.png
-  :width: 700
-  :alt: Alternative text
+.. image:: s_indmc_annotated.png
+  :width: 650
+  :alt: indmc subcircuit
 
 The following additional points about the implementation may be
 noted:
@@ -330,10 +332,16 @@ noted:
   ``idr>``, the two corresponding to the same node.
 
 - Input and output pads (shown in light green colour) are used to indicate
-  the input and output ports the subcircuit symbol will have when it is
-  invoked (from a higher level). For the induction machine subcircuit,
-  ``vds``, ``vqs``, ``tl`` are the input ports, and
-  ``wrm`` is the output port.
+  the input and output ports of the subcircuit symbol when it is
+  invoked from a higher level. For the induction machine subcircuit,
+  ``va``, ``vb``, ``vc``, ``tl`` are the input ports, and
+  ``wrm`` is the output port. When the subcircuit is invoked, the input
+  ports appear on the left, and the output ports on the right, as shown
+  below.
+
+  .. image:: indmc_symbol.png
+    :width: 150
+    :alt: indmc symbol
 
 - The subcircuit has the following parameters:
   ``j``,
@@ -357,7 +365,7 @@ noted:
   depend on these parameters.
   For example, consider
   Eq. :eq:`eq_indmcx1_1`
-  for :mat:`i_{ds}`, implemented using
+  for :math:`i_{ds}`, implemented using
   the ``sum\_2`` element marked as ``s6`` in the figure. This element gives
 
   .. math::
@@ -372,19 +380,19 @@ noted:
   specific to the concerned subcircuit, and it needs to be in the
   same directory as the ``.yml`` file for that subcircuit.
   For ``s_indmc``, the python file is
-  ``~/gseim_gui/subckt/s_indmc_parm.py``, and is reproduced below.
+  ``~/gseim_grc/subckt/s_indmc_parm.py``, and is reproduced below.
 
   .. code-block:: python
      :linenos:
 
      def s_indmc_parm(dict1):
 
-         j = float(dict1['j'])
-         llr = float(dict1['llr'])
-         lls = float(dict1['lls'])
-         lm = float(dict1['lm'])
-         rr = float(dict1['rr'])
-         rs = float(dict1['rs'])
+         j     = float(dict1['j'    ])
+         llr   = float(dict1['llr'  ])
+         lls   = float(dict1['lls'  ])
+         lm    = float(dict1['lm'   ])
+         rr    = float(dict1['rr'   ])
+         rs    = float(dict1['rs'   ])
          poles = float(dict1['poles'])
 
          ls = lls + lm
@@ -424,7 +432,7 @@ noted:
 
          m1_k = x1
 
-         dict1['i1_k'] = '%14.7e' % (i1_k)
+         dict1['i1_k' ] = '%14.7e' % (i1_k )
          dict1['s1_k1'] = '%14.7e' % (s1_k1)
          dict1['s1_k2'] = '%14.7e' % (s1_k2)
          dict1['s2_k1'] = '%14.7e' % (s2_k1)
@@ -441,8 +449,8 @@ noted:
          dict1['s8_k2'] = '%14.7e' % (s8_k2)
          dict1['s9_k1'] = '%14.7e' % (s9_k1)
          dict1['s9_k2'] = '%14.7e' % (s9_k2)
-         dict1['m1_k'] = '%14.7e' % (m1_k)
-         dict1['x2'] = '%14.7e' % (x2)
+         dict1['m1_k' ] = '%14.7e' % (m1_k )
+         dict1['x2'   ] = '%14.7e' % (x2   )
 
   The ``k1`` and ``k2`` values for the ``sum_2`` element marked as
   ``s6`` in the schematic are computed in the above python function
@@ -458,3 +466,24 @@ noted:
   of the blocks involved in the subcircuit. These features provide a mechanism
   for viewing various quantities of interest at different levels when the
   system is simulated.
+
+.. _subckt_vsi:
+
+Voltage source inverter
+=======================
+
+Next, we consider a subcircuit with electrical elements, viz.,
+a three-phase voltage source inverter. The GSEIM implementation
+is shown below.
+
+.. image:: vsi_1.png
+  :width: 300
+  :alt: three-phase VSI
+
+When the subcircuit is called from a higher level,
+it appears as follows.
+
+  .. image:: vsi_2.png
+    :width: 140
+    :alt: VSI symbol
+

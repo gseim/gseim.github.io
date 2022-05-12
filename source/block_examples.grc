@@ -1,0 +1,265 @@
+options:
+  parameters:
+    author: mbp
+    category: '[GRC Hier Blocks]'
+    comment: ''
+    copyright: ''
+    delta_show_grid: '2'
+    description: ''
+    drawing_scheme: name
+    engine_output: GUI_window
+    generate_options: circuit
+    id: block_examples
+    mirror: none
+    placement: (0,0)
+    port_block_x: '4'
+    port_block_y: '4'
+    port_sep_x: '4'
+    port_sep_y: '4'
+    rotate_strict: 'no'
+    run: 'True'
+    sizing_mode: fixed
+    title: Not titled yet
+    wiring_style: rectilinear
+  states:
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+blocks:
+- name: abc_to_dq$0
+  id: abc_to_dq
+  parameters:
+    comment: ''
+    drawing_scheme: name
+    mirror: none
+    name: none
+    port_block_x: '4'
+    port_block_y: '4'
+    port_sep_x: '4'
+    port_sep_y: '4'
+    rotate_strict: 'no'
+  states:
+    coordinate: [648, 162]
+    rotation: 0
+    state: true
+- name: r$0
+  id: r
+  parameters:
+    comment: ''
+    drawing_scheme: symbol
+    k_scale: '1.0'
+    mirror: none
+    name: none
+    port_block_x: '10'
+    port_block_y: '4'
+    port_offset_b: '0'
+    port_offset_l: '0'
+    port_offset_r: '0'
+    port_offset_t: '0'
+    port_sep_x: '0'
+    port_sep_y: '0'
+    r: '1.0'
+    rotate_strict: 'yes'
+  states:
+    coordinate: [294, 186]
+    rotation: 0
+    state: true
+- name: show_text$0
+  id: show_text
+  parameters:
+    comment: ''
+    drawing_scheme: text
+    font_size: '11'
+    mirror: none
+    name: none
+    port_block_x: '4'
+    port_block_y: '4'
+    port_sep_x: '4'
+    port_sep_y: '4'
+    rotate_strict: 'no'
+    text: r
+  states:
+    coordinate: [321, 249]
+    rotation: 0
+    state: true
+- name: show_text$1
+  id: show_text
+  parameters:
+    comment: ''
+    drawing_scheme: text
+    font_size: '11'
+    mirror: none
+    name: none
+    port_block_x: '4'
+    port_block_y: '4'
+    port_sep_x: '4'
+    port_sep_y: '4'
+    rotate_strict: 'no'
+    text: vsrc_dc
+  states:
+    coordinate: [384, 249]
+    rotation: 0
+    state: true
+- name: show_text$2
+  id: show_text
+  parameters:
+    comment: ''
+    drawing_scheme: text
+    font_size: '11'
+    mirror: none
+    name: none
+    port_block_x: '4'
+    port_block_y: '4'
+    port_sep_x: '4'
+    port_sep_y: '4'
+    rotate_strict: 'no'
+    text: sum_2
+  states:
+    coordinate: [471, 249]
+    rotation: 0
+    state: true
+- name: show_text$3
+  id: show_text
+  parameters:
+    comment: ''
+    drawing_scheme: text
+    font_size: '11'
+    mirror: none
+    name: none
+    port_block_x: '4'
+    port_block_y: '4'
+    port_sep_x: '4'
+    port_sep_y: '4'
+    rotate_strict: 'no'
+    text: voltmeter_fb
+  states:
+    coordinate: [540, 249]
+    rotation: 0
+    state: true
+- name: show_text$4
+  id: show_text
+  parameters:
+    comment: ''
+    drawing_scheme: text
+    font_size: '11'
+    mirror: none
+    name: none
+    port_block_x: '4'
+    port_block_y: '4'
+    port_sep_x: '4'
+    port_sep_y: '4'
+    rotate_strict: 'no'
+    text: abc_to_dq
+  states:
+    coordinate: [636, 249]
+    rotation: 0
+    state: true
+- name: show_text$5
+  id: show_text
+  parameters:
+    comment: ''
+    drawing_scheme: text
+    font_size: '11'
+    mirror: none
+    name: none
+    port_block_x: '4'
+    port_block_y: '4'
+    port_sep_x: '4'
+    port_sep_y: '4'
+    rotate_strict: 'no'
+    text: xfmr_l1l2
+  states:
+    coordinate: [726, 249]
+    rotation: 0
+    state: true
+- name: sum_2$0
+  id: sum_2
+  parameters:
+    comment: ''
+    drawing_scheme: symbol
+    k1: '1.0'
+    k2: '1.0'
+    mirror: none
+    name: none
+    port_block_x: '5'
+    port_block_y: '3'
+    port_offset_b: '0'
+    port_offset_l: '0'
+    port_offset_r: '0'
+    port_offset_t: '0'
+    port_sep_x: '0'
+    port_sep_y: '4'
+    rotate_strict: 'yes'
+  states:
+    coordinate: [477, 177]
+    rotation: 0
+    state: true
+- name: voltmeter_fb$0
+  id: voltmeter_fb
+  parameters:
+    comment: ''
+    drawing_scheme: name
+    k_scale: '1.0'
+    mirror: none
+    name: none
+    port_block_x: '4'
+    port_block_y: '4'
+    port_sep_x: '0'
+    port_sep_y: '0'
+    rotate_strict: 'yes'
+  states:
+    coordinate: [564, 186]
+    rotation: 0
+    state: true
+- name: vsrc_dc$0
+  id: vsrc_dc
+  parameters:
+    comment: ''
+    drawing_scheme: symbol
+    k_scale: '1.0'
+    mirror: none
+    name: none
+    port_block_x: '5'
+    port_block_y: '10'
+    port_offset_b: '0'
+    port_offset_l: '0'
+    port_offset_r: '0'
+    port_offset_t: '0'
+    port_sep_x: '0'
+    port_sep_y: '0'
+    rotate_strict: 'yes'
+    vdc: '0.0'
+  states:
+    coordinate: [393, 168]
+    rotation: 0
+    state: true
+- name: xfmr_l1l2$0
+  id: xfmr_l1l2
+  parameters:
+    comment: ''
+    drawing_scheme: symbol
+    i10: '0'
+    i20: '0'
+    k: '1'
+    l1: 1m
+    l2: 1m
+    mirror: none
+    name: none
+    port_block_x: '2'
+    port_block_y: '12'
+    port_offset_b: '0'
+    port_offset_l: '0'
+    port_offset_r: '0'
+    port_offset_t: '0'
+    port_sep_x: '5'
+    port_sep_y: '0'
+    rotate_strict: 'yes'
+  states:
+    coordinate: [735, 162]
+    rotation: 0
+    state: true
+connections: []
+gparms: {}
+outvars: {}
+solve_blocks: []
+output_blocks: []

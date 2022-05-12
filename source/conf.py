@@ -20,7 +20,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'GSEIM'
-copyright = '2021, Mahesh Patil'
+copyright = '2022, Mahesh Patil'
 author = 'Mahesh Patil'
 
 # The short X.Y version
@@ -87,6 +87,11 @@ html_theme = 'alabaster'
 # documentation.
 #
 # html_theme_options = {}
+
+#this gave error:
+#html_theme_options = {
+#    'navigation_depth': 4,
+#}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -190,3 +195,5 @@ epub_exclude_files = ['search.html']
 # -- Extension configuration -------------------------------------------------
 #def setup(app):
 #    app.add_stylesheet('css/custom.css')
+
+numfig = True

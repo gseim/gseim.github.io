@@ -38,17 +38,17 @@
 the installation steps.</p>
 <ul class="simple">
 <li>Make sure you have <code class="docutils literal notranslate"><span class="pre">python3</span></code> and <code class="docutils literal notranslate"><span class="pre">g++</span></code> installed.</li>
-<li>Download the <code class="docutils literal notranslate"><span class="pre">gseim_gui</span></code> folder from the
+<li>Download the <code class="docutils literal notranslate"><span class="pre">gseim_grc</span></code> folder from the
 <a class="reference external" href="https://github.com/gseim/gseim">GSEIM distribution</a>
 in your home directory.</li>
-<li><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">~/gseim_gui/gseim/cppsrc</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">~/gseim_grc/gseim/cppsrc</span></code></li>
 <li><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">-f</span> <span class="pre">mkgseim</span></code></li>
 <li><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">-f</span> <span class="pre">mkfilter_so</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">mv</span> <span class="pre">libfilter.so</span> <span class="pre">~/gseim_gui/gseim/exec/.</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">~/gseim_gui</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">~/gseim_gui/grc/scripts/run_gseim</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">mv</span> <span class="pre">libfilter.so</span> <span class="pre">~/gseim_grc/gseim/exec/.</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">~/gseim_grc</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">~/gseim_grc/grc/scripts/run_gseim</span></code></li>
 <li>The GSEIM GUI should show up. Change the window to full size;
-quit the GUI and run <code class="docutils literal notranslate"><span class="pre">run_gseim</span></code> again.</li>
+quit the GUI and run the above <code class="docutils literal notranslate"><span class="pre">python3</span></code> command again.</li>
 <li>Follow instructions in the <a class="reference internal" href="getting_started.html#getting-started"><span class="std std-ref">Getting Started</span></a> section.</li>
 </ul>
 </div>
@@ -74,13 +74,19 @@ quit the GUI and run <code class="docutils literal notranslate"><span class="pre
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">GSEIM Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="elements.html">Blocks and ports</a></li>
 <li class="toctree-l1"><a class="reference internal" href="new_project.html">Creating a new project</a></li>
 <li class="toctree-l1"><a class="reference internal" href="organisation.html">GSEIM Organisation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="xbe.html">Element templates (<code class="docutils literal notranslate"><span class="pre">xbe</span></code>)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="functions.html"><code class="docutils literal notranslate"><span class="pre">f</span></code>, <code class="docutils literal notranslate"><span class="pre">g</span></code>, <code class="docutils literal notranslate"><span class="pre">h</span></code> functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">Element templates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="solve.html">Solve Blocks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="subckt.html">Subcircuits</a></li>
-<li class="toctree-l1"><a class="reference internal" href="xbedocs.html">xbe Documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bedocs.html">Block Documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proj_list.html">GSEIM projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mna.html">Modified nodal analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nr.html">Newton-Raphson method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numerical.html">Numerical methods for ODEs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ssw.html">SSW computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="startup.html">Start-up simulation</a></li>
 </ul>
 
 <div class="relations">
@@ -109,7 +115,7 @@ quit the GUI and run <code class="docutils literal notranslate"><span class="pre
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2021, Mahesh Patil.
+      &copy;2022, Mahesh Patil.
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>

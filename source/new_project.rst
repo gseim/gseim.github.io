@@ -1,11 +1,18 @@
+
+.. _new_project:
+
 ======================
 Creating a new project
 ======================
 
-It is assumed that you have successfully
-installed GSEIM on a linux computer. In this section,
-you will see how to make up a new GSEIM project,
+It is assumed that the user has successfully installed GSEIM on a linux
+computer. In this section, we will see how to make up a new GSEIM project,
 simulate it, and view the simulation results.
+
+.. _example_1:
+
+Example 1
+---------
 
 Consider the ODE given by
 
@@ -24,22 +31,22 @@ by rewriting it as
 
    y = \int (x_1 + x_2)\,dt
 
-In the following, a step-by-step procedure is given to make
-up the schematic diagram and obtain the simulation results
-for the above equations. Note that this is a rather simple
-ODE for which the analytic solution can be easily found and
-compared with the numerical solution given by GSEIM.
+In the following, a step-by-step procedure is given to implement
+the above equations with a schematic diagram and obtain the simulation
+results. Note that this is a rather simple ODE for which the analytic
+solution can be easily found and compared with the numerical solution
+given by GSEIM.
 
 - Start a new project. A canvas with an ``Options`` block will
   appear. Double-click on the options block, and set ``Id``
   and ``Title``. Note that Id should only contain letters, digits,
-  and the underscore character. In the ``Generate option`` field,
+  and the underscore character. In the ``Generate options`` field,
   choose ``Circuit`` to indicate that this schematic diagram is
   for a complete stand-alone circuit (system) and not a hierarchical block.
 
   .. image:: new_project_1.png
-    :width: 600
-    :alt: Alternative text
+    :width: 350
+    :alt: Options block
 
   |
 - The next step is to bring in the required elements (blocks)
@@ -49,80 +56,82 @@ compared with the numerical solution given by GSEIM.
   :math:`x_2`,
   a ``sum_2`` element and an ``integrator``. To bring ``src_ac``
   into the canvas, select it from the library, and drag it into
-  the canvas.
+  the canvas. (Instead of navigating the block tree panel, one
+  can also use the ``Search for a block by name`` button in
+  the menu bar.)
 
   .. image:: new_project_2.png
-    :width: 250
-    :alt: Alternative text
+    :width: 180
+    :alt: Block tree panel
 
   |
 - Place the components, keeping in mind the connections you will
   need to make.
 
   .. image:: new_project_3.png
-    :width: 350
-    :alt: Alternative text
+    :width: 180
+    :alt: placing blocks
 
-- Next, we need to set the properties (parameters) for each of the
+- Next, we need to set the properties (parameter values) for each of the
   elements. In this example, the parameters for ``sum_2`` and
   ``integrator`` are not required to be changed (from their
   default values). For the ``src_ac`` elements, we need to set
   the amplitude, frequency, and phase. Double-click on the element
   of interest, and edit its parameter values. 
-  For :math:`x_1 = 4 \cos \omega t`, the parameters
+  For the ``src_ac`` element corresponding to :math:`x_1`, the parameters
   ``a``, ``f_hz``, ``phi_deg``
   should be set to 4, 10, and 90, respectively.
-  For :math:`x_2 = 3 \sin \omega t`, they
-  should be set to 3, 10, and 0, respectively, as shown below.
+  For the other source, they should be set to 3, 10, and 0, respectively.
 
   .. image:: new_project_4.png
-    :width: 600
-    :alt: Alternative text
+    :width: 350
+    :alt: parameter values
 
   (Note that it is also possible to add comments about a block
-  by double-clicking on it and then selecting the ``Advacned`` tab.)
+  using the ``Advacned`` tab in the ``Properties`` window.)
 
 - Connect the elements as required. To make a connection between two
-  ports, click on one of the ports and then the other.
+  ports, click on one of the ports and then on the other.
 
   .. image:: new_project_5.png
-    :width: 350
-    :alt: Alternative text
+    :width: 180
+    :alt: connections
 
 - We now want to indicate to the simulator which variables it should
-  save (and make available for plotting). These are of two types:
+  save (and make available for plotting). These **output variables**
+  are of two types:
 
-  - Node value: This is the value of the variable represented by a
+  - **Node value**: This is the value of the variable represented by a
     node (wire). To select a node value as an output variable,
-    left-click on the node (wire), and it will appear in a different
+    left-click on that wire, and it will appear in a different
     colour as shown below.
 
     .. image:: new_project_6.png
-      :width: 350
-      :alt: Alternative text
+      :width: 180
+      :alt: outvar selection
 
-    Now, right click on that wire and select ``Add to outvars``. A box
-    which describes the node (as a connection between node x of element xx
-    and node y of element yy) appears. Give a suitable name to this output
-    variable as shown below.
+    Now, right click on the wire and select ``Add to outvars``. A box
+    which appears which describes the node as a connection between
+    node x of element xx and node y of element yy. Give a suitable
+    name to this output variable, as shown below.
 
     .. image:: new_project_7.png
-      :width: 500
-      :alt: Alternative text
+      :width: 300
+      :alt: outvar selection
 
     |
-  - Output parameter of an element: For each element, a few output
+  - **Output parameter of an element**: For each element, a few output
     parameters are declared in the library. To select an output parameter
-    of a specific element, right-click on that element and select
-    ``Add to outvars``. The output parameters available for that element
-    will appear. For example, if you click on the ``integrator``, the
-    following dialog box will be displayed.
+    of a specific element, first select the element with left-click, and
+    then right-click and select ``Add to outvars``. The output parameters
+    available for that element will appear. For example, for the
+    ``integrator``, the following dialog box will be displayed.
     Select ``y`` and give a suitable name to the corresponding output
     variable.
 
     .. image:: new_project_8.png
-      :width: 400
-      :alt: Alternative text
+      :width: 320
+      :alt: outvar selection
 
   |
 - The next step is to set simulation parameters such as time step,
@@ -131,8 +140,6 @@ compared with the numerical solution given by GSEIM.
   we only need one solve block.
 
   To begin with, we need to add a new solve block. Click on
-  ``Edit``
-  :math:`\rightarrow`
   ``SolveBlocks``
   :math:`\rightarrow`
   ``Add Solve Block``.
@@ -141,14 +148,12 @@ compared with the numerical solution given by GSEIM.
   this block can keep its default value.
 
   .. image:: new_project_9.png
-    :width: 250
-    :alt: Alternative text
+    :width: 200
+    :alt: solve block
 
   We have now added a solve block called ``S1(0)``.
 
 - Next, we edit the properties of the solve block ``S1(0)``. Click on
-  ``Edit``
-  :math:`\rightarrow`
   ``SolveBlocks``
   :math:`\rightarrow`
   ``Edit Solve Block``.
@@ -159,43 +164,40 @@ compared with the numerical solution given by GSEIM.
   - ``t_start`` and ``t_end``, the starting and ending times for the simulation
   - the time step ``tstep0_x``
 
-  |
 
   .. image:: new_project_10.png
     :width: 400
-    :alt: Alternative text
+    :alt: solve block parameters
 
-  |
+  Note that ``tstep0_x`` can be assigned by clicking on ``time_step_x``
+  and then selecting ``tstep0_x``.
+
 - We now need to prepare an ``output block`` to inform the simulator
   about what data files should be created and which variables should
   be stored in each of them. For this purpose, we first need to add
   an output block.  Click on
-  ``Edit``
-  :math:`\rightarrow`
   ``OutputBlocks``
   :math:`\rightarrow`
   ``Add Output Block``.
   The following dialog box appears.
 
   .. image:: new_project_11.png
-    :width: 200
-    :alt: Alternative text
+    :width: 250
+    :alt: output block
 
   Each output block is associated with a parent solve block.
   In this case, there is only one solve block, so there is no need to
   exercise any choice.
 
 - Edit the output block added in the previous step by clicking on
-  ``Edit``
-  :math:`\rightarrow`
   ``OutputBlocks``
   :math:`\rightarrow`
   ``Edit Output Block``.
   The following dialog box appears.
 
   .. image:: new_project_12.png
-    :width: 450
-    :alt: Alternative text
+    :width: 380
+    :alt: edit output block
 
   Note that the output variables listed in this box are those declared
   earlier. Select the output variables of interest, and assign a name to
@@ -203,18 +205,323 @@ compared with the numerical solution given by GSEIM.
 
 - You are now ready to simulate the system. Save the project
   file in the directory of your choice, naming it
-  ``test_1.grc`` (where ``test_``` comes from the ``Id`` in the
-  ``Options`` block). Click on
-  ``Generate flow graph``, then
-  ``Execute flow graph``.
+  ``test_1.grc`` (where ``test_1`` is the value we assigned to
+  ``Id`` in the ``Options`` block). Click on ``Generate circuit file``,
+  then ``Run simulation``.
   At this stage, the data file specified in your output block would
   be created in the directory
-  ``~/gseim_gui/gseim/output/``. Click on ``View results``. The plotting
-  GUI will appear in a separate window. Click on ``Browse files`` and select
-  ``~/gseim_gui/gseim/output/test_1.in``. After that, select the x and y variables
+  ``~/gseim_grc/gseim/output/``. Click on ``View results``. The plotting
+  GUI will appear in a separate window. Click on ``Load File`` and select
+  ``~/gseim_grc/gseim/output/test_1.in``. After that, select the x and y variables
   as shown in the following figure to view :math:`y(t)`.
 
   .. image:: new_project_13.png
     :width: 650
-    :alt: Alternative text
+    :alt: plot
+
+Example 2
+---------
+
+We now consider an electrical circuit example, the RC circuit shown below.
+The blocks required are ``r``, ``c``, ``vsrc_clock``, and ``ground``. We will
+simulate the circuit for :math:`8\,{\textrm{msec}}` and plot the current :math:`i(t)`
+and the capacitor voltage :math:`V_c(t)`.
+
+.. image:: rc_cct.png
+  :width: 500
+  :alt: RC circuit
+
+Here are the steps to be followed.
+
+- Bring in the required blocks into the canvas.
+
+  .. image:: rc_project_1.png
+    :width: 200
+    :alt: RC circuit blocks
+
+- Select the capacitor and rotate it clockwise through :math:`90^{\circ}` using
+  the ``Rotate CW 90 deg`` button in the menu bar.
+
+  .. image:: rc_project_2.png
+    :width: 170
+    :alt: RC circuit blocks
+
+- Place the blocks suitably. As discussed in the
+  :ref:`Blocks and ports <blocksports>` section, connectors are often useful
+  in making the wiring neater. Bring in ``connector_e_3``, rotate it, and place
+  it near the ground as shown below.
+
+  .. image:: rc_project_3.png
+    :width: 160
+    :alt: RC circuit blocks
+
+- The next step is wiring. The procedure is the same as that followed in
+  :ref:`Example 1 <example_1>`.
+
+  .. image:: rc_project_4.png
+    :width: 160
+    :alt: RC circuit blocks
+
+- In the interest of a more compact schematic, the ground block can be
+  moved to obtain the following. (This is purely a cosmetic step and can
+  be skipped.)
+
+  .. image:: rc_project_5.png
+    :width: 160
+    :alt: RC circuit blocks
+
+- Next, assign the following parameter values:
+
+  - ``r``: ``r = 1k`` (i.e., :math:`1\,{\textrm{k}}\Omega`)
+  - ``c``: ``c = 1u`` (i.e., :math:`1\,\mu{\textrm{F}}`)
+  - ``vsrc_clock``:
+
+    - ``T1 = 0.5m``
+    - ``T2 = 0.5m``
+    - ``L1 = 0``
+    - ``L2 = 5``
+    - ``delta1 = 0.02m``
+    - ``delta2 = 0.02m``
+
+- The block parameter values can be (optionally) displayed on the canvas
+  by selecting the block by left-clicking
+  :math:`\rightarrow`
+  right click
+  :math:`\rightarrow`
+  ``Show parameter``
+  :math:`\rightarrow`
+  select desired parameter.
+  The parameter value -- in reality, a ``show_parameter`` block -- appears
+  next to the selected block. The ``show_parameter`` block can be moved around
+  like any other block.
+
+  .. image:: rc_project_6.png
+    :width: 160
+    :alt: RC circuit blocks
+
+- Output variables: For electrical circuits, using the ``Add to outvars`` option
+  for a wire creates an output variable of type node voltage (i.e., voltage of
+  that node with respect to ground). For the RC circuit, we can define the
+  following output variables:
+
+  - ``v_s``: This can be either the node voltage of the wire connecting the
+    source and the resistor or the outvar ``v`` of the source.
+  - ``v_c``: This can be either the node voltage of the wire connecting the
+    resistor and the capacitor or the outvar ``v`` of the capacitor.
+  - ``i``: This can be selected as the ``i`` outvar of either the resistor
+    or the capacitor.
+
+  The following figure shows one way of assigning the output variables.
+
+  .. image:: rc_project_7.png
+    :width: 350
+    :alt: RC circuit outvars
+
+- Solve block: For simulation of electrical circuits, GSEIM allows only
+  implicits methods. In this example, we will select the backward Euler
+  method and simulate the circuit for :math:`8\,{\textrm{msec}}` with
+  a time step of :math:`0.02\,{\textrm{msec}}` by making the following
+  assignments:
+
+  - ``solve_type``: ``trns``
+  - ``algorithm_e``: ``backward_euler``
+  - ``t_end``: ``8m``
+  - ``time_step_x`` :math:`\rightarrow` ``tstep0_e``: ``0.02m``
+
+- Create an output block as shown below.
+
+  .. image:: rc_project_8.png
+    :width: 300
+    :alt: RC output block
+
+  |
+- In the ``Options`` block, make these assignments:
+
+  - ``Id``: ``test_2``
+  - ``Title``: RC Circuit
+
+  Save the file as ``test_2.grc`` in the directory of your choice.
+
+- ``Generate circuit file``
+  :math:`\rightarrow`
+  ``Run simulation``
+  :math:`\rightarrow`
+  ``View results``
+
+  Select ``~/gseim_grc/gseim/output/test_2.in`` in the plotting GUI
+  and plot ``v_s`` and ``v_c``. You should see the following plot.
+
+  .. image:: rc_project_9.png
+    :width: 650
+    :alt: RC plot 1
+
+  If we want to view the current ``i`` and the capacitor voltage
+  ``v_c`` simultaneously, there is a problem: ``i`` is of the
+  order of
+  :math:`10^{-3}`
+  whereas ``v_c`` is of the order of
+  :math:`10^0`, and the current will show up as zero. There are two
+  options to circumvent this situation.
+
+  - Use different y-axes -- say, left for ``v_c`` and right for
+    ``i`` -- to get the following plot.
+
+    .. image:: rc_project_10.png
+      :width: 650
+      :alt: RC plot 2
+
+    |
+  - Use the MultiPlot option provided by the plotting GUI to get
+    the following plot.
+
+    .. image:: rc_project_11.png
+      :width: 650
+      :alt: RC plot 3
+
+Example 3
+---------
+
+We will now simulate the buck converter shown below.
+
+.. image:: buck_cct.png
+  :width: 330
+  :alt: buck converter
+
+It differs from the RC circuit in the last example in two aspects:
+
+- It is nonlinear (because of the diode).
+- It involves both flow-graph elements (the gate signal source) and
+  electrical elements.
+
+GSEIM uses the Newton-Raphson (N-R) method for nonlinear electrical
+circuits, and therefore solve block parameters related to the N-R
+method need to be assigned appropriately. This is the main difference
+with respect to the RC circuit. The steps involved in simulating the
+buck converter are given below.
+
+- Bring in the blocks
+  ``r``,
+  ``l``,
+  ``c``,
+  ``diode_r``,
+  ``switch_1``,
+  ``vsrc_dc``,
+  ``clock_1``,
+  ``ground``,
+  and connectors. Place the blocks and wire the circuit.
+- Assign the parameter values as follows. Note that ``diode_r`` and
+  ``switch_1`` are idealised components with resistance ``r_on``
+  when conducting and ``r_off`` when not conducting. In addition,
+  ``switch_1`` has a parameter ``x_high`` which indicates what
+  value of the input variable (of type flow-graph) should be
+  interpreted as high.
+
+  - ``r``: ``r = 50``
+  - ``c``: ``c = 100u`` (i.e., :math:`100\,\mu{\textrm{F}}`)
+  - ``l``: ``l = 600u`` (i.e., :math:`600\,\mu{\textrm{H}}`)
+  - ``vsrc_dc``: ``vdc = 50``
+  - ``diode_r``: ``r_on = 1m``, ``r_off = 10M`` (m for milli, M for mega)
+  - ``switch_1``: ``r_on = 1m``, ``r_off = 10M``, ``x_high = 1``
+  - ``clock_1``:
+
+    - ``f_hz = 25k`` (i.e., 25 kHz)
+    - ``D = 0.6`` (duty cycle)
+    - ``y_high = 1``
+    - ``delta1 = 0.1u``
+    - ``delta2 = 0.1u``
+
+- Use the ``Show parameter`` option to display the salient component
+  values. The circuit would look like this:
+
+  .. image:: buck_project_1.png
+    :width: 350
+    :alt: buck converter project
+
+- Select the inductor current and resistor voltage as output variables;
+  name them as ``IL`` and ``v_out``, respectively.
+- Add a solve block and make the following assignments. (Note that ``_ex``
+  in a solve block parameter name indicates that it is related to a circuit
+  involving both ``ebe`` and ``xbe`` elements.)
+
+  - ``solve_type = trns``
+  - ``algorithm_ex = backward_euler``
+  - ``t_end = 40m``
+  - ``time_step_ex`` :math:`\rightarrow` ``tstep0_ex``: ``0.2u``
+  - ``e_nr``:
+
+    - ``e_nr_spice_vntol = 1e-4``
+    - ``e_nr_spice_abstol = 1e-6``
+    - ``e_nr_spice_reltol = 1e-3``
+
+  The ``vntol``, ``abstol``, and ``reltol`` parameters have to do with
+  SPICE convergence criteria, described in the section on
+  :ref:`numerical methods <numerical>`.
+- Add an output block and add ``IL`` and ``v_out`` to its list of
+  variables.
+- In the ``Options`` block, set ``Id`` to ``buck``, ``Title`` to
+  ``buck converter``, save the project as ``buck.grc`` (in a directory
+  of your choice).
+
+- ``Generate circuit file``
+  :math:`\rightarrow`
+  ``Run simulation``
+  :math:`\rightarrow`
+  ``View results``
+
+  The ``v_out`` versus time plot is shown below. The circuit takes about
+  :math:`35\,{\textrm{msec}}` to reach the steady state.
+
+  .. image:: buck_project_2.png
+    :width: 650
+    :alt: buck converter project
+
+If we are only interested in the steady-state behaviour of the circuit,
+the transient simulation approach has two drawbacks:
+
+- The number of cycles required to reach the steady state can be
+  substantially large. In our examples, it is about
+  :math:`35\times 10^{-3}/40\times 10^{-6}` or 875 cycles. However,
+  we are interested in just one cycle in the steady state. Clearly,
+  the transient simulation approach is wasteful in terms of simulation
+  time.
+- With the transient simulation approach, it is not know *a priori*
+  how long the circuit would take to reach the steady state, thus
+  entailing a trial-and-error loop.
+
+GSEIM provides a way to directly compute the steady-state solution,
+without having to go through a (possibly long) transient. This
+option is called Steady-State Waveform (SSW) and is the same as
+that implemented in
+`SEQUEL <https://www.ee.iitb.ac.in/~sequel/>`_.
+
+We can try out the SSW option for the buck converter example by
+making the following assignments in the solve block already created.
+
+- ``solve_type = ssw``
+- ``SSW`` :math:`\rightarrow` ``ssw_frequency``: ``25k``
+
+  The ``ssw_frequency`` parameter is used by GSEIM to find the
+  period :math:`T`. Alternatively, we could have set
+  ``ssw_period = 40u``.
+
+Doing
+``Generate circuit file``
+:math:`\rightarrow`
+``Run simulation``
+:math:`\rightarrow`
+``View results``
+once again, and selecting ``IL`` for plotting, we get the following
+plot.
+
+.. image:: buck_project_3.png
+  :width: 650
+  :alt: buck converter project
+
+
+If the inductance value is changed to ``200u``, we get discontinuous
+inductor current as shown below.
+
+.. image:: buck_project_4.png
+  :width: 650
+  :alt: buck converter project
 
