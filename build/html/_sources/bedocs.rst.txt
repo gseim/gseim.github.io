@@ -61,6 +61,7 @@ xbe: logic operations
 - :download:`not <be_docs/be_not.pdf>`
 - :download:`and_2 <be_docs/be_and_2.pdf>`
 - :download:`or_2 <be_docs/be_or_2.pdf>`
+- :download:`xor_2 <be_docs/be_xor_2.pdf>`
 
 xbe: math Operations
 ====================
@@ -68,8 +69,9 @@ xbe: math Operations
 - :download:`abs <be_docs/be_abs.pdf>`
 - :download:`atan2_rad <be_docs/be_atan2_rad.pdf>`
 - :download:`cos <be_docs/be_cos.pdf>`
+- :download:`dead_zone <be_docs/be_dead_zone.pdf>`
 - :download:`diff <be_docs/be_diff.pdf>`
-- :download:`edge_delay <be_docs/be_edge_delay.pdf>`
+- :download:`div <be_docs/be_div.pdf>`
 - :download:`integrator <be_docs/be_integrator.pdf>`
 - :download:`integrator_1 <be_docs/be_integrator_1.pdf>`
 - :download:`lag_1 <be_docs/be_lag_1.pdf>`
@@ -82,6 +84,7 @@ xbe: math Operations
 - :download:`multscl <be_docs/be_multscl.pdf>`
 - :download:`mult_2 <be_docs/be_mult_2.pdf>`
 - :download:`pwl10_xy <be_docs/be_pwl10_xy.pdf>`
+- :download:`signum <be_docs/be_signum.pdf>`
 - :download:`sin <be_docs/be_sin.pdf>`
 - :download:`sum_2 <be_docs/be_sum_2.pdf>`
 - :download:`sum_3 <be_docs/be_sum_3.pdf>`
@@ -92,6 +95,15 @@ xbe: sample/delay
 - :download:`sampler <be_docs/be_sampler.pdf>`
 - :download:`delay_discrete <be_docs/be_delay_discrete.pdf>`
 - :download:`delay_onestep <be_docs/be_delay_onestep.pdf>`
+- :download:`delay_onestep_1 <be_docs/be_delay_onestep_1.pdf>`
+- :download:`edge_delay <be_docs/be_edge_delay.pdf>`
+- :download:`edge_delay_1 <be_docs/be_edge_delay_1.pdf>`
+
+xbe: averaging
+==============
+
+- :download:`average_mv_1 <be_docs/be_average_mv_1.pdf>`
+- :download:`average_mv_2 <be_docs/be_average_mv_2.pdf>`
 
 xbe: filters
 ============
@@ -143,6 +155,7 @@ ebe: switches
 =============
 
 - :download:`diode_r <be_docs/be_diode_r.pdf>`
+- :download:`diode_spice <be_docs/be_diode_spice.pdf>`
 - :download:`switch_1 <be_docs/be_switch_1.pdf>`
 - :download:`thyristor <be_docs/be_thyristor.pdf>`
 

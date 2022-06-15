@@ -200,6 +200,26 @@ demarcate the ports; they are not shown in the GUI. The following
 figure shows how the connectors would actually appear in the GUI.</p>
 <a class="reference internal image-reference" href="_images/connectors_2.png"><img alt="connectors (actual)" src="_images/connectors_2.png" style="width: 600px;" /></a>
 </div>
+<div class="section" id="bus-connections">
+<h2>Bus connections<a class="headerlink" href="#bus-connections" title="Permalink to this headline">¶</a></h2>
+<p>In some situations, such as 3-phase circuits, it is convenient
+to represent multiple wires with a single <em>bus</em>. GSEIM provides
+bus elements for <em>bussifying</em>, i.e., coalescing a bunch of wires
+(signals) into a single bus wire and <em>de-bussifying</em>, i.e.,
+splitting a single bus wire into multiple wires. A few examples
+of bus elements are shown below.</p>
+<a class="reference internal image-reference" href="_images/bus_1.png"><img alt="bus examples" src="_images/bus_1.png" style="width: 460px;" /></a>
+<p>The bus ports are rendered in green in order to distinguish them
+from electrical and flow-graph ports. Bus connectors, bus
+sub-circuit pads, and bus tags are also provided in the GSEIM
+library. The user needs to ensure that bus connections made in
+the circuit are compatible. For example, a bus node representing
+three electrical wires should not be connected to a bus representing
+four electrical wires. Similarly, an electrical bus node and a
+flow-graph bus node should not be connected.</p>
+<p>One example where buses substantially reduce clutter in the schematic is
+CMLI_5level_1.grc, a 5-level cascaded multi-level inverter circuit.</p>
+</div>
 </div>
 
 
@@ -227,6 +247,7 @@ figure shows how the connectors would actually appear in the GUI.</p>
 <li class="toctree-l2"><a class="reference internal" href="#bringing-in-a-block">Bringing in a block</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#moving-deleting-copying-of-blocks">Moving/deleting/copying of blocks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#making-connections">Making connections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bus-connections">Bus connections</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="new_project.html">Creating a new project</a></li>
