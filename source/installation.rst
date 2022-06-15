@@ -6,7 +6,8 @@ GSEIM Installation
 Currently, GSEIM is available only for Linux. Here are
 the installation steps.
 
-- Make sure you have ``python3`` and ``g++`` installed.
+- Make sure you have ``python3``, ``numpy``, ``psutil``, ``matplotlib``,
+  ``g++`` installed.
 - Download the ``gseim_grc`` folder from the
   `GSEIM distribution <https://github.com/gseim/gseim>`_
   in your home directory.

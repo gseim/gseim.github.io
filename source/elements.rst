@@ -195,3 +195,29 @@ figure shows how the connectors would actually appear in the GUI.
 .. image:: connectors_2.png
   :width: 600
   :alt: connectors (actual)
+
+Bus connections
+===============
+
+In some situations, such as 3-phase circuits, it is convenient
+to represent multiple wires with a single *bus*. GSEIM provides
+bus elements for *bussifying*, i.e., coalescing a bunch of wires
+(signals) into a single bus wire and *de-bussifying*, i.e.,
+splitting a single bus wire into multiple wires. A few examples
+of bus elements are shown below.
+
+.. image:: bus_1.png
+  :width: 460
+  :alt: bus examples
+
+The bus ports are rendered in green in order to distinguish them
+from electrical and flow-graph ports. Bus connectors, bus
+sub-circuit pads, and bus tags are also provided in the GSEIM
+library. The user needs to ensure that bus connections made in
+the circuit are compatible. For example, a bus node representing
+three electrical wires should not be connected to a bus representing
+four electrical wires. Similarly, an electrical bus node and a
+flow-graph bus node should not be connected.
+
+One example where buses substantially reduce clutter in the schematic is
+CMLI_5level_1.grc, a 5-level cascaded multi-level inverter circuit.

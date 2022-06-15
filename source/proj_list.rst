@@ -20,10 +20,9 @@ Project list
 - :download:`ac_controller/ac_controller_4<proj_pdf/ac_controller_4.pdf>`
 - :download:`ac_controller/ac_controller_5<proj_pdf/ac_controller_5.pdf>`
 - :download:`ac_to_ac/cyclo_converter_1ph_1<proj_pdf/cyclo_converter_1ph_1.pdf>`
-- :download:`ac_to_dc/boost_pfc_1<proj_pdf/boost_pfc_1.pdf>`
 - :download:`ac_to_dc/bridge_diode_3p<proj_pdf/bridge_diode_3p.pdf>`
 - :download:`ac_to_dc/bridge_diode_3p_1<proj_pdf/bridge_diode_3p_1.pdf>`
-- ``ac_to_dc/bridge_thyristor_3p``
+- :download:`ac_to_dc/bridge_thyristor_3p<proj_pdf/bridge_thyristor_3p.pdf>`
 - :download:`ac_to_dc/buck_rectifier<proj_pdf/buck_rectifier.pdf>`
 - :download:`ac_to_dc/diode_rectifier_1<proj_pdf/diode_rectifier_1.pdf>`
 - :download:`ac_to_dc/diode_rectifier_2<proj_pdf/diode_rectifier_2.pdf>`
@@ -43,6 +42,9 @@ Project list
 - :download:`dc_commutation/dc_commutation_3<proj_pdf/dc_commutation_3.pdf>`
 - :download:`dc_commutation/dc_commutation_4<proj_pdf/dc_commutation_4.pdf>`
 - :download:`dc_commutation/dc_commutation_5<proj_pdf/dc_commutation_5.pdf>`
+- :download:`dc_to_ac/CMLI_1ph_1<proj_pdf/CMLI_1ph_1.pdf>`
+- :download:`dc_to_ac/CMLI_5level_1<proj_pdf/CMLI_5level_1.pdf>`
+- :download:`dc_to_ac/CMLI_7level_1<proj_pdf/CMLI_7level_1.pdf>`
 - :download:`dc_to_ac/DCMLI_1<proj_pdf/DCMLI_1.pdf>`
 - :download:`dc_to_ac/FCMLI_1<proj_pdf/FCMLI_1.pdf>`
 - :download:`dc_to_ac/grid_connected_VSI_PR_1ph<proj_pdf/grid_connected_VSI_PR_1ph.pdf>`
@@ -53,6 +55,7 @@ Project list
 - :download:`dc_to_ac/inverter_1ph_4<proj_pdf/inverter_1ph_4.pdf>`
 - :download:`dc_to_ac/inverter_3ph_1<proj_pdf/inverter_3ph_1.pdf>`
 - :download:`dc_to_ac/inverter_3ph_2<proj_pdf/inverter_3ph_2.pdf>`
+- :download:`dc_to_ac/inverter_3ph_2a<proj_pdf/inverter_3ph_2a.pdf>`
 - :download:`dc_to_ac/inverter_one_arm<proj_pdf/inverter_one_arm.pdf>`
 - :download:`dc_to_ac/inverter_two_arms<proj_pdf/inverter_two_arms.pdf>`
 - :download:`dc_to_ac/inverter_with_filter<proj_pdf/inverter_with_filter.pdf>`
