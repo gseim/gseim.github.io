@@ -151,6 +151,13 @@ ebe: sources
 - :download:`vsrc_pulse10 <be_docs/be_vsrc_pulse10.pdf>`
 - :download:`vsrc_x <be_docs/be_vsrc_x.pdf>`
 
+ebe: battery
+============
+
+- :download:`battery_c <be_docs/be_battery_c.pdf>`
+- :download:`battery_r <be_docs/be_battery_r.pdf>`
+- :download:`battery_vsrc <be_docs/be_battery_vsrc.pdf>`
+
 ebe: switches
 =============
 

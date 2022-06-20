@@ -20,6 +20,7 @@ GSEIM documentation
    solve
    subckt
    bedocs
+   subckt_docs
    proj_list
    mna
    nr
