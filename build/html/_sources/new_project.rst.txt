@@ -88,7 +88,7 @@ given by GSEIM.
     :alt: parameter values
 
   (Note that it is also possible to add comments about a block
-  using the ``Advacned`` tab in the ``Properties`` window.)
+  using the ``Advanced`` tab in the ``Properties`` window.)
 
 - Connect the elements as required. To make a connection between two
   ports, click on one of the ports and then on the other.
