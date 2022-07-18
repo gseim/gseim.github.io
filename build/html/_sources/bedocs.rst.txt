@@ -43,6 +43,7 @@ xbe: sources
 
 - :download:`clock <be_docs/be_clock.pdf>`
 - :download:`clock_1 <be_docs/be_clock_1.pdf>`
+- :download:`clock_1a <be_docs/be_clock_1a.pdf>`
 - :download:`clock_3 <be_docs/be_clock_3.pdf>`
 - :download:`clock_3ph <be_docs/be_clock_3ph.pdf>`
 - :download:`clock_thyr <be_docs/be_clock_thyr.pdf>`
@@ -54,14 +55,22 @@ xbe: sources
 - :download:`triangle_1 <be_docs/be_triangle_1.pdf>`
 - :download:`triangle_2 <be_docs/be_triangle_2.pdf>`
 - :download:`triangle_3 <be_docs/be_triangle_3.pdf>`
+- :download:`triangle_4 <be_docs/be_triangle_4.pdf>`
 
 xbe: logic operations
 =====================
 
 - :download:`not <be_docs/be_not.pdf>`
 - :download:`and_2 <be_docs/be_and_2.pdf>`
+- :download:`and_3 <be_docs/be_and_3.pdf>`
 - :download:`or_2 <be_docs/be_or_2.pdf>`
+- :download:`or_3 <be_docs/be_or_3.pdf>`
 - :download:`xor_2 <be_docs/be_xor_2.pdf>`
+- :download:`decoder_2_4 <be_docs/be_decoder_2_4.pdf>`
+- :download:`srff_nand <be_docs/be_srff_nand.pdf>`
+- :download:`srff_nor <be_docs/be_srff_nor.pdf>`
+- :download:`jkff <be_docs/be_jkff.pdf>`
+- :download:`signal_switch <be_docs/be_signal_switch.pdf>`
 
 xbe: math Operations
 ====================
@@ -74,8 +83,11 @@ xbe: math Operations
 - :download:`div <be_docs/be_div.pdf>`
 - :download:`integrator <be_docs/be_integrator.pdf>`
 - :download:`integrator_1 <be_docs/be_integrator_1.pdf>`
+- :download:`integrator_reset_1 <be_docs/be_integrator_reset_1.pdf>`
 - :download:`lag_1 <be_docs/be_lag_1.pdf>`
 - :download:`lag_2 <be_docs/be_lag_2.pdf>`
+- :download:`max <be_docs/be_max.pdf>`
+- :download:`min <be_docs/be_min.pdf>`
 - :download:`limiter <be_docs/be_limiter.pdf>`
 - :download:`linear <be_docs/be_linear.pdf>`
 - :download:`modulo <be_docs/be_modulo.pdf>`
@@ -94,6 +106,7 @@ xbe: sample/delay
 
 - :download:`sampler <be_docs/be_sampler.pdf>`
 - :download:`delay_discrete <be_docs/be_delay_discrete.pdf>`
+- :download:`delay_discrete_1 <be_docs/be_delay_discrete_1.pdf>`
 - :download:`delay_onestep <be_docs/be_delay_onestep.pdf>`
 - :download:`delay_onestep_1 <be_docs/be_delay_onestep_1.pdf>`
 - :download:`edge_delay <be_docs/be_edge_delay.pdf>`
@@ -145,6 +158,7 @@ ebe: passive
 ebe: sources
 ============
 
+- :download:`isrc_x <be_docs/doc_dummy.pdf>`
 - :download:`vsrc_ac <be_docs/be_vsrc_ac.pdf>`
 - :download:`vsrc_clock <be_docs/be_vsrc_clock.pdf>`
 - :download:`vsrc_dc <be_docs/be_vsrc_dc.pdf>`
@@ -163,6 +177,7 @@ ebe: switches
 
 - :download:`diode_r <be_docs/be_diode_r.pdf>`
 - :download:`diode_spice <be_docs/be_diode_spice.pdf>`
+- :download:`igbt_1 <be_docs/be_igbt_1.pdf>`
 - :download:`switch_1 <be_docs/be_switch_1.pdf>`
 - :download:`thyristor <be_docs/be_thyristor.pdf>`
 
@@ -179,3 +194,4 @@ ebe: transformers
 - :download:`xfmr_level0_1ph <be_docs/be_xfmr_level0_1ph.pdf>`
 - :download:`xfmr_level2_1ph <be_docs/be_xfmr_level2_1ph.pdf>`
 - :download:`xfmr_level0_1ph_1_2 <be_docs/be_xfmr_level0_1ph_1_2.pdf>`
+- :download:`xfmr_level0_1ph_1_3 <be_docs/be_xfmr_level0_1ph_1_3.pdf>`
