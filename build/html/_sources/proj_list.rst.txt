@@ -89,6 +89,7 @@ Project list
 - :download:`dc_to_dc/flyback_2<proj_pdf/flyback_2.pdf>`
 - :download:`dc_to_dc/forward_converter_1<proj_pdf/forward_converter_1.pdf>`
 - :download:`dc_to_dc/forward_converter_2<proj_pdf/forward_converter_2.pdf>`
+- :download:`dc_to_dc/half_bridge_llc_converter<proj_pdf/half_bridge_llc_converter.pdf>`
 - :download:`dc_to_dc/push_pull_current_fed_converter<proj_pdf/push_pull_current_fed_converter.pdf>`
 - :download:`dc_to_dc/smps_1<proj_pdf/smps_1.pdf>`
 - :download:`dc_to_dc/synchronous_buck<proj_pdf/synchronous_buck.pdf>`
