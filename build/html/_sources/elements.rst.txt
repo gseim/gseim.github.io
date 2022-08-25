@@ -84,10 +84,10 @@ and check out the various features being discussed here.
   entry box for that parameter. Note that, when a block is copied, the
   new block gets the parameter values of the old block.
 
-- If the cursor is made to over over the core area of a block, the
+- If the cursor is made to hover over the core area of a block, the
   name of the block (assigned automatically by the GUI) appears as
   shown below for the dc source. The string before ``$``, viz.,
-  ``vsrc_dc`` gives the type of this block, and integer which appears
+  ``vsrc_dc`` gives the type of this block, and the integer which appears
   after ``$`` (0 in this case) is the unique ID number assigned by the
   GUI to this specific instance of ``vsrc_dc``.
 
@@ -95,7 +95,7 @@ and check out the various features being discussed here.
     :width: 400
     :alt: block name
 
-- If the cursor is made to over over a port of a block, the
+- If the cursor is made to hover over a port of a block, the
   name of the port appears as shown below (next to the inductor
   symbol).
 

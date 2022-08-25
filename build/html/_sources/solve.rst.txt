@@ -63,7 +63,10 @@ executed. For example, if there are two solve blocks with names
 ``S1`` will be executed first, followed by ``S2``.
 
 When a solve block is added, it gets a set of default parameter values
-from the file ``~/gseim_grc/gseim/exec/gseim_slvparms.in``.
+from the file
+``$GSEIM_MASTER/gseim_grc/src/gseim/data/gseim_slvparms.in``
+(see comments about ``$GSEIM_MASTER`` in
+:ref:`Getting started <getting_started>`).
 These values can be edited by clicking on
 ``SolveBlocks``
 :math:`\rightarrow`

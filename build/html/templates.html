@@ -44,7 +44,7 @@ with the help of some examples.</p>
 <ul class="simple">
 <li>Template files for flow-graph type elements have extension
 <code class="docutils literal notranslate"><span class="pre">.xbe</span></code> (<em>explicit basic element</em>), and they are located in
-<code class="docutils literal notranslate"><span class="pre">~/gseim_grc/gseim/xbe/</span></code>.</li>
+directory <code class="docutils literal notranslate"><span class="pre">$XBE</span></code> (see <a class="reference internal" href="organisation.html#gseimorg"><span class="std std-ref">GSEIM Organisation</span></a>).</li>
 <li>A flow-graph element template has three types of variables in general:
 input, output, and auxiliary. Only the input and output variables
 are made available in the GUI for connection to other elements.</li>
@@ -67,8 +67,7 @@ can be input, output, or auxiliary variables.</li>
 </ul>
 <p>In the following, we look at a few representative examples
 to explain the functioning of the <code class="docutils literal notranslate"><span class="pre">xbe</span></code> templates. The
-templates described here can be found in
-<code class="docutils literal notranslate"><span class="pre">~/gseim_grc/gseim/xbe</span></code>.</p>
+templates described here can be found in directory <code class="docutils literal notranslate"><span class="pre">$XBE</span></code>.</p>
 <div class="section" id="sum-2-xbe">
 <span id="sum-2"></span><h3>sum_2.xbe<a class="headerlink" href="#sum-2-xbe" title="Permalink to this headline">¶</a></h3>
 <p>This element is used to obtain</p>
@@ -1297,7 +1296,7 @@ The above points regarding xbe templates can be summarised as follows.</p>
 <ul class="simple">
 <li>Template files for electrical type elements have extension
 <code class="docutils literal notranslate"><span class="pre">.ebe</span></code> (<em>electrical basic element</em>), and they are located in
-<code class="docutils literal notranslate"><span class="pre">~/gseim_grc/gseim/ebe/</span></code>.</li>
+directory <code class="docutils literal notranslate"><span class="pre">$EBE</span></code> (see <a class="reference internal" href="organisation.html#gseimorg"><span class="std std-ref">GSEIM Organisation</span></a>).</li>
 <li>An electrical element template has nodes (which are used in
 wiring) and some other variables in general:<ul>
 <li>state variables which may be used in elements whose equations
@@ -1309,8 +1308,7 @@ used in implementing the element equations</li>
 </ul>
 <p>In the following, we look at a few representative examples
 to explain the functioning of the <code class="docutils literal notranslate"><span class="pre">ebe</span></code> templates. The
-templates described here can be found in
-<code class="docutils literal notranslate"><span class="pre">~/gseim_grc/gseim/ebe</span></code>.</p>
+templates described here can be found in <code class="docutils literal notranslate"><span class="pre">$EBE</span></code>.</p>
 <div class="section" id="r-ebe">
 <span id="resistor"></span><h3>r.ebe<a class="headerlink" href="#r-ebe" title="Permalink to this headline">¶</a></h3>
 <p>This is the resistor element with nodes <code class="docutils literal notranslate"><span class="pre">p</span></code> and <code class="docutils literal notranslate"><span class="pre">n</span></code>, and
@@ -2242,7 +2240,6 @@ ebe templates.</p>
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">GSEIM Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="elements.html">Blocks and ports</a></li>
 <li class="toctree-l1"><a class="reference internal" href="new_project.html">Creating a new project</a></li>

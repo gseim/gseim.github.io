@@ -34,8 +34,10 @@
             
   <div class="section" id="creating-a-new-project">
 <span id="new-project"></span><h1>Creating a new project<a class="headerlink" href="#creating-a-new-project" title="Permalink to this headline">¶</a></h1>
-<p>It is assumed that the user has successfully installed GSEIM on a linux
-computer. In this section, we will see how to make up a new GSEIM project,
+<p>It is assumed that the user has gone through the
+<a class="reference internal" href="getting_started.html#getting-started"><span class="std std-ref">Getting started</span></a> section and become
+familiar with the basic functionality of the GSEIM GUI.
+In this section, we will see how to make up a new GSEIM project,
 simulate it, and view the simulation results.</p>
 <div class="section" id="example-1">
 <span id="id1"></span><h2>Example 1<a class="headerlink" href="#example-1" title="Permalink to this headline">¶</a></h2>
@@ -186,15 +188,14 @@ earlier. Select the output variables of interest, and assign a name to
 the output file (which will be created by this output block).</p>
 </li>
 <li><p class="first">You are now ready to simulate the system. Save the project
-file in the directory of your choice, naming it
-<code class="docutils literal notranslate"><span class="pre">test_1.grc</span></code> (where <code class="docutils literal notranslate"><span class="pre">test_1</span></code> is the value we assigned to
+file in the directory of your choice (called <code class="docutils literal notranslate"><span class="pre">$USER_DIR</span></code> in the
+following) as <code class="docutils literal notranslate"><span class="pre">test_1.grc</span></code> (where <code class="docutils literal notranslate"><span class="pre">test_1</span></code> is the value we assigned to
 <code class="docutils literal notranslate"><span class="pre">Id</span></code> in the <code class="docutils literal notranslate"><span class="pre">Options</span></code> block). Click on <code class="docutils literal notranslate"><span class="pre">Generate</span> <span class="pre">circuit</span> <span class="pre">file</span></code>,
 then <code class="docutils literal notranslate"><span class="pre">Run</span> <span class="pre">simulation</span></code>.
 At this stage, the data file specified in your output block would
-be created in the directory
-<code class="docutils literal notranslate"><span class="pre">~/gseim_grc/gseim/output/</span></code>. Click on <code class="docutils literal notranslate"><span class="pre">View</span> <span class="pre">results</span></code>. The plotting
+be created in <code class="docutils literal notranslate"><span class="pre">$USER_DIR</span></code>. Click on <code class="docutils literal notranslate"><span class="pre">View</span> <span class="pre">results</span></code>. The plotting
 GUI will appear in a separate window. Click on <code class="docutils literal notranslate"><span class="pre">Load</span> <span class="pre">File</span></code> and select
-<code class="docutils literal notranslate"><span class="pre">~/gseim_grc/gseim/output/test_1.in</span></code>. After that, select the x and y variables
+<code class="docutils literal notranslate"><span class="pre">$USER_DIR/test_1.in</span></code>. After that, select the x and y variables
 as shown in the following figure to view <span class="math notranslate nohighlight">\(y(t)\)</span>.</p>
 <a class="reference internal image-reference" href="_images/new_project_13.png"><img alt="plot" src="_images/new_project_13.png" style="width: 650px;" /></a>
 </li>
@@ -297,14 +298,15 @@ assignments:</p>
 <li><code class="docutils literal notranslate"><span class="pre">Id</span></code>: <code class="docutils literal notranslate"><span class="pre">test_2</span></code></li>
 <li><code class="docutils literal notranslate"><span class="pre">Title</span></code>: RC Circuit</li>
 </ul>
-<p>Save the file as <code class="docutils literal notranslate"><span class="pre">test_2.grc</span></code> in the directory of your choice.</p>
+<p>Save the file as <code class="docutils literal notranslate"><span class="pre">test_2.grc</span></code> in the directory of your choice
+(called <code class="docutils literal notranslate"><span class="pre">$USER_DIR</span></code> in the following).</p>
 </li>
 <li><p class="first"><code class="docutils literal notranslate"><span class="pre">Generate</span> <span class="pre">circuit</span> <span class="pre">file</span></code>
 <span class="math notranslate nohighlight">\(\rightarrow\)</span>
 <code class="docutils literal notranslate"><span class="pre">Run</span> <span class="pre">simulation</span></code>
 <span class="math notranslate nohighlight">\(\rightarrow\)</span>
 <code class="docutils literal notranslate"><span class="pre">View</span> <span class="pre">results</span></code></p>
-<p>Select <code class="docutils literal notranslate"><span class="pre">~/gseim_grc/gseim/output/test_2.in</span></code> in the plotting GUI
+<p>Select <code class="docutils literal notranslate"><span class="pre">$USER_DIR/test_2.in</span></code> in the plotting GUI
 and plot <code class="docutils literal notranslate"><span class="pre">v_s</span></code> and <code class="docutils literal notranslate"><span class="pre">v_c</span></code>. You should see the following plot.</p>
 <a class="reference internal image-reference" href="_images/rc_project_9.png"><img alt="RC plot 1" src="_images/rc_project_9.png" style="width: 650px;" /></a>
 <p>If we want to view the current <code class="docutils literal notranslate"><span class="pre">i</span></code> and the capacitor voltage
@@ -486,7 +488,6 @@ inductor current as shown below.</p>
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">GSEIM Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="elements.html">Blocks and ports</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Creating a new project</a><ul>

@@ -5,21 +5,41 @@
 Getting Started
 ===============
 
-It is assumed that the user has successfully installed GSEIM on a linux
-computer. In this section, we will see how to run an existing GSEIM
-project (which is already available in the GSEIM distribution), and
-view the simulation results.
+Several "project files" have been included in the GSEIM
+distribution. In this section, we will see how to execute (run)
+some of these projects and view the simulation results.
+
+First, let us see where the project files are located.
+As explained in the
+`Installation Instructions <https://github.com/gseim/gseim>`_,
+there are two ways to run GSEIM in linux:
+
+- installing pre-built image: In this case, the project files are
+  not available locally, and the user should therefore download the GSEIM
+  ``.zip`` file and unzip it in a suitable directory.
+- building from source: In this case, the project files are already
+  available locally.
+
+In either case, the user should be able to locate the directory
+``/gseim-master``.
+We will denote the absolute path for this directory by ``$GSEIM_MASTER``.
+Note that ``$GSEIM_MASTER`` would vary from user to user, depending
+on where the GSEIM zip file has been copied/unzipped.
+
+The project files are located in
+``$GSEIM_MASTER/gseim_grc/src/gseim/test_data/input/``. We will denote
+the absolute path to this directory by ``$PROJ_DIR``.
 
 Free acceleration of induction motor
 ====================================
 
 - File menu :math:`\rightarrow` Open
   :math:`\rightarrow` Select the **project file**
-  ``~/gseim_grc/proj_grc/machines/indmc_free.grc``
+  ``$PROJ_DIR/machines/indmc_free.grc``
   as shown below.
 
   .. image:: open_project.png
-    :width: 600
+    :height: 300
     :alt: open project
 
   The project schematic diagram will appear as shown below.
@@ -29,17 +49,22 @@ Free acceleration of induction motor
     :alt: demo project
 
 - Click on ``Generate circuit file``. This would create the **circuit file**
-  ``~/gseim_grc/gseim/output/indmc_free.in`` which is used by the GSEIM solver
+  ``$PROJ_DIR/machines/indmc_free.in`` which is used by the GSEIM solver
   for solving the set of ODEs associated with the project schematic.
   Notice that a separate window opens to show the progress of this step.
   If the flow graph generation is successful, **Program Completed** will
   appear at the bottom of that window. Close the window.
 
+  Note that the circuit file (which has extension ``.in``) always gets
+  created in the same directory as the project file (which has extension
+  ``.grc``).
+
 - Click on ``Run simulation``. This invokes the solver which runs the
   simulation and creates the data files as specified for this project.
   Again, a separate window opens to show the progress made by the solver.
-  The data files are created in the directory
-  ``~/gseim_grc/gseim/output``.
+  The data files are also created in the same directory as the ``.grc``
+  file which in this case is
+  ``$PROJ_DIR/machines/``.
 
 - Click on ``View results``. The plotting GUI would show up as a separate
   application, as shown below.
@@ -50,7 +75,7 @@ Free acceleration of induction motor
 
   |
 - Click on ``Load File``, and select the circuit file
-  ``~/gseim_grc/gseim/output/indmc_free.in``. The data file created by GSEIM
+  ``$PROJ_DIR/machines/indmc_free.in``. The data file created by GSEIM
   for this particular project will appear as shown below. Names of the
   variables stored in the data file are listed. Select ``time`` as
   the x-axis and ``wrm`` (the angular speed of the motor) as the y-axis to
@@ -65,7 +90,7 @@ Neutral point clamped inverter
 
 - File menu :math:`\rightarrow` Open
   :math:`\rightarrow` Select the **project file**
-  ``~/gseim_grc/proj_grc/dc_to_ac/npc_inverter.grc``.
+  ``$PROJ_DIR/dc_to_ac/npc_inverter.grc``.
   The project schematic diagram will appear as shown below.
 
   .. image:: npc_schematic.png
@@ -77,7 +102,7 @@ Neutral point clamped inverter
   Close the window when the program is completed.
 
 - Click on ``View results``. In the plotting GUI, click on ``Load File``,
-  and select the circuit file ``~/gseim_grc/gseim/output/npc_inverter.in``.
+  and select the circuit file ``$PROJ_DIR/dc_to_ac/npc_inverter.in``.
   Select ``time`` as the x-axis and ``ia`` as the y-axis to
   obtain the plot shown below.
 

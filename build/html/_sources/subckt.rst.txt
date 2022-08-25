@@ -14,6 +14,52 @@ a simple subcircuit can be designed using the schematic
 capture GUI. We will then look at more complex subcircuits,
 including an induction motor model.
 
+Some comments about sub-circuit files are in order.
+As described in the section on
+:ref:`Getting started <getting_started>`,
+the GSEIM distribution already has several sub-circuits,
+and the concerned files are located in the
+``$SUBCKT`` and
+``$SUBCKT_GRC``
+directories. These sub-circuits can be used by the user
+in a new circuit (project). In addition, the user can make
+up new sub-circuits. A sub-circuit named ``sub1``, for example,
+involves three files:
+
+- ``sub1.grc`` : This file describes the schematic diagram of
+  the sub-circuit prepared by the user.
+
+- ``sub1.hblock.yml`` : This file is generated when the user
+  opens ``sub1.grc`` in the GUI and clicks on the
+  ``Generate circuit file`` button in the menu bar.
+
+- ``sub1_parm.py`` : This is a python file, to be written by
+  the user, if the sub-circuit involves *computed parameters*,
+  i.e., parameters whose values need to be computed.
+
+Of these three files, ``sub1.grc`` can be saved by the user in
+a directory of their choice. The path of the other two files is
+given by the value assigned to the variable
+``HIER_BLOCK_USER_DIR`` while invoking GSEIM. For example, if
+the user wants to use ``~/subckt_dir`` for saving
+``sub1.hblock.yml`` and
+``sub1_parm.py``,
+then the commands to invoke GSEIM (see
+`Installation Instructions <https://github.com/gseim/gseim>`_)
+should be modified as follows.
+
+- Pre-built image:
+
+  ``HIER_BLOCK_USER_DIR=~/subckt_dir/ gseim-gui``
+
+- Building from source:
+
+  ``HIER_BLOCK_USER_DIR=~/subckt_dir/ bazel run //grc:gseim_gui``
+
+In the following, we will denote the value assigned to ``HIER_BLOCK_USER_DIR`` 
+by ``$HIER_BLOCK_USER_DIR``.
+With this background, we can now discuss a few specific sub-circuits.
+
 .. _subckt_linear2:
 
 Linear transformation
@@ -80,15 +126,8 @@ the step-by-step procedure given below.
 - Save the subcircuit schematic. It is a good practice to use a file
   name which reflects the name (``Id``) of the subcircuit. In our
   example, it would be ``s_linear_2.grc``.
-  The subcircuit ``.grc`` file can be saved in any directory; here,
-  we will save it in the directory where other GSEIM subcircuit
-  ``.grc.`` files are located.
+  Save ``s_linear_2.grc`` in a suitable directory.
 
-  .. image:: sub_linear2_9.png
-    :width: 600
-    :alt: save subcircuit
-
-  |
 - The next step is to bring in the required elements (blocks)
   from the library (see :ref:`new_project`). We need four
   ``multscl`` (multiply by scalar) elements and two ``sum_2`` elements.
@@ -185,21 +224,17 @@ the step-by-step procedure given below.
 
   |
 - Click on ``Generate circuit file``. This creates a file
-  ``~/gseim_grc/subckt/s_linear_2.hblock.yml``,
+  ``$HIER_BLOCK_USER_DIR/s_linear_2.hblock.yml``,
   a text file which can be opened with
   a text editor such as ``vim``, ``emacs``, ``gedit``.
   Notice that the ``.grc`` file to which we have saved the schematic
-  appears in the ``grc_source`` field in the ``.yml`` file.
+  appears in the ``grc_source`` field in ``s_linear_2.hblock.yml``.
 
   End your GSEIM session and start it again. You will find the newly
-  added subcircuit listed under ``GRC Hier Blocks`` as shown below:
+  added subcircuit listed under ``GRC Hier Blocks``.
   Note that the label which appears in this list (``s_linear_2``)
   corresponds to the ``Id`` value we entered in the ``Options`` block
   earlier.
-
-  .. image:: sub_linear2_12.png
-    :width: 200
-    :alt: subckt menu
 
 - Drag and drop the subcircuit into the canvas.
 

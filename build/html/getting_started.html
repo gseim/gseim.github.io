@@ -18,7 +18,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Blocks and ports" href="elements.html" />
-    <link rel="prev" title="GSEIM Installation" href="installation.html" />
+    <link rel="prev" title="Introduction" href="intro.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -34,33 +34,55 @@
             
   <div class="section" id="getting-started">
 <span id="id1"></span><h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
-<p>It is assumed that the user has successfully installed GSEIM on a linux
-computer. In this section, we will see how to run an existing GSEIM
-project (which is already available in the GSEIM distribution), and
-view the simulation results.</p>
+<p>Several “project files” have been included in the GSEIM
+distribution. In this section, we will see how to execute (run)
+some of these projects and view the simulation results.</p>
+<p>First, let us see where the project files are located.
+As explained in the
+<a class="reference external" href="https://github.com/gseim/gseim">Installation Instructions</a>,
+there are two ways to run GSEIM in linux:</p>
+<ul class="simple">
+<li>installing pre-built image: In this case, the project files are
+not available locally, and the user should therefore download the GSEIM
+<code class="docutils literal notranslate"><span class="pre">.zip</span></code> file and unzip it in a suitable directory.</li>
+<li>building from source: In this case, the project files are already
+available locally.</li>
+</ul>
+<p>In either case, the user should be able to locate the directory
+<code class="docutils literal notranslate"><span class="pre">/gseim-master</span></code>.
+We will denote the absolute path for this directory by <code class="docutils literal notranslate"><span class="pre">$GSEIM_MASTER</span></code>.
+Note that <code class="docutils literal notranslate"><span class="pre">$GSEIM_MASTER</span></code> would vary from user to user, depending
+on where the GSEIM zip file has been copied/unzipped.</p>
+<p>The project files are located in
+<code class="docutils literal notranslate"><span class="pre">$GSEIM_MASTER/gseim_grc/src/gseim/test_data/input/</span></code>. We will denote
+the absolute path to this directory by <code class="docutils literal notranslate"><span class="pre">$PROJ_DIR</span></code>.</p>
 <div class="section" id="free-acceleration-of-induction-motor">
 <h2>Free acceleration of induction motor<a class="headerlink" href="#free-acceleration-of-induction-motor" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><p class="first">File menu <span class="math notranslate nohighlight">\(\rightarrow\)</span> Open
 <span class="math notranslate nohighlight">\(\rightarrow\)</span> Select the <strong>project file</strong>
-<code class="docutils literal notranslate"><span class="pre">~/gseim_grc/proj_grc/machines/indmc_free.grc</span></code>
+<code class="docutils literal notranslate"><span class="pre">$PROJ_DIR/machines/indmc_free.grc</span></code>
 as shown below.</p>
-<a class="reference internal image-reference" href="_images/open_project.png"><img alt="open project" src="_images/open_project.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/open_project.png"><img alt="open project" src="_images/open_project.png" style="height: 300px;" /></a>
 <p>The project schematic diagram will appear as shown below.</p>
 <a class="reference internal image-reference" href="_images/indmc_schematic.png"><img alt="demo project" src="_images/indmc_schematic.png" style="width: 600px;" /></a>
 </li>
 <li><p class="first">Click on <code class="docutils literal notranslate"><span class="pre">Generate</span> <span class="pre">circuit</span> <span class="pre">file</span></code>. This would create the <strong>circuit file</strong>
-<code class="docutils literal notranslate"><span class="pre">~/gseim_grc/gseim/output/indmc_free.in</span></code> which is used by the GSEIM solver
+<code class="docutils literal notranslate"><span class="pre">$PROJ_DIR/machines/indmc_free.in</span></code> which is used by the GSEIM solver
 for solving the set of ODEs associated with the project schematic.
 Notice that a separate window opens to show the progress of this step.
 If the flow graph generation is successful, <strong>Program Completed</strong> will
 appear at the bottom of that window. Close the window.</p>
+<p>Note that the circuit file (which has extension <code class="docutils literal notranslate"><span class="pre">.in</span></code>) always gets
+created in the same directory as the project file (which has extension
+<code class="docutils literal notranslate"><span class="pre">.grc</span></code>).</p>
 </li>
 <li><p class="first">Click on <code class="docutils literal notranslate"><span class="pre">Run</span> <span class="pre">simulation</span></code>. This invokes the solver which runs the
 simulation and creates the data files as specified for this project.
 Again, a separate window opens to show the progress made by the solver.
-The data files are created in the directory
-<code class="docutils literal notranslate"><span class="pre">~/gseim_grc/gseim/output</span></code>.</p>
+The data files are also created in the same directory as the <code class="docutils literal notranslate"><span class="pre">.grc</span></code>
+file which in this case is
+<code class="docutils literal notranslate"><span class="pre">$PROJ_DIR/machines/</span></code>.</p>
 </li>
 <li><p class="first">Click on <code class="docutils literal notranslate"><span class="pre">View</span> <span class="pre">results</span></code>. The plotting GUI would show up as a separate
 application, as shown below.</p>
@@ -70,7 +92,7 @@ application, as shown below.</p>
 </div>
 </li>
 <li><p class="first">Click on <code class="docutils literal notranslate"><span class="pre">Load</span> <span class="pre">File</span></code>, and select the circuit file
-<code class="docutils literal notranslate"><span class="pre">~/gseim_grc/gseim/output/indmc_free.in</span></code>. The data file created by GSEIM
+<code class="docutils literal notranslate"><span class="pre">$PROJ_DIR/machines/indmc_free.in</span></code>. The data file created by GSEIM
 for this particular project will appear as shown below. Names of the
 variables stored in the data file are listed. Select <code class="docutils literal notranslate"><span class="pre">time</span></code> as
 the x-axis and <code class="docutils literal notranslate"><span class="pre">wrm</span></code> (the angular speed of the motor) as the y-axis to
@@ -84,7 +106,7 @@ obtain the plot shown below.</p>
 <ul>
 <li><p class="first">File menu <span class="math notranslate nohighlight">\(\rightarrow\)</span> Open
 <span class="math notranslate nohighlight">\(\rightarrow\)</span> Select the <strong>project file</strong>
-<code class="docutils literal notranslate"><span class="pre">~/gseim_grc/proj_grc/dc_to_ac/npc_inverter.grc</span></code>.
+<code class="docutils literal notranslate"><span class="pre">$PROJ_DIR/dc_to_ac/npc_inverter.grc</span></code>.
 The project schematic diagram will appear as shown below.</p>
 <a class="reference internal image-reference" href="_images/npc_schematic.png"><img alt="npc schematic" src="_images/npc_schematic.png" style="width: 600px;" /></a>
 </li>
@@ -93,7 +115,7 @@ appears, close the window, and click on <code class="docutils literal notranslat
 Close the window when the program is completed.</p>
 </li>
 <li><p class="first">Click on <code class="docutils literal notranslate"><span class="pre">View</span> <span class="pre">results</span></code>. In the plotting GUI, click on <code class="docutils literal notranslate"><span class="pre">Load</span> <span class="pre">File</span></code>,
-and select the circuit file <code class="docutils literal notranslate"><span class="pre">~/gseim_grc/gseim/output/npc_inverter.in</span></code>.
+and select the circuit file <code class="docutils literal notranslate"><span class="pre">$PROJ_DIR/dc_to_ac/npc_inverter.in</span></code>.
 Select <code class="docutils literal notranslate"><span class="pre">time</span></code> as the x-axis and <code class="docutils literal notranslate"><span class="pre">ia</span></code> as the y-axis to
 obtain the plot shown below.</p>
 <a class="reference internal image-reference" href="_images/npc_results_1.png"><img alt="npc results-1" src="_images/npc_results_1.png" style="width: 600px;" /></a>
@@ -136,7 +158,6 @@ and <code class="docutils literal notranslate"><span class="pre">tEnd</span></co
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">GSEIM Installation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#free-acceleration-of-induction-motor">Free acceleration of induction motor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#neutral-point-clamped-inverter">Neutral point clamped inverter</a></li>
@@ -162,7 +183,7 @@ and <code class="docutils literal notranslate"><span class="pre">tEnd</span></co
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="installation.html" title="previous chapter">GSEIM Installation</a></li>
+      <li>Previous: <a href="intro.html" title="previous chapter">Introduction</a></li>
       <li>Next: <a href="elements.html" title="next chapter">Blocks and ports</a></li>
   </ul></li>
 </ul>

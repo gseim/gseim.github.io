@@ -35,43 +35,62 @@
   <div class="section" id="gseim-organisation">
 <span id="gseimorg"></span><h1>GSEIM Organisation<a class="headerlink" href="#gseim-organisation" title="Permalink to this headline">¶</a></h1>
 <p>In this section, we describe how the GSEIM program is
-organised. The parent directory for GSEIM is
-<code class="docutils literal notranslate"><span class="pre">~/gseim_grc</span></code>. We will discuss where the various
-GSEIM files are located relative to the parent directory,
-what kind of files they are, what task they are involved
-in, etc. This information is useful not only for prospective
-contributors, but also for general users.
-The block diagram of the GSEIM program is shown below.</p>
-<a class="reference internal image-reference" href="_images/block_1.png"><img alt="Alternative text" src="_images/block_1.png" style="width: 600px;" /></a>
+organised. We will use the following to denote the
+various directories involved:</p>
+<ul>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">$GSEIM_MASTER</span></code> <strong>:</strong> the <code class="docutils literal notranslate"><span class="pre">/gseim-master</span></code> directory in
+the GSEIM distribution (see <a class="reference internal" href="getting_started.html#getting-started"><span class="std std-ref">Getting started</span></a>)</p>
+</li>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">$BLOCKS</span></code> <strong>:</strong> <code class="docutils literal notranslate"><span class="pre">$GSEIM_MASTER/gseim_grc/src/gseim/data/blocks</span></code></p>
+</li>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">$XBE</span></code> <strong>:</strong> <code class="docutils literal notranslate"><span class="pre">$GSEIM_MASTER/gseim_grc/src/gseim/data/xbe</span></code></p>
+</li>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">$EBE</span></code> <strong>:</strong> <code class="docutils literal notranslate"><span class="pre">$GSEIM_MASTER/gseim_grc/src/gseim/data/ebe</span></code></p>
+</li>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">$GRC</span></code> <strong>:</strong> <code class="docutils literal notranslate"><span class="pre">$GSEIM_MASTER/gseim_grc/src/grc</span></code></p>
+<p>(<code class="docutils literal notranslate"><span class="pre">grc</span></code> stands for GNU Radio Companion, part of the
+<a class="reference external" href="https://www.gnuradio.org//">GNU Radio</a> package. Files in <code class="docutils literal notranslate"><span class="pre">$GRC</span></code>
+are originally from GNU Radio Companion, modified suitably for GSEIM.)</p>
+</li>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">$GSEIM</span></code> <strong>:</strong> <code class="docutils literal notranslate"><span class="pre">$GSEIM_MASTER/gseim_grc/src/gseim</span></code></p>
+</li>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">$CPPSRC</span></code> <strong>:</strong> <code class="docutils literal notranslate"><span class="pre">$GSEIM_MASTER/gseim_grc/src/gseim_cpp_lib</span></code></p>
+</li>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">$PLOT</span></code> <strong>:</strong> <code class="docutils literal notranslate"><span class="pre">$GSEIM_MASTER/gseim_grc/src/gseim_plot</span></code></p>
+</li>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">$SUBCKT</span></code> <strong>:</strong> <code class="docutils literal notranslate"><span class="pre">$GSEIM_MASTER/gseim_grc/src/gseim/data/subckt</span></code></p>
+</li>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">$SUBCKT_GRC</span></code> <strong>:</strong> <code class="docutils literal notranslate"><span class="pre">$GSEIM_MASTER/gseim_grc/src/gseim/data/subckt_grc</span></code></p>
+</li>
+</ul>
+<p>The block diagram of the GSEIM program is shown below. When
+applicable, the location (directory) of the concerned block
+is also given.</p>
+<a class="reference internal image-reference" href="_images/block_1.png"><img alt="Alternative text" src="_images/block_1.png" style="width: 550px;" /></a>
 <p>The program components can be broadly classified as follows.</p>
 <ul>
 <li><p class="first"><strong>Schematic entry GUI</strong>: This block consists of python
-files located in
-<code class="docutils literal notranslate"><span class="pre">~/gseim_grc/grc/</span></code>
-and is adapted from the
-<a class="reference external" href="https://www.gnuradio.org//">GNU Radio</a> package.
-It enables the user to prepare a schematic diagram
-of the system of interest, and as output, it produces a high-level
-netlist in the GNU Radio format. The high-level
-netlist (with extension <code class="docutils literal notranslate"><span class="pre">.grc</span></code>), which we will refer to as
-the <strong>project file</strong>, can be saved by
-the user in a directory of their choice using the
-<code class="docutils literal notranslate"><span class="pre">save</span> <span class="pre">file</span></code> button.</p>
+files adapted from the <a class="reference external" href="https://www.gnuradio.org//">GNU Radio</a> package.
+It enables the user to prepare a schematic diagram of the system of
+interest, and as output, it produces a high-level netlist in the
+GNU Radio format. The high-level netlist (with extension <code class="docutils literal notranslate"><span class="pre">.grc</span></code>),
+which we will refer to as the <strong>project file</strong>, can be saved by
+the user in a directory of their choice using the <code class="docutils literal notranslate"><span class="pre">save</span> <span class="pre">file</span></code> button.
+We will refer to this directory as <code class="docutils literal notranslate"><span class="pre">$GRC_FILE_DIR</span></code>.</p>
 </li>
-<li><p class="first"><strong>Parser</strong>: This is a python program,
-<code class="docutils literal notranslate"><span class="pre">~/gseim_grc/gseim/exec/gseim1.py</span></code>, which
+<li><p class="first"><strong>Parser</strong>: This is a python program, <code class="docutils literal notranslate"><span class="pre">$GSEIM/gseim_parser.py</span></code>, which
 takes the high-level netlist (the <code class="docutils literal notranslate"><span class="pre">.grc</span></code> file)
 as input, and performs parsing of node names and computation
 of element parameters (if applicable). As its output, the
-parser produces a low-level netlist in
-<code class="docutils literal notranslate"><span class="pre">~/gseim_grc/gseim/output/</span></code>, with extension <code class="docutils literal notranslate"><span class="pre">.in</span></code>.
+parser produces a low-level netlist (with extension <code class="docutils literal notranslate"><span class="pre">.in</span></code>)
+in <code class="docutils literal notranslate"><span class="pre">$GRC_FILE_DIR</span></code>.
 We will refer to this low-level netlist as the <strong>circuit file</strong>.</p>
 </li>
 <li><p class="first"><strong>Solver</strong>: This part of the code, written in C++, performs
 numerical solution of the circuit equations and ODEs represented by
 the user’s schematic. It takes the low-level netlist (the circuit file)
 as its input, and creates the output files requested by the user
-in <code class="docutils literal notranslate"><span class="pre">~/gseim_grc/gseim/output/</span></code>.</p>
+in <code class="docutils literal notranslate"><span class="pre">$GRC_FILE_DIR</span></code>.</p>
 </li>
 <li><p class="first"><strong>Plotting GUI</strong>: This is a python-Qt program for showing
 plots using the data files generated by the solver.</p>
@@ -84,16 +103,13 @@ the following files:</p>
 <ul class="simple">
 <li>If <code class="docutils literal notranslate"><span class="pre">xyz</span></code> is a flow-graph type element, the file <code class="docutils literal notranslate"><span class="pre">xyz.xbe</span></code>
 contains information about the variable names, parameter
-names and values, and equations related to that element.
-The <code class="docutils literal notranslate"><span class="pre">.xbe</span></code> files are in <code class="docutils literal notranslate"><span class="pre">~/gseim_grc/gseim/xbe/</span></code>.</li>
+names and values, and equations related to that element.</li>
 <li>If <code class="docutils literal notranslate"><span class="pre">xyz</span></code> is an electrical type element, the file <code class="docutils literal notranslate"><span class="pre">xyz.ebe</span></code>
 contains information about the node names, parameter
-names and values, and equations related to that element.
-The <code class="docutils literal notranslate"><span class="pre">.ebe</span></code> files are in <code class="docutils literal notranslate"><span class="pre">~/gseim_grc/gseim/ebe/</span></code>.</li>
+names and values, and equations related to that element.</li>
 <li>For both flow-graph and electrical type elements, the
 file <code class="docutils literal notranslate"><span class="pre">xyz.yml</span></code> specifies how the element would appear
-in the schematic entry GUI. The <code class="docutils literal notranslate"><span class="pre">.yml</span></code> files are in
-<code class="docutils literal notranslate"><span class="pre">~/gseim_grc/blocks/</span></code>.</li>
+in the schematic entry GUI.</li>
 </ul>
 <p>The <code class="docutils literal notranslate"><span class="pre">.xbe</span></code> and <code class="docutils literal notranslate"><span class="pre">.ebe</span></code> files are used by both the
 schematic entry GUI and the solver whereas the <code class="docutils literal notranslate"><span class="pre">.yml</span></code>
@@ -102,7 +118,7 @@ files are used only by the schematic entry GUI.</p>
 <li><p class="first"><strong>Subcircuits (hierarchical blocks)</strong>: In several applications,
 subcircuits (hierarchical blocks) are convenient. A few subcircuits
 are provided with the GSEIM distribution. Files related to subcircuits
-are located in <code class="docutils literal notranslate"><span class="pre">~/gseim_grc/subckt/</span></code> and <code class="docutils literal notranslate"><span class="pre">~/gseim_grc/subckt_grc/</span></code>.
+are located in <code class="docutils literal notranslate"><span class="pre">$SUBCKT</span></code> and <code class="docutils literal notranslate"><span class="pre">$SUBCKT_GRC</span></code>.
 Apart from that, the user can also make up new subcircuits, as
 described in the <a class="reference internal" href="subckt.html#subckt"><span class="std std-ref">Subcircuits</span></a> section.</p>
 </li>
@@ -128,7 +144,6 @@ described in the <a class="reference internal" href="subckt.html#subckt"><span c
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">GSEIM Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="elements.html">Blocks and ports</a></li>
 <li class="toctree-l1"><a class="reference internal" href="new_project.html">Creating a new project</a></li>

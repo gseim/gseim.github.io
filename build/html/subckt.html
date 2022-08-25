@@ -42,6 +42,48 @@ In this section, we will first explain how
 a simple subcircuit can be designed using the schematic
 capture GUI. We will then look at more complex subcircuits,
 including an induction motor model.</p>
+<p>Some comments about sub-circuit files are in order.
+As described in the section on
+<a class="reference internal" href="getting_started.html#getting-started"><span class="std std-ref">Getting started</span></a>,
+the GSEIM distribution already has several sub-circuits,
+and the concerned files are located in the
+<code class="docutils literal notranslate"><span class="pre">$SUBCKT</span></code> and
+<code class="docutils literal notranslate"><span class="pre">$SUBCKT_GRC</span></code>
+directories. These sub-circuits can be used by the user
+in a new circuit (project). In addition, the user can make
+up new sub-circuits. A sub-circuit named <code class="docutils literal notranslate"><span class="pre">sub1</span></code>, for example,
+involves three files:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">sub1.grc</span></code> : This file describes the schematic diagram of
+the sub-circuit prepared by the user.</li>
+<li><code class="docutils literal notranslate"><span class="pre">sub1.hblock.yml</span></code> : This file is generated when the user
+opens <code class="docutils literal notranslate"><span class="pre">sub1.grc</span></code> in the GUI and clicks on the
+<code class="docutils literal notranslate"><span class="pre">Generate</span> <span class="pre">circuit</span> <span class="pre">file</span></code> button in the menu bar.</li>
+<li><code class="docutils literal notranslate"><span class="pre">sub1_parm.py</span></code> : This is a python file, to be written by
+the user, if the sub-circuit involves <em>computed parameters</em>,
+i.e., parameters whose values need to be computed.</li>
+</ul>
+<p>Of these three files, <code class="docutils literal notranslate"><span class="pre">sub1.grc</span></code> can be saved by the user in
+a directory of their choice. The path of the other two files is
+given by the value assigned to the variable
+<code class="docutils literal notranslate"><span class="pre">HIER_BLOCK_USER_DIR</span></code> while invoking GSEIM. For example, if
+the user wants to use <code class="docutils literal notranslate"><span class="pre">~/subckt_dir</span></code> for saving
+<code class="docutils literal notranslate"><span class="pre">sub1.hblock.yml</span></code> and
+<code class="docutils literal notranslate"><span class="pre">sub1_parm.py</span></code>,
+then the commands to invoke GSEIM (see
+<a class="reference external" href="https://github.com/gseim/gseim">Installation Instructions</a>)
+should be modified as follows.</p>
+<ul>
+<li><p class="first">Pre-built image:</p>
+<p><code class="docutils literal notranslate"><span class="pre">HIER_BLOCK_USER_DIR=~/subckt_dir/</span> <span class="pre">gseim-gui</span></code></p>
+</li>
+<li><p class="first">Building from source:</p>
+<p><code class="docutils literal notranslate"><span class="pre">HIER_BLOCK_USER_DIR=~/subckt_dir/</span> <span class="pre">bazel</span> <span class="pre">run</span> <span class="pre">//grc:gseim_gui</span></code></p>
+</li>
+</ul>
+<p>In the following, we will denote the value assigned to <code class="docutils literal notranslate"><span class="pre">HIER_BLOCK_USER_DIR</span></code>
+by <code class="docutils literal notranslate"><span class="pre">$HIER_BLOCK_USER_DIR</span></code>.
+With this background, we can now discuss a few specific sub-circuits.</p>
 <div class="section" id="linear-transformation">
 <span id="subckt-linear2"></span><h2>Linear transformation<a class="headerlink" href="#linear-transformation" title="Permalink to this headline">¶</a></h2>
 <p>Let us see how to make up a subcircuit to implement
@@ -96,13 +138,7 @@ system.</p>
 <li><p class="first">Save the subcircuit schematic. It is a good practice to use a file
 name which reflects the name (<code class="docutils literal notranslate"><span class="pre">Id</span></code>) of the subcircuit. In our
 example, it would be <code class="docutils literal notranslate"><span class="pre">s_linear_2.grc</span></code>.
-The subcircuit <code class="docutils literal notranslate"><span class="pre">.grc</span></code> file can be saved in any directory; here,
-we will save it in the directory where other GSEIM subcircuit
-<code class="docutils literal notranslate"><span class="pre">.grc.</span></code> files are located.</p>
-<a class="reference internal image-reference" href="_images/sub_linear2_9.png"><img alt="save subcircuit" src="_images/sub_linear2_9.png" style="width: 600px;" /></a>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
+Save <code class="docutils literal notranslate"><span class="pre">s_linear_2.grc</span></code> in a suitable directory.</p>
 </li>
 <li><p class="first">The next step is to bring in the required elements (blocks)
 from the library (see <a class="reference internal" href="new_project.html#new-project"><span class="std std-ref">Creating a new project</span></a>). We need four
@@ -184,17 +220,16 @@ suitable assignments for the other three <code class="docutils literal notransla
 </div>
 </li>
 <li><p class="first">Click on <code class="docutils literal notranslate"><span class="pre">Generate</span> <span class="pre">circuit</span> <span class="pre">file</span></code>. This creates a file
-<code class="docutils literal notranslate"><span class="pre">~/gseim_grc/subckt/s_linear_2.hblock.yml</span></code>,
+<code class="docutils literal notranslate"><span class="pre">$HIER_BLOCK_USER_DIR/s_linear_2.hblock.yml</span></code>,
 a text file which can be opened with
 a text editor such as <code class="docutils literal notranslate"><span class="pre">vim</span></code>, <code class="docutils literal notranslate"><span class="pre">emacs</span></code>, <code class="docutils literal notranslate"><span class="pre">gedit</span></code>.
 Notice that the <code class="docutils literal notranslate"><span class="pre">.grc</span></code> file to which we have saved the schematic
-appears in the <code class="docutils literal notranslate"><span class="pre">grc_source</span></code> field in the <code class="docutils literal notranslate"><span class="pre">.yml</span></code> file.</p>
+appears in the <code class="docutils literal notranslate"><span class="pre">grc_source</span></code> field in <code class="docutils literal notranslate"><span class="pre">s_linear_2.hblock.yml</span></code>.</p>
 <p>End your GSEIM session and start it again. You will find the newly
-added subcircuit listed under <code class="docutils literal notranslate"><span class="pre">GRC</span> <span class="pre">Hier</span> <span class="pre">Blocks</span></code> as shown below:
+added subcircuit listed under <code class="docutils literal notranslate"><span class="pre">GRC</span> <span class="pre">Hier</span> <span class="pre">Blocks</span></code>.
 Note that the label which appears in this list (<code class="docutils literal notranslate"><span class="pre">s_linear_2</span></code>)
 corresponds to the <code class="docutils literal notranslate"><span class="pre">Id</span></code> value we entered in the <code class="docutils literal notranslate"><span class="pre">Options</span></code> block
 earlier.</p>
-<a class="reference internal image-reference" href="_images/sub_linear2_12.png"><img alt="subckt menu" src="_images/sub_linear2_12.png" style="width: 200px;" /></a>
 </li>
 <li><p class="first">Drag and drop the subcircuit into the canvas.</p>
 <p>Hovering over a port displays the name of that port.
@@ -494,7 +529,6 @@ it appears as follows.</p>
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">GSEIM Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="elements.html">Blocks and ports</a></li>
 <li class="toctree-l1"><a class="reference internal" href="new_project.html">Creating a new project</a></li>

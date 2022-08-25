@@ -16,7 +16,7 @@ xbe templates
 
 - Template files for flow-graph type elements have extension
   ``.xbe`` (*explicit basic element*), and they are located in
-  ``~/gseim_grc/gseim/xbe/``.
+  directory ``$XBE`` (see :ref:`GSEIM Organisation <gseimorg>`).
 
 - A flow-graph element template has three types of variables in general:
   input, output, and auxiliary. Only the input and output variables
@@ -41,8 +41,7 @@ xbe templates
 
 In the following, we look at a few representative examples
 to explain the functioning of the ``xbe`` templates. The
-templates described here can be found in
-``~/gseim_grc/gseim/xbe``.
+templates described here can be found in directory ``$XBE``.
 
 .. _sum_2:
 
@@ -1024,7 +1023,7 @@ ebe templates
 
 - Template files for electrical type elements have extension
   ``.ebe`` (*electrical basic element*), and they are located in
-  ``~/gseim_grc/gseim/ebe/``.
+  directory ``$EBE`` (see :ref:`GSEIM Organisation <gseimorg>`).
 
 - An electrical element template has nodes (which are used in
   wiring) and some other variables in general:
@@ -1036,8 +1035,7 @@ ebe templates
 
 In the following, we look at a few representative examples
 to explain the functioning of the ``ebe`` templates. The
-templates described here can be found in
-``~/gseim_grc/gseim/ebe``.
+templates described here can be found in ``$EBE``.
 
 .. _resistor:
 
